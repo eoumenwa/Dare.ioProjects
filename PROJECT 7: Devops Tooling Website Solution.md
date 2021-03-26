@@ -1,4 +1,4 @@
-## Devops Tooling Website Solution
+# Devops Tooling Website Solution
 
 This project describes a set of DevOps tools that will help a team in day to day activities in managing, developing, testing, deploying and monitoring different projects. This single DevOps Tooling Solution consists of:
 
@@ -61,8 +61,16 @@ Some Definitions
   Amazon EBS (Elastic Block Store) is an example of a cloud block store. Cloud block-level storage will usually offer facilities such as replication for   
   reliability, or backup services.
   
-* Object storage (also known as object-based storage[1]) is a computer data storage architecture that manages data as objects, as opposed to other storage   architectures like file systems which manages data as a file hierarchy, and block storage which manages data as blocks within sectors and tracks.[2] Each   object typically includes the data itself, a variable amount of metadata, and a globally unique identifier. Object storage can be implemented at multiple   levels, including the device level (object-storage device), the system level, and the interface level.
+* Object storage (also known as object-based storage) is a computer data storage architecture that manages data as objects, as opposed to other storage       architectures like file systems which manages data as a file hierarchy, and block storage which manages data as blocks within sectors and tracks. Each     object typically includes the data itself, a variable amount of metadata, and a globally unique identifier. Object storage can be implemented at multiple   levels, including the device level (object-storage device), the system level, and the interface level. Object storage systems allow retention of massive   amounts of unstructured data. Object storage is used for purposes such as storing photos on Facebook, songs on Spotify, or files in online collaboration   services, such as Dropbox.
 
+## Solution components:
+
+1. Infrastructure: AWS
+2. Webserver Linux: Red Hat Enterprise Linux 8
+3. Database Server: Ubuntu 20.04 + MySQL
+4. Storage Server: Red Hat Enterprise Linux 8 + NFS Server
+5. Programming Language: PHP
+6. Code Repository: GitHub
 
 References
 https://en.wikipedia.org/wiki/Network-attached_storage
@@ -73,6 +81,7 @@ https://en.wikipedia.org/wiki/SSH_File_Transfer_Protocol
 https://en.wikipedia.org/wiki/ISCSI
 https://en.wikipedia.org/wiki/Block-level_storage
 https://en.wikipedia.org/wiki/Object_storage
+https://dzone.com/articles/confused-by-aws-storage-options-s3-ebs-amp-efs-explained
 
   
  
