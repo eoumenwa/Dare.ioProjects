@@ -72,8 +72,16 @@ Some Definitions
 5. Programming Language: PHP
 6. Code Repository: GitHub
 
+![image](https://user-images.githubusercontent.com/78841364/112709900-76d5ec80-8e93-11eb-9ea8-78d8fac70f43.png)
 
+Based on the set up above, we require four Red Hat instances and one Ubuntu instance 
 
+## Step 1 - Prepare NFS Server
+1. Spin up a new EC2 instance with RHEL Linux 8 Operating System.
+2. Configure LVM on the Server based on Project 6 experience - To do this, I created an EBS volume of 15GB and attached it to the NFS server instance
+3. Instead of formating the disks as ext4 you will have to format them as xfs
+Ensure there are 3 Logical Volumes. lv-opt lv-apps, and lv-logs
+Create mount points on /mnt directory for the logical volumes as follow: Mount lv-apps on /mnt/apps - To be used by webservers Mount lv-logs on /mnt/logs - To be used by webserver logs Mount lv-opt on /mnt/opt - To be used by Jenkins server in Project 8
 
 
 
