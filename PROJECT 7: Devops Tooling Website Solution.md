@@ -83,7 +83,8 @@ Based on the set up above, we require four Red Hat instances and one Ubuntu inst
 Ensure there are 3 Logical Volumes. lv-opt lv-apps, and lv-logs
 Create mount points on /mnt directory for the logical volumes as follow: Mount lv-apps on /mnt/apps - To be used by webservers Mount lv-logs on /mnt/logs - To be used by webserver logs Mount lv-opt on /mnt/opt - To be used by Jenkins server in Project 8
 
-
+Note difference between mv /var/log/httpd /var/log/httpd.bak and mv /var/log/httpd/. /var/log/httpd.bak
+/var signifies go to root/var.  httpd/. means close directory and copy only contents without making folder
 
 
 
