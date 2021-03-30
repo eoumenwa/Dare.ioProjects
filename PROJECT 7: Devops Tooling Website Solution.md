@@ -86,7 +86,7 @@ Create mount points on /mnt directory for the logical volumes as follow: Mount l
 Note difference between mv /var/log/httpd /var/log/httpd.bak and mv /var/log/httpd/. /var/log/httpd.bak
 /var signifies go to root/var.  httpd/. means close directory and copy only contents without making folder
 
-
+Taking a short break. Hopeful to continue later tonight
 
 
 
