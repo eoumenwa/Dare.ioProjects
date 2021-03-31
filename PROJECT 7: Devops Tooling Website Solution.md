@@ -88,10 +88,12 @@ Note difference between mv /var/log/httpd /var/log/httpd.bak and mv /var/log/htt
 
 Taking a short break. Hopeful to continue later tonight
 
+Notice the error in the output. Can you confirm if you configured local DNS to resolve web to an IP address
 
+You should use  the IP addresses of the servers instead of Web1 and Web2
 
-
-
+Exactly, or you can use the IP address directly. Just be aware that when IP changes your configuration will not work again
+What i do every time is to attach an elastic IP to every server i create just to prevent the IPs from changing and breaking the setup
 
 
 References
