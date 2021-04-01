@@ -95,7 +95,7 @@ You should use  the IP addresses of the servers instead of Web1 and Web2
 Exactly, or you can use the IP address directly. Just be aware that when IP changes your configuration will not work again
 What i do every time is to attach an elastic IP to every server i create just to prevent the IPs from changing and breaking the setup
 
-
+Now thinking of exploring vsc code as one platform for editing and also connecting to my instances.
 References
 https://en.wikipedia.org/wiki/Network-attached_storage
 https://en.wikipedia.org/wiki/Storage_area_network
