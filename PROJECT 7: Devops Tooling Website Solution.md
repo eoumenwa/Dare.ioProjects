@@ -97,7 +97,7 @@ What i do every time is to attach an elastic IP to every server i create just to
 
 Now thinking of exploring vsc code as one platform for editing and also connecting to my instances.
 
-Looks like VSC isonly an alternative to powershell in windows....
+Looks like VSC isonly an alternative to powershell in windows. Fruther research needed.
 
 
 References
