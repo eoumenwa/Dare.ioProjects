@@ -78,8 +78,9 @@ Based on the set up above, we require four Red Hat instances and one Ubuntu inst
 
 ## Step 1 - Prepare NFS Server
 1. Spin up a new EC2 instance with RHEL Linux 8 Operating System.
-2. Configure LVM on the Server based on Project 6 experience - To do this, I created an EBS volume of 15GB and attached it to the NFS server instance
+2. Configure LVM on the Server based on Project 6 experience - To do this, I created an EBS volume of 15GB and attached it to the NFS server instance.
 3. Instead of formating the disks as ext4 you will have to format them as xfs
+
 Ensure there are 3 Logical Volumes. lv-opt lv-apps, and lv-logs
 Create mount points on /mnt directory for the logical volumes as follow: Mount lv-apps on /mnt/apps - To be used by webservers Mount lv-logs on /mnt/logs - To be used by webserver logs Mount lv-opt on /mnt/opt - To be used by Jenkins server in Project 8
 
@@ -97,7 +98,7 @@ What i do every time is to attach an elastic IP to every server i create just to
 
 Now thinking of exploring vsc code as one platform for editing and also connecting to my instances.
 
-Looks like VSC isonly an alternative to powershell in windows. Fruther research needed.
+Looks like VSC is only an alternative to powershell in windows. Fruther research needed.
 
 
 References
