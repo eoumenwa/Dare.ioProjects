@@ -128,12 +128,13 @@ sudo yum install nfs-utils nfs4-acl-tools -y
 4. Verify that NFS was mounted successfully by running df -h
   ![image](https://user-images.githubusercontent.com/78841364/113607377-20954600-9617-11eb-938a-81eb9c83471e.png)
 
-   Make sure that the changes will persist on Web Server after reboot:
+4.1 Make sure that the changes will persist on Web Server after reboot:
    sudo vi /etc/fstab
 
-add following line
+   Add following line
 
-<NFS-Server-Private-IP-Address>:/mnt/apps /var/www nfs defaults 0 0
+   <NFS-Server-Private-IP-Address>:/mnt/apps /var/www nfs defaults 0 0
+   172.31.23.215:/mnt/apps                   /var/www          nfs     defaults        0 0
 
 5. Install Apache
    sudo yum install httpd -y
@@ -148,6 +149,30 @@ add following line
    
    Creating test.txt from the NFS server ( in  shot 5b above, the created file can be seen)
    ![image](https://user-images.githubusercontent.com/78841364/113610809-9e5b5080-961b-11eb-8d70-6edbc4dfd6d1.png) Shot 6a
+
+7. Locate the log folder for Apache on the Web Server and mount it to NFS server’s export for logs. Repeat step 4.1 to make sure the mount point will    
+   persist after reboot.
+
+  ![image](https://user-images.githubusercontent.com/78841364/113614866-1710db80-9621-11eb-91cd-0560229d9fc8.png)
+
+  ![image](https://user-images.githubusercontent.com/78841364/113614966-3f003f00-9621-11eb-9894-bf98b8b32e42.png)
+
+
+172.31.23.215:/mnt/logs                   /var/log/httpd          nfs     defaults        0 0
+
+[ec2-user@ip-172-31-23-25 ~]$ sudo mount -a
+[ec2-user@ip-172-31-23-25 ~]$ sudo systemctl daemon-reload
+
+Disabling the apache default page
+![image](https://user-images.githubusercontent.com/78841364/113624581-d3709e80-962d-11eb-92d2-c40594a19975.png)
+
+
+8. Fork the tooling source code from Darey.io Github Account to your Github account.
+
+![image](https://user-images.githubusercontent.com/78841364/113620935-fba9ce80-9628-11eb-8897-abeca378ac66.png)
+
+Paste the public IP address of the webserver into the browser to confirm the apche default page
+![image](https://user-images.githubusercontent.com/78841364/113621488-ac17d280-9629-11eb-965d-027274599ab5.png)
 
 
 Note difference between mv /var/log/httpd /var/log/httpd.bak and mv /var/log/httpd/. /var/log/httpd.bak
