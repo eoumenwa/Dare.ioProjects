@@ -79,10 +79,76 @@ Based on the set up above, we require four Red Hat instances and one Ubuntu inst
 ## Step 1 - Prepare NFS Server
 1. Spin up a new EC2 instance with RHEL Linux 8 Operating System.
 2. Configure LVM on the Server based on Project 6 experience - To do this, I created an EBS volume of 15GB and attached it to the NFS server instance.
-3. Instead of formating the disks as ext4 you will have to format them as xfs
+3. Instead of formating the disk as ext4, I formatted as xfs
 
 Ensure there are 3 Logical Volumes. lv-opt lv-apps, and lv-logs
 Create mount points on /mnt directory for the logical volumes as follow: Mount lv-apps on /mnt/apps - To be used by webservers Mount lv-logs on /mnt/logs - To be used by webserver logs Mount lv-opt on /mnt/opt - To be used by Jenkins server in Project 8
+
+## Step 2 — Configure the database server
+
+1. Install MySQL server
+ubuntu@ip-172-31-40-226:~$ sudo apt install mysql-server -y
+2. Create a database and name it tooling 
+mysql> create database tooling;
+Query OK, 1 row affected (0.01 sec)
+
+3. Create a database user and name it webaccess
+mysql> CREATE USER `webaccess`@`%` IDENTIFIED WITH mysql_native_password BY 'emmanuel';
+Query OK, 0 rows affected (0.01 sec)
+
+4. Grant permission to webaccess user on tooling database to do anything only from the webservers subnet cidr
+mysql> GRANT ALL PRIVILEGES ON tooling.* TO 'webaccess'@'%' WITH GRANT OPTION;
+Query OK, 0 rows affected (0.00 sec)
+
+I will have to change the % to the subnet cidr
+
+![image](https://user-images.githubusercontent.com/78841364/113601058-dd36d980-960e-11eb-9d71-136cf8ab3d01.png)
+
+
+## Step 3 — Prepare the Web Servers
+
+We need to make sure that our Web Servers can serve the same content from shared storage solutions, in this case - NFS Server and MySQL database. We know that one DB can be accessed for reads and writes by multiple clients. For storing shared files that our Web Servers will use - we will utilize NFS and mount previously created Logical Volume lv-apps to the folder where Apache stores files to be served to the users (/var/www).
+
+This approach will make our Web Servers stateless, which means we will be able to add new ones or remove them whenever we need, and the integrity of the data (in the database and on NFS) will be preserved.
+
+During the next steps we will do following:
+Configure NFS client (this step must be done on all three servers)
+Deploy a Tooling application to our Web Servers into a shared NFS folder
+Configure the Web Servers to work with a single MySQL database
+
+1. Launch a new EC2 instance with RHEL 8 Operating System.
+
+2. Install NFS client
+sudo yum install nfs-utils nfs4-acl-tools -y
+
+3. Mount /var/www/ and target the NFS server’s export for apps
+   sudo mkdir /var/www
+   sudo mount -t nfs -o rw,nosuid <NFS-Server-Private-IP-Address>:/mnt/apps /var/www
+ 
+4. Verify that NFS was mounted successfully by running df -h
+  ![image](https://user-images.githubusercontent.com/78841364/113607377-20954600-9617-11eb-938a-81eb9c83471e.png)
+
+   Make sure that the changes will persist on Web Server after reboot:
+   sudo vi /etc/fstab
+
+add following line
+
+<NFS-Server-Private-IP-Address>:/mnt/apps /var/www nfs defaults 0 0
+
+5. Install Apache
+   sudo yum install httpd -y
+
+![image](https://user-images.githubusercontent.com/78841364/113610588-576d5b00-961b-11eb-908a-7792427c3bcc.png) Shot 5a
+
+
+![image](https://user-images.githubusercontent.com/78841364/113610392-0d847500-961b-11eb-9fc8-8796a5c60a9b.png) Shot 5b
+
+
+6. Verify that Apache files and directories are available on the Web Server in /var/www and also on the NFS server in /mnt/apps. If you see the same files    - it means NFS is mounted correctly. You can try to create a new file touch test.txt from one server and check if the same file is accessible from other    Web Servers.
+   
+   Creating test.txt from the NFS server ( in  shot 5b above, the created file can be seen)
+   ![image](https://user-images.githubusercontent.com/78841364/113610809-9e5b5080-961b-11eb-8d70-6edbc4dfd6d1.png) Shot 6a
+
 
 Note difference between mv /var/log/httpd /var/log/httpd.bak and mv /var/log/httpd/. /var/log/httpd.bak
 /var signifies go to root/var.  httpd/. means close directory and copy only contents without making folder
