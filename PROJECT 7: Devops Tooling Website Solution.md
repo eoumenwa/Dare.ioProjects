@@ -153,27 +153,25 @@ sudo yum install nfs-utils nfs4-acl-tools -y
 7. Locate the log folder for Apache on the Web Server and mount it to NFS server’s export for logs. Repeat step 4.1 to make sure the mount point will    
    persist after reboot.
 
-  ![image](https://user-images.githubusercontent.com/78841364/113614866-1710db80-9621-11eb-91cd-0560229d9fc8.png)
-
-  ![image](https://user-images.githubusercontent.com/78841364/113614966-3f003f00-9621-11eb-9894-bf98b8b32e42.png)
-
 
 172.31.23.215:/mnt/logs                   /var/log/httpd          nfs     defaults        0 0
 
 [ec2-user@ip-172-31-23-25 ~]$ sudo mount -a
 [ec2-user@ip-172-31-23-25 ~]$ sudo systemctl daemon-reload
 
-Disabling the apache default page
-![image](https://user-images.githubusercontent.com/78841364/113624581-d3709e80-962d-11eb-92d2-c40594a19975.png)
-
-
 8. Fork the tooling source code from Darey.io Github Account to your Github account.
 
 ![image](https://user-images.githubusercontent.com/78841364/113620935-fba9ce80-9628-11eb-8897-abeca378ac66.png)
 
-Paste the public IP address of the webserver into the browser to confirm the apche default page
+Paste the public IP address of the webserver into the browser to confirm the apache default page
+
 ![image](https://user-images.githubusercontent.com/78841364/113621488-ac17d280-9629-11eb-965d-027274599ab5.png)
 
+9. Deploy the tooling website’s code to the Webserver. Ensure that the html folder from the repository is deployed to /var/www/html
+[ec2-user@ip-172-31-23-25 ~]$ cd tooling/
+[ec2-user@ip-172-31-23-25 tooling]$ sudo cp -R html/. /var/www/html/
+
+Refresh the webpage
 
 Note difference between mv /var/log/httpd /var/log/httpd.bak and mv /var/log/httpd/. /var/log/httpd.bak
 /var signifies go to root/var.  httpd/. means close directory and copy only contents without making folder
