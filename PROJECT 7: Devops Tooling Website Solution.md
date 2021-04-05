@@ -99,7 +99,7 @@ What i do every time is to attach an elastic IP to every server i create just to
 Now thinking of exploring vsc code as one platform for editing and also connecting to my instances.
 
 Looks like VSC is only an alternative to powershell in windows. Fruther research needed.
- In trying to set up three webservers, how can set up one and have commands replicated in three. For the sake of practice I will have it done one after the other
+In trying to set up three webservers, how can set up one and have commands replicated in three. For the sake of practice I will have it done one after the other
 
 References
 https://en.wikipedia.org/wiki/Network-attached_storage
