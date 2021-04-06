@@ -168,8 +168,11 @@ Paste the public IP address of the webserver into the browser to confirm the apa
 ![image](https://user-images.githubusercontent.com/78841364/113621488-ac17d280-9629-11eb-965d-027274599ab5.png)
 
 9. Deploy the tooling website’s code to the Webserver. Ensure that the html folder from the repository is deployed to /var/www/html
+
 [ec2-user@ip-172-31-23-25 ~]$ cd tooling/
+
 [ec2-user@ip-172-31-23-25 tooling]$ sudo cp -R html/. /var/www/html/
+
 
 Refresh the webpage
 
