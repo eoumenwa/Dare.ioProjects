@@ -176,6 +176,8 @@ Paste the public IP address of the webserver into the browser to confirm the apa
 
 Refresh the webpage
 
+
+
 Note difference between mv /var/log/httpd /var/log/httpd.bak and mv /var/log/httpd/. /var/log/httpd.bak
 /var signifies go to root/var.  httpd/. means close directory and copy only contents without making folder
 
