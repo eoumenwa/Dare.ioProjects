@@ -195,7 +195,10 @@ Now thinking of exploring vsc code as one platform for editing and also connecti
 Looks like VSC is only an alternative to powershell in windows. Fruther research needed.
 In trying to set up three webservers, how can set up one and have commands replicated in three. For the sake of practice I will have it done one after the other. 
 C Run chmod 700 /var/log/httpd and restart. Try to unmount and proceed
-
+The above did not work.
+Also after mounting NFS to /var/log/htppd file ownership did not change to apache:apache
+But remained root:root. However,permissions was 700 which is normal.
+Maybe I need to run chmod 777 again on the miint points before mounting again 
 References
 https://en.wikipedia.org/wiki/Network-attached_storage
 https://en.wikipedia.org/wiki/Storage_area_network
