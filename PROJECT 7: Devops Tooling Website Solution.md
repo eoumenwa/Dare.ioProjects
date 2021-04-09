@@ -173,8 +173,10 @@ cd tooling/
 
 sudo cp -R html/. /var/www/html/
 
+Disable selinux using 
+sudo setenforce 0
 
-Refresh the webpage
+Refresh the webpage or access the it using the instance public or private IP address
 
 ![image](https://user-images.githubusercontent.com/78841364/114185599-e88e4b80-9913-11eb-8b21-ef75b706b052.png)
 
