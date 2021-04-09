@@ -147,7 +147,7 @@ sudo yum install nfs-utils nfs4-acl-tools -y
 
 6. Verify that Apache files and directories are available on the Web Server in /var/www and also on the NFS server in /mnt/apps. If you see the same files    - it means NFS is mounted correctly. You can try to create a new file touch test.txt from one server and check if the same file is accessible from other    Web Servers.
    
-   Creating test.txt from the NFS server ( in  shot 5b above, the created file can be seen)
+   Creating test.txt from the NFS server ( in  shot 5b above, the created file can be seen in shot 6a)
    ![image](https://user-images.githubusercontent.com/78841364/113610809-9e5b5080-961b-11eb-8d70-6edbc4dfd6d1.png) Shot 6a
 
 7. Locate the log folder for Apache on the Web Server and mount it to NFS server’s export for logs. Repeat step 4.1 to make sure the mount point will    
@@ -201,7 +201,7 @@ C Run chmod 700 /var/log/httpd and restart. Try to unmount and proceed
 
 New steps
 sudo chmod -R 777 /mnt/logs on NFS
-sudo umount -t nfs rw,nosuid 172.31.23.215:/mnt/logs /var/log/httpd on webserver to unmount
+sudo umount -t nfs rw,nosuid 172.xx.23.xxx:/mnt/logs /var/log/httpd on webserver to unmount
 sudo mkdir /home/log
 sudo cp -R -v /var/log/http/. /home/log
 delete content of mnt/logs on nfs
