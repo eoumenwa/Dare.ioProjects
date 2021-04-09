@@ -201,6 +201,7 @@ sudo chmod -R 777 /mnt/logs on NFS
 sudo umount -t nfs rw,nosuid 172.31.23.215:/mnt/logs /var/log/httpd on webserver to unmount
 sudo mkdir /home/log
 sudo cp -R -v /var/log/http/. /home/log
+delete content of mnt/logs on nfs
 mount again
 observe permissions on new httpd
 chown
