@@ -87,7 +87,7 @@ Create mount points on /mnt directory for the logical volumes as follow: Mount l
 ## Step 2 — Configure the database server
 
 1. Install MySQL server
-ubuntu@ip-172-31-40-226:~$ sudo apt install mysql-server -y
+$ sudo apt install mysql-server -y
 2. Create a database and name it tooling 
 mysql> create database tooling;
 Query OK, 1 row affected (0.01 sec)
@@ -134,7 +134,7 @@ sudo yum install nfs-utils nfs4-acl-tools -y
    Add following line
 
    <NFS-Server-Private-IP-Address>:/mnt/apps /var/www nfs defaults 0 0
-   172.31.23.215:/mnt/apps                   /var/www          nfs     defaults        0 0
+   <NFS-Server-Private-IP-Address>:/mnt/apps                   /var/www          nfs     defaults        0 0
 
 5. Install Apache
    sudo yum install httpd -y
@@ -153,11 +153,11 @@ sudo yum install nfs-utils nfs4-acl-tools -y
 7. Locate the log folder for Apache on the Web Server and mount it to NFS server’s export for logs. Repeat step 4.1 to make sure the mount point will    
    persist after reboot.
 
+  <NFS-Server-Private-IP-Address>:/mnt/logs /var/log/httpd nfs defaults 0 0
+  <NFS-Server-Private-IP-Address>:/mnt/logs                   /var/log/httpd          nfs     defaults        0 0
 
-172.31.23.215:/mnt/logs                   /var/log/httpd          nfs     defaults        0 0
-
-[ec2-user@ip-172-31-23-25 ~]$ sudo mount -a
-[ec2-user@ip-172-31-23-25 ~]$ sudo systemctl daemon-reload
+sudo mount -a
+sudo systemctl daemon-reload
 
 8. Fork the tooling source code from Darey.io Github Account to your Github account.
 
@@ -169,12 +169,15 @@ Paste the public IP address of the webserver into the browser to confirm the apa
 
 9. Deploy the tooling website’s code to the Webserver. Ensure that the html folder from the repository is deployed to /var/www/html
 
-[ec2-user@ip-172-31-23-25 ~]$ cd tooling/
+cd tooling/
 
-[ec2-user@ip-172-31-23-25 tooling]$ sudo cp -R html/. /var/www/html/
+sudo cp -R html/. /var/www/html/
 
 
 Refresh the webpage
+
+![image](https://user-images.githubusercontent.com/78841364/114185599-e88e4b80-9913-11eb-8b21-ef75b706b052.png)
+
 
 
 
