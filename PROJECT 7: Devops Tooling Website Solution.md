@@ -224,6 +224,8 @@ https://en.wikipedia.org/wiki/ISCSI
 https://en.wikipedia.org/wiki/Block-level_storage
 https://en.wikipedia.org/wiki/Object_storage
 https://dzone.com/articles/confused-by-aws-storage-options-s3-ebs-amp-efs-explained
-
-  
+https://www.tecmint.com/install-lamp-on-centos-8/
+https://serverfault.com/questions/590012/why-cant-apache-create-log-files
+https://www.edureka.co/community/67382/httpd-service-failed-because-control-process-exited-error
+http://www.zbeanztech.com/blog/important-mysql-commands#:~:text=Show%20all%20data%20from%20a,columns%20from%20%5Btable%20name%5D%3B
  
