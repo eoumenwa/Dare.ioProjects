@@ -241,37 +241,6 @@ INSERT INTO ‘users’ (’id’, ‘username’, ‘password’, ‘email’, 
 ![image](https://user-images.githubusercontent.com/78841364/114305291-8ebd8b00-9aa5-11eb-8572-61dfaac56ece.png)
 
 
-Note difference between mv /var/log/httpd /var/log/httpd.bak and mv /var/log/httpd/. /var/log/httpd.bak
-/var signifies go to root/var.  httpd/. means close directory and copy only contents without making folder
-
-Taking a short break. Hopeful to continue later tonight
-
-Notice the error in the output. Can you confirm if you configured local DNS to resolve web to an IP address
-
-You should use  the IP addresses of the servers instead of Web1 and Web2
-
-Exactly, or you can use the IP address directly. Just be aware that when IP changes your configuration will not work again
-What i do every time is to attach an elastic IP to every server i create just to prevent the IPs from changing and breaking the setup
-
-Now thinking of exploring vsc code as one platform for editing and also connecting to my instances.
-
-Looks like VSC is only an alternative to powershell in windows. Fruther research needed.
-In trying to set up three webservers, how can set up one and have commands replicated in three. For the sake of practice I will have it done one after the other. 
-C Run chmod 700 /var/log/httpd and restart. Try to unmount and proceed
-
-New steps
-sudo chmod -R 777 /mnt/logs on NFS
-sudo umount -t nfs rw,nosuid 172.xx.23.xxx:/mnt/logs /var/log/httpd on webserver to unmount
-sudo mkdir /home/log
-sudo cp -R -v /var/log/http/. /home/log
-delete content of mnt/logs on nfs
-mount again
-observe permissions on new httpd
-chown
-chmod
-copy back restart
-
-
 References
 https://en.wikipedia.org/wiki/Network-attached_storage
 https://en.wikipedia.org/wiki/Storage_area_network
