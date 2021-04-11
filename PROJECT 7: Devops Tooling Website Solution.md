@@ -209,13 +209,22 @@ Refresh the webpage using the webserver public IP address
 
 
 11. Update the website’s configuration to connect to the database (in functions.php file). 
+cd /var/www/html
+sudo vi functions.php
+Update database IP, username (webaccess), password, database name (tooling)
+
+12. Install mysql client
+sudo yum install mysql-server
+
+13. Apply tooling-db.sql script to tooling database
+cd tooling
+mysql -h 172.31.40.226 -u webaccess -p tooling < tooling-db.sql
 
 
-12. Apply tooling-db.sql script.
 Create in MySQL a new admin user with username: myuser and password: password:
 INSERT INTO ‘users’ (’id’, ‘username’, ‘password’, ‘email’, ‘user_type’, ‘status’) VALUES -> (1, ‘myuser’, ‘5f4dcc3b5aa765d61d8327deb882cf99’, ‘user@mail.com’, ‘admin’, ‘1’);
 
-Open the website in your browser http://<Web-Server-Public-IP-Address-or-Public-DNS-Name>/index.php and make sure you can login into the websute with myuser user.
+Open the website in your browser http://<Web-Server-Public-IP-Address-or-Public-DNS-Name>/index.php and make sure you can login into the website with myuser user.
 
 ![image](https://user-images.githubusercontent.com/78841364/114305291-8ebd8b00-9aa5-11eb-8572-61dfaac56ece.png)
 
