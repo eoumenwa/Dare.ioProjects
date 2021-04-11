@@ -182,6 +182,9 @@ Refresh the webpage or access the it using the instance public or private IP add
 
 
 
+![image](https://user-images.githubusercontent.com/78841364/114305291-8ebd8b00-9aa5-11eb-8572-61dfaac56ece.png)
+
+
 
 Note difference between mv /var/log/httpd /var/log/httpd.bak and mv /var/log/httpd/. /var/log/httpd.bak
 /var signifies go to root/var.  httpd/. means close directory and copy only contents without making folder
