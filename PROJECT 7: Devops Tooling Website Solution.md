@@ -224,10 +224,21 @@ mysql -h 172.31.40.226 -u webaccess -p tooling < tooling-db.sql
 Create in MySQL a new admin user with username: myuser and password: password:
 INSERT INTO ‘users’ (’id’, ‘username’, ‘password’, ‘email’, ‘user_type’, ‘status’) VALUES -> (1, ‘myuser’, ‘5f4dcc3b5aa765d61d8327deb882cf99’, ‘user@mail.com’, ‘admin’, ‘1’);
 
-Open the website in your browser http://<Web-Server-Public-IP-Address-or-Public-DNS-Name>/index.php and make sure you can login into the website with myuser user.
+14.  Install PHP
+      sudo dnf update
+      sudo dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+      sudo dnf install dnf-utils http://rpms.remirepo.net/enterprise/remi-release-8.rpm
+      sudo dnf module list php
+      sudo dnf module reset php
+      php -v
+      sudo systemctl restart httpd
+      sudo setsebool -P httpd_execmem 1
+      sudo systemctl restart httpd
+
+
+15. Open the website in your browser http://<Web-Server-Public-IP-Address-or-Public-DNS-Name>/index.php and make sure you can login into the website with myuser user.
 
 ![image](https://user-images.githubusercontent.com/78841364/114305291-8ebd8b00-9aa5-11eb-8572-61dfaac56ece.png)
-
 
 
 Note difference between mv /var/log/httpd /var/log/httpd.bak and mv /var/log/httpd/. /var/log/httpd.bak
