@@ -152,53 +152,53 @@ sudo yum install nfs-utils nfs4-acl-tools -y
 
 7. Locate the log folder for Apache on the Web Server and mount it to NFS server’s export for logs. 
 7.1  back up /httpd/var/log
-ec2-user@ip-172-31-26-39 ~]$ sudo cp -R -v /var/log/httpd/. /home/log
-'/var/log/httpd/./error_log' -> '/home/log/./error_log'
-'/var/log/httpd/./access_log' -> '/home/log/./access_log'
+      sudo cp -R -v /var/log/httpd/. /home/log
+      '/var/log/httpd/./error_log' -> '/home/log/./error_log'
+      '/var/log/httpd/./access_log' -> '/home/log/./access_log'
 
 7.2  Mount using sudo mount -t nfs -o rw,nosuid 172.31.23.215:/mnt/logs /var/log/httpd
 
 7.3  Restore files
 
 7.4  Repeat step 4.1 to make sure the mount point will persist after reboot.
-  <NFS-Server-Private-IP-Address>:/mnt/logs /var/log/httpd nfs defaults 0 0
-  <NFS-Server-Private-IP-Address>:/mnt/logs                   /var/log/httpd          nfs     defaults        0 0
+    <NFS-Server-Private-IP-Address>:/mnt/logs /var/log/httpd nfs defaults 0 0
+    <NFS-Server-Private-IP-Address>:/mnt/logs                   /var/log/httpd          nfs     defaults        0 0
     
-Confirm mounting was properly done and restart
-sudo mount -a
-sudo systemctl daemon-reload
+  Confirm mounting was properly done and restart
+  sudo mount -a
+  sudo systemctl daemon-reload
 
 8. Fork the tooling source code from Darey.io Github Account to your Github account.
-sudo yum install git -y
+   sudo yum install git -y
 
-![image](https://user-images.githubusercontent.com/78841364/113620935-fba9ce80-9628-11eb-8897-abeca378ac66.png)
+    ![image](https://user-images.githubusercontent.com/78841364/113620935-fba9ce80-9628-11eb-8897-abeca378ac66.png)
 
 
 9. Deploy the tooling website’s code to the Webserver. Ensure that the html folder from the repository is deployed to /var/www/html
 
-cd tooling/
- sudo cp -R -v html/. /var/www/html/
+    cd tooling/
+    sudo cp -R -v html/. /var/www/html/
+  
+
+9.1 Paste the public IP address of the webserver into the browser to confirm the apache default page
+
+    ![image](https://user-images.githubusercontent.com/78841364/113621488-ac17d280-9629-11eb-965d-027274599ab5.png)
 
 
-Paste the public IP address of the webserver into the browser to confirm the apache default page
-
-![image](https://user-images.githubusercontent.com/78841364/113621488-ac17d280-9629-11eb-965d-027274599ab5.png)
-
-
-Disable apache welcome page
+9.2 Disable apache welcome page
 sudo mv /etc/httpd/conf.d/welcome.conf /etc/httpd/conf.d/welcome.conf_backup
 
 10. sudo systemctl restart httpd
 
-Encountered errors after restarting as shown below
+    Encountered errors after restarting as shown below
 
-![image](https://user-images.githubusercontent.com/78841364/114307661-a64d4180-9aae-11eb-9443-e68c45ebd3c2.png)
+    ![image](https://user-images.githubusercontent.com/78841364/114307661-a64d4180-9aae-11eb-9443-e68c45ebd3c2.png)
 
-Changed ownership and file permissions to httpd as follows
-sudo chown -R root:root /var/log/httpd
-sudo chmod 700 /var/log/httpd
+    Changed ownership and file permissions to httpd as follows
+    sudo chown -R root:root /var/log/httpd
+    sudo chmod 700 /var/log/httpd
 
-Disabled selinux using sudo setenforce 0 and restarted httpd
+    Disabled selinux using sudo setenforce 0 and restarted httpd
 
 ![image](https://user-images.githubusercontent.com/78841364/114308064-8d459000-9ab0-11eb-975f-d724abdaed31.png)
 
@@ -209,20 +209,21 @@ Refresh the webpage using the webserver public IP address
 
 
 11. Update the website’s configuration to connect to the database (in functions.php file). 
-cd /var/www/html
-sudo vi functions.php
-Update database IP, username (webaccess), password, database name (tooling)
+    cd /var/www/html
+    sudo vi functions.php
+    Update database IP, username (webaccess), password, database name (tooling)
 
 12. Install mysql client
-sudo yum install mysql-server
+    sudo yum install mysql-server
 
 13. Apply tooling-db.sql script to tooling database
-cd tooling
-mysql -h 172.31.40.226 -u webaccess -p tooling < tooling-db.sql
+    cd tooling
+    mysql -h 172.31.40.226 -u webaccess -p tooling < tooling-db.sql
 
 
-Create in MySQL a new admin user with username: myuser and password: password:
-INSERT INTO ‘users’ (’id’, ‘username’, ‘password’, ‘email’, ‘user_type’, ‘status’) VALUES -> (1, ‘myuser’, ‘5f4dcc3b5aa765d61d8327deb882cf99’, ‘user@mail.com’, ‘admin’, ‘1’);
+  Create in MySQL a new admin user with username: myuser and password: password:
+  INSERT INTO ‘users’ (’id’, ‘username’, ‘password’, ‘email’, ‘user_type’, ‘status’) VALUES -> (1, ‘myuser’, ‘5f4dcc3b5aa765d61d8327deb882cf99’,       
+  ‘user@mail.com’, ‘admin’, ‘1’);
 
 14.  Install PHP
       sudo dnf update
@@ -236,9 +237,10 @@ INSERT INTO ‘users’ (’id’, ‘username’, ‘password’, ‘email’, 
       sudo systemctl restart httpd
 
 
-15. Open the website in your browser http://<Web-Server-Public-IP-Address-or-Public-DNS-Name>/index.php and make sure you can login into the website with myuser user.
+15. Open the website in your browser http://<Web-Server-Public-IP-Address-or-Public-DNS-Name>/index.php and make sure you can login into the website with   
+    myuser user.
 
-![image](https://user-images.githubusercontent.com/78841364/114305291-8ebd8b00-9aa5-11eb-8572-61dfaac56ece.png)
+    ![image](https://user-images.githubusercontent.com/78841364/114305291-8ebd8b00-9aa5-11eb-8572-61dfaac56ece.png)
 
 
 References
