@@ -150,37 +150,72 @@ sudo yum install nfs-utils nfs4-acl-tools -y
    Creating test.txt from the NFS server ( in  shot 5b above, the created file can be seen in shot 6a)
    ![image](https://user-images.githubusercontent.com/78841364/113610809-9e5b5080-961b-11eb-8d70-6edbc4dfd6d1.png) Shot 6a
 
-7. Locate the log folder for Apache on the Web Server and mount it to NFS server’s export for logs. Repeat step 4.1 to make sure the mount point will    
-   persist after reboot.
+7. Locate the log folder for Apache on the Web Server and mount it to NFS server’s export for logs. 
+7.1  back up /httpd/var/log
+ec2-user@ip-172-31-26-39 ~]$ sudo cp -R -v /var/log/httpd/. /home/log
+'/var/log/httpd/./error_log' -> '/home/log/./error_log'
+'/var/log/httpd/./access_log' -> '/home/log/./access_log'
 
+7.2  Mount using sudo mount -t nfs -o rw,nosuid 172.31.23.215:/mnt/logs /var/log/httpd
+
+7.3  Restore files
+
+7.4  Repeat step 4.1 to make sure the mount point will persist after reboot.
   <NFS-Server-Private-IP-Address>:/mnt/logs /var/log/httpd nfs defaults 0 0
   <NFS-Server-Private-IP-Address>:/mnt/logs                   /var/log/httpd          nfs     defaults        0 0
-
+    
+Confirm mounting was properly done and restart
 sudo mount -a
 sudo systemctl daemon-reload
 
 8. Fork the tooling source code from Darey.io Github Account to your Github account.
+sudo yum install git -y
 
 ![image](https://user-images.githubusercontent.com/78841364/113620935-fba9ce80-9628-11eb-8897-abeca378ac66.png)
+
+
+9. Deploy the tooling website’s code to the Webserver. Ensure that the html folder from the repository is deployed to /var/www/html
+
+cd tooling/
+ sudo cp -R -v html/. /var/www/html/
+
 
 Paste the public IP address of the webserver into the browser to confirm the apache default page
 
 ![image](https://user-images.githubusercontent.com/78841364/113621488-ac17d280-9629-11eb-965d-027274599ab5.png)
 
-9. Deploy the tooling website’s code to the Webserver. Ensure that the html folder from the repository is deployed to /var/www/html
 
-cd tooling/
+Disable apache welcome page
+sudo mv /etc/httpd/conf.d/welcome.conf /etc/httpd/conf.d/welcome.conf_backup
 
-sudo cp -R html/. /var/www/html/
+10. sudo systemctl restart httpd
 
-Disable selinux using 
-sudo setenforce 0
+Encountered errors after restarting as shown below
 
-Refresh the webpage or access the it using the instance public or private IP address
+![image](https://user-images.githubusercontent.com/78841364/114307661-a64d4180-9aae-11eb-9443-e68c45ebd3c2.png)
+
+Changed ownership and file permissions to httpd as follows
+sudo chown -R root:root /var/log/httpd
+sudo chmod 700 /var/log/httpd
+
+Disabled selinux using sudo setenforce 0 and restarted httpd
+
+![image](https://user-images.githubusercontent.com/78841364/114308064-8d459000-9ab0-11eb-975f-d724abdaed31.png)
+
+
+Refresh the webpage using the webserver public IP address
 
 ![image](https://user-images.githubusercontent.com/78841364/114185599-e88e4b80-9913-11eb-8b21-ef75b706b052.png)
 
 
+11. Update the website’s configuration to connect to the database (in functions.php file). 
+
+
+12. Apply tooling-db.sql script.
+Create in MySQL a new admin user with username: myuser and password: password:
+INSERT INTO ‘users’ (’id’, ‘username’, ‘password’, ‘email’, ‘user_type’, ‘status’) VALUES -> (1, ‘myuser’, ‘5f4dcc3b5aa765d61d8327deb882cf99’, ‘user@mail.com’, ‘admin’, ‘1’);
+
+Open the website in your browser http://<Web-Server-Public-IP-Address-or-Public-DNS-Name>/index.php and make sure you can login into the websute with myuser user.
 
 ![image](https://user-images.githubusercontent.com/78841364/114305291-8ebd8b00-9aa5-11eb-8572-61dfaac56ece.png)
 
