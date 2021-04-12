@@ -240,8 +240,13 @@ Refresh the webpage using the webserver public IP address
 15. Open the website in your browser http://<Web-Server-Public-IP-Address-or-Public-DNS-Name>/index.php and make sure you can login into the website with   
     myuser user.
 
-    ![image](https://user-images.githubusercontent.com/78841364/114305291-8ebd8b00-9aa5-11eb-8572-61dfaac56ece.png)
+    ![image](https://user-images.githubusercontent.com/78841364/114305291-8ebd8b00-9aa5-11eb-8572-61dfaac56ece.png).
+    
 
+Repeated the same process for webservers 2 and 3
+
+Summary
+In this project, I implemented a web solution for a DevOps team using LAMP stack with remote Database and NFS servers. I have been able to fully understand the concept of network file sharing and also deploying of website code.
 
 References
 https://en.wikipedia.org/wiki/Network-attached_storage
