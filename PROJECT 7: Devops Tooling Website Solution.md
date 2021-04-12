@@ -1,4 +1,5 @@
 # Devops Tooling Website Solution
+https://drive.google.com/file/d/1FGYsJ56l8KyRjKc_d0FQYez8ghxZ8Hud/view?usp=sharing (Link to Project 7 Demo)
 
 This project describes a set of DevOps tools that will help a team in day to day activities in managing, developing, testing, deploying and monitoring different projects. This single DevOps Tooling Solution consists of:
 
@@ -82,7 +83,7 @@ Based on the set up above, we require four Red Hat instances and one Ubuntu inst
 3. Instead of formating the disk as ext4, I formatted as xfs
 
 Ensure there are 3 Logical Volumes. lv-opt lv-apps, and lv-logs
-Create mount points on /mnt directory for the logical volumes as follow: Mount lv-apps on /mnt/apps - To be used by webservers Mount lv-logs on /mnt/logs - To be used by webserver logs Mount lv-opt on /mnt/opt - To be used by Jenkins server in Project 8
+Create mount points on /mnt directory for the logical volumes as follows: Mount lv-apps on /mnt/apps - To be used by webservers. Mount lv-logs on /mnt/logs - To be used by webserver logs Mount lv-opt on /mnt/opt - To be used by Jenkins server in Project 8
 
 ## Step 2 — Configure the database server
 
@@ -168,13 +169,13 @@ sudo yum install nfs-utils nfs4-acl-tools -y
   sudo mount -a
   sudo systemctl daemon-reload
 
-8. Fork the tooling source code from Darey.io Github Account to your Github account.
+8*. Fork the tooling source code from Darey.io Github Account to your Github account.
    sudo yum install git -y
 
     ![image](https://user-images.githubusercontent.com/78841364/113620935-fba9ce80-9628-11eb-8897-abeca378ac66.png)
 
 
-9. Deploy the tooling website’s code to the Webserver. Ensure that the html folder from the repository is deployed to /var/www/html
+9*. Deploy the tooling website’s code to the Webserver. Ensure that the html folder from the repository is deployed to /var/www/html
 
     cd tooling/
     sudo cp -R -v html/. /var/www/html/
@@ -208,15 +209,15 @@ Refresh the webpage using the webserver public IP address
 ![image](https://user-images.githubusercontent.com/78841364/114185599-e88e4b80-9913-11eb-8b21-ef75b706b052.png)
 
 
-11. Update the website’s configuration to connect to the database (in functions.php file). 
+11*. Update the website’s configuration to connect to the database (in functions.php file). 
     cd /var/www/html
     sudo vi functions.php
     Update database IP, username (webaccess), password, database name (tooling)
 
-12. Install mysql client
+12*. Install mysql client
     sudo yum install mysql-server
 
-13. Apply tooling-db.sql script to tooling database
+13*. Apply tooling-db.sql script to tooling database
     cd tooling
     mysql -h 172.31.40.226 -u webaccess -p tooling < tooling-db.sql
 
@@ -231,6 +232,8 @@ Refresh the webpage using the webserver public IP address
       sudo dnf install dnf-utils http://rpms.remirepo.net/enterprise/remi-release-8.rpm
       sudo dnf module list php
       sudo dnf module reset php
+      sudo dnf module enable php:remi-7.4
+      sudo dnf install php php-opcache php-gd php-curl php-mysqlnd
       php -v
       sudo systemctl restart httpd
       sudo setsebool -P httpd_execmem 1
@@ -243,7 +246,7 @@ Refresh the webpage using the webserver public IP address
     ![image](https://user-images.githubusercontent.com/78841364/114305291-8ebd8b00-9aa5-11eb-8572-61dfaac56ece.png).
     
 
-Repeated the same process for webservers 2 and 3
+Repeated the same process for webservers 2 and 3 excluding steps with asterisk * 
 
 Summary
 In this project, I implemented a web solution for a DevOps team using LAMP stack with remote Database and NFS servers. I have been able to fully understand the concept of network file sharing and also deploying of website code.
