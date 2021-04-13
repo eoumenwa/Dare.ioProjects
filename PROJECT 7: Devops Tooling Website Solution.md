@@ -1,4 +1,5 @@
 # Devops Tooling Website Solution
+
 https://drive.google.com/file/d/1FGYsJ56l8KyRjKc_d0FQYez8ghxZ8Hud/view?usp=sharing (Link to Project 7 Demo)
 
 This project describes a set of DevOps tools that will help a team in day to day activities in managing, developing, testing, deploying and monitoring different projects. This single DevOps Tooling Solution consists of:
@@ -13,7 +14,7 @@ This project describes a set of DevOps tools that will help a team in day to day
 
 5. Grafana - a multi-platform open source analytics and interactive visualization web application.
 
-6. Prometheus - An open-source monitoring system with a dimensional data model, flexible query language, efficient time series database and modern alerting      approach.
+6. Prometheus - An open-source monitoring system with a dimensional data model, flexible query language, efficient time series database and modern alerting    approach.
 
 7. Kibana - Kibana is a free and open user interface that lets you visualize your Elasticsearch data and navigate the Elastic Stack.
 
@@ -101,7 +102,6 @@ Query OK, 0 rows affected (0.01 sec)
 mysql> GRANT ALL PRIVILEGES ON tooling.* TO 'webaccess'@'%' WITH GRANT OPTION;
 Query OK, 0 rows affected (0.00 sec)
 
-I will have to change the % to the subnet cidr
 
 ![image](https://user-images.githubusercontent.com/78841364/113601058-dd36d980-960e-11eb-9d71-136cf8ab3d01.png)
 
@@ -120,7 +120,7 @@ Configure the Web Servers to work with a single MySQL database
 1. Launch a new EC2 instance with RHEL 8 Operating System.
 
 2. Install NFS client
-sudo yum install nfs-utils nfs4-acl-tools -y
+   sudo yum install nfs-utils nfs4-acl-tools -y
 
 3. Mount /var/www/ and target the NFS server’s export for apps
    sudo mkdir /var/www
@@ -149,10 +149,12 @@ sudo yum install nfs-utils nfs4-acl-tools -y
 6. Verify that Apache files and directories are available on the Web Server in /var/www and also on the NFS server in /mnt/apps. If you see the same files    - it means NFS is mounted correctly. You can try to create a new file touch test.txt from one server and check if the same file is accessible from other    Web Servers.
    
    Creating test.txt from the NFS server ( in  shot 5b above, the created file can be seen in shot 6a)
+   
    ![image](https://user-images.githubusercontent.com/78841364/113610809-9e5b5080-961b-11eb-8d70-6edbc4dfd6d1.png) Shot 6a
 
 7. Locate the log folder for Apache on the Web Server and mount it to NFS server’s export for logs. 
-7.1  back up /httpd/var/log
+8. 
+9.1  back up /httpd/var/log
       sudo cp -R -v /var/log/httpd/. /home/log
       '/var/log/httpd/./error_log' -> '/home/log/./error_log'
       '/var/log/httpd/./access_log' -> '/home/log/./access_log'
@@ -170,7 +172,8 @@ sudo yum install nfs-utils nfs4-acl-tools -y
   sudo systemctl daemon-reload
 
 8*. Fork the tooling source code from Darey.io Github Account to your Github account.
-   sudo yum install git -y
+   
+    sudo yum install git -y
 
     ![image](https://user-images.githubusercontent.com/78841364/113620935-fba9ce80-9628-11eb-8897-abeca378ac66.png)
 
@@ -187,7 +190,7 @@ sudo yum install nfs-utils nfs4-acl-tools -y
 
 
 9.2 Disable apache welcome page
-sudo mv /etc/httpd/conf.d/welcome.conf /etc/httpd/conf.d/welcome.conf_backup
+    sudo mv /etc/httpd/conf.d/welcome.conf /etc/httpd/conf.d/welcome.conf_backup
 
 10. sudo systemctl restart httpd
 
@@ -215,11 +218,11 @@ Refresh the webpage using the webserver public IP address
     Update database IP, username (webaccess), password, database name (tooling)
 
 12*. Install mysql client
-    sudo yum install mysql-server
+     sudo yum install mysql-server
 
 13*. Apply tooling-db.sql script to tooling database
-    cd tooling
-    mysql -h 172.31.40.226 -u webaccess -p tooling < tooling-db.sql
+     cd tooling
+     mysql -h 172.31.40.226 -u webaccess -p tooling < tooling-db.sql
 
 
   Create in MySQL a new admin user with username: myuser and password: password:
@@ -246,9 +249,11 @@ Refresh the webpage using the webserver public IP address
     ![image](https://user-images.githubusercontent.com/78841364/114305291-8ebd8b00-9aa5-11eb-8572-61dfaac56ece.png).
     
 
-Repeated the same process for webservers 2 and 3 excluding steps with asterisk * 
+16. Repeated the same process for webservers 2 and 3 excluding steps with asterisk * 
 
-Summary
+
+# Summary
+
 In this project, I implemented a web solution for a DevOps team using LAMP stack with remote Database and NFS servers. I have been able to fully understand the concept of network file sharing and also deploying of website code.
 
 References
