@@ -89,33 +89,34 @@ Create mount points on /mnt directory for the logical volumes as follows: Mount 
 ## Step 2 — Configure the database server
 
 1. Install MySQL server
-$ sudo apt install mysql-server -y
+   $ sudo apt install mysql-server -y
 2. Create a database and name it tooling 
-mysql> create database tooling;
-Query OK, 1 row affected (0.01 sec)
+   mysql> create database tooling;
+   Query OK, 1 row affected (0.01 sec)
 
 3. Create a database user and name it webaccess
-mysql> CREATE USER `webaccess`@`%` IDENTIFIED WITH mysql_native_password BY 'emmanuel';
-Query OK, 0 rows affected (0.01 sec)
+   mysql> CREATE USER `webaccess`@`%` IDENTIFIED WITH mysql_native_password BY 'emmanuel';
+   Query OK, 0 rows affected (0.01 sec)
 
 4. Grant permission to webaccess user on tooling database to do anything only from the webservers subnet cidr
-mysql> GRANT ALL PRIVILEGES ON tooling.* TO 'webaccess'@'%' WITH GRANT OPTION;
-Query OK, 0 rows affected (0.00 sec)
+   mysql> GRANT ALL PRIVILEGES ON tooling.* TO 'webaccess'@'%' WITH GRANT OPTION;
+   Query OK, 0 rows affected (0.00 sec)
 
 
-![image](https://user-images.githubusercontent.com/78841364/113601058-dd36d980-960e-11eb-9d71-136cf8ab3d01.png)
+   ![image](https://user-images.githubusercontent.com/78841364/113601058-dd36d980-960e-11eb-9d71-136cf8ab3d01.png)
 
 
 ## Step 3 — Prepare the Web Servers
 
-We need to make sure that our Web Servers can serve the same content from shared storage solutions, in this case - NFS Server and MySQL database. We know that one DB can be accessed for reads and writes by multiple clients. For storing shared files that our Web Servers will use - we will utilize NFS and mount previously created Logical Volume lv-apps to the folder where Apache stores files to be served to the users (/var/www).
+    We need to make sure that our Web Servers can serve the same content from shared storage solutions, in this case - NFS Server and MySQL database.    We     know that one DB can be accessed for reads and writes by multiple clients. For storing shared files that our Web Servers will use - we will utilize NFS     and mount previously created Logical Volume lv-apps to the folder where Apache stores files to be served to the users (/var/www).
 
-This approach will make our Web Servers stateless, which means we will be able to add new ones or remove them whenever we need, and the integrity of the data (in the database and on NFS) will be preserved.
+    This approach will make our Web Servers stateless, which means we will be able to add new ones or remove them whenever we need, and the integrity of  
+    the data (in the database and on NFS) will be preserved.
 
-During the next steps we will do following:
-Configure NFS client (this step must be done on all three servers)
-Deploy a Tooling application to our Web Servers into a shared NFS folder
-Configure the Web Servers to work with a single MySQL database
+    During the next steps we will do following:
+    Configure NFS client (this step must be done on all three servers)
+    Deploy a Tooling application to our Web Servers into a shared NFS folder
+    Configure the Web Servers to work with a single MySQL database
 
 1. Launch a new EC2 instance with RHEL 8 Operating System.
 
@@ -127,7 +128,7 @@ Configure the Web Servers to work with a single MySQL database
    sudo mount -t nfs -o rw,nosuid <NFS-Server-Private-IP-Address>:/mnt/apps /var/www
  
 4. Verify that NFS was mounted successfully by running df -h
-  ![image](https://user-images.githubusercontent.com/78841364/113607377-20954600-9617-11eb-938a-81eb9c83471e.png)
+   ![image](https://user-images.githubusercontent.com/78841364/113607377-20954600-9617-11eb-938a-81eb9c83471e.png)
 
 4.1 Make sure that the changes will persist on Web Server after reboot:
    sudo vi /etc/fstab
@@ -140,10 +141,10 @@ Configure the Web Servers to work with a single MySQL database
 5. Install Apache
    sudo yum install httpd -y
 
-![image](https://user-images.githubusercontent.com/78841364/113610588-576d5b00-961b-11eb-908a-7792427c3bcc.png) Shot 5a
+   ![image](https://user-images.githubusercontent.com/78841364/113610588-576d5b00-961b-11eb-908a-7792427c3bcc.png) Shot 5a
 
 
-![image](https://user-images.githubusercontent.com/78841364/113610392-0d847500-961b-11eb-9fc8-8796a5c60a9b.png) Shot 5b
+   ![image](https://user-images.githubusercontent.com/78841364/113610392-0d847500-961b-11eb-9fc8-8796a5c60a9b.png) Shot 5b
 
 
 6. Verify that Apache files and directories are available on the Web Server in /var/www and also on the NFS server in /mnt/apps. If you see the same files    - it means NFS is mounted correctly. You can try to create a new file touch test.txt from one server and check if the same file is accessible from other    Web Servers.
@@ -167,9 +168,9 @@ Configure the Web Servers to work with a single MySQL database
     <NFS-Server-Private-IP-Address>:/mnt/logs /var/log/httpd nfs defaults 0 0
     <NFS-Server-Private-IP-Address>:/mnt/logs                   /var/log/httpd          nfs     defaults        0 0
     
-  Confirm mounting was properly done and restart
-  sudo mount -a
-  sudo systemctl daemon-reload
+     Confirm mounting was properly done and restart
+     sudo mount -a
+     sudo systemctl daemon-reload
 
 8*. Fork the tooling source code from Darey.io Github Account to your Github account.
    
@@ -190,6 +191,7 @@ Configure the Web Servers to work with a single MySQL database
 
 
 9.2 Disable apache welcome page
+   
     sudo mv /etc/httpd/conf.d/welcome.conf /etc/httpd/conf.d/welcome.conf_backup
 
 10. sudo systemctl restart httpd
@@ -204,18 +206,18 @@ Configure the Web Servers to work with a single MySQL database
 
     Disabled selinux using sudo setenforce 0 and restarted httpd
 
-![image](https://user-images.githubusercontent.com/78841364/114308064-8d459000-9ab0-11eb-975f-d724abdaed31.png)
+    ![image](https://user-images.githubusercontent.com/78841364/114308064-8d459000-9ab0-11eb-975f-d724abdaed31.png)
 
 
-Refresh the webpage using the webserver public IP address
+    Refresh the webpage using the webserver public IP address
 
-![image](https://user-images.githubusercontent.com/78841364/114185599-e88e4b80-9913-11eb-8b21-ef75b706b052.png)
+    ![image](https://user-images.githubusercontent.com/78841364/114185599-e88e4b80-9913-11eb-8b21-ef75b706b052.png)
 
 
 11*. Update the website’s configuration to connect to the database (in functions.php file). 
-    cd /var/www/html
-    sudo vi functions.php
-    Update database IP, username (webaccess), password, database name (tooling)
+     cd /var/www/html
+     sudo vi functions.php
+     Update database IP, username (webaccess), password, database name (tooling)
 
 12*. Install mysql client
      sudo yum install mysql-server
@@ -225,11 +227,11 @@ Refresh the webpage using the webserver public IP address
      mysql -h 172.31.40.226 -u webaccess -p tooling < tooling-db.sql
 
 
-  Create in MySQL a new admin user with username: myuser and password: password:
-  INSERT INTO ‘users’ (’id’, ‘username’, ‘password’, ‘email’, ‘user_type’, ‘status’) VALUES -> (1, ‘myuser’, ‘5f4dcc3b5aa765d61d8327deb882cf99’,       
-  ‘user@mail.com’, ‘admin’, ‘1’);
+    Create in MySQL a new admin user with username: myuser and password: password:
+    INSERT INTO ‘users’ (’id’, ‘username’, ‘password’, ‘email’, ‘user_type’, ‘status’) VALUES -> (1, ‘myuser’, ‘5f4dcc3b5aa765d61d8327deb882cf99’,       
+    ‘user@mail.com’, ‘admin’, ‘1’);
 
-14.  Install PHP
+14.   Install PHP
       sudo dnf update
       sudo dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
       sudo dnf install dnf-utils http://rpms.remirepo.net/enterprise/remi-release-8.rpm
@@ -254,20 +256,22 @@ Refresh the webpage using the webserver public IP address
 
 ## Summary
 
-In this project, I implemented a web solution for a DevOps team using LAMP stack with remote Database and NFS servers. I have been able to fully understand the concept of network file sharing and also deploying of website code.
+   In this project, I implemented a web solution for a DevOps team using LAMP stack with remote Database and NFS servers. I have been able to fully     
+   understand the concept of network file sharing and also deploying of website code.
 
-References
-https://en.wikipedia.org/wiki/Network-attached_storage
-https://en.wikipedia.org/wiki/Storage_area_network
-https://en.wikipedia.org/wiki/Network_File_System
-https://en.wikipedia.org/wiki/Server_Message_Block
-https://en.wikipedia.org/wiki/SSH_File_Transfer_Protocol
-https://en.wikipedia.org/wiki/ISCSI
-https://en.wikipedia.org/wiki/Block-level_storage
-https://en.wikipedia.org/wiki/Object_storage
-https://dzone.com/articles/confused-by-aws-storage-options-s3-ebs-amp-efs-explained
-https://www.tecmint.com/install-lamp-on-centos-8/
-https://serverfault.com/questions/590012/why-cant-apache-create-log-files
-https://www.edureka.co/community/67382/httpd-service-failed-because-control-process-exited-error
-http://www.zbeanztech.com/blog/important-mysql-commands#:~:text=Show%20all%20data%20from%20a,columns%20from%20%5Btable%20name%5D%3B
+## References
+
+   https://en.wikipedia.org/wiki/Network-attached_storage
+   https://en.wikipedia.org/wiki/Storage_area_network
+   https://en.wikipedia.org/wiki/Network_File_System
+   https://en.wikipedia.org/wiki/Server_Message_Block
+   https://en.wikipedia.org/wiki/SSH_File_Transfer_Protocol
+   https://en.wikipedia.org/wiki/ISCSI
+   https://en.wikipedia.org/wiki/Block-level_storage
+   https://en.wikipedia.org/wiki/Object_storage
+   https://dzone.com/articles/confused-by-aws-storage-options-s3-ebs-amp-efs-explained
+   https://www.tecmint.com/install-lamp-on-centos-8/
+   https://serverfault.com/questions/590012/why-cant-apache-create-log-files
+   https://www.edureka.co/community/67382/httpd-service-failed-because-control-process-exited-error
+   http://www.zbeanztech.com/blog/important-mysql-commands#:~:text=Show%20all%20data%20from%20a,columns%20from%20%5Btable%20name%5D%3B
  
