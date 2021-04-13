@@ -153,8 +153,8 @@ Configure the Web Servers to work with a single MySQL database
    ![image](https://user-images.githubusercontent.com/78841364/113610809-9e5b5080-961b-11eb-8d70-6edbc4dfd6d1.png) Shot 6a
 
 7. Locate the log folder for Apache on the Web Server and mount it to NFS server’s export for logs. 
-8. 
-9.1  back up /httpd/var/log
+ 
+7.1  back up /httpd/var/log
       sudo cp -R -v /var/log/httpd/. /home/log
       '/var/log/httpd/./error_log' -> '/home/log/./error_log'
       '/var/log/httpd/./access_log' -> '/home/log/./access_log'
@@ -252,7 +252,7 @@ Refresh the webpage using the webserver public IP address
 16. Repeated the same process for webservers 2 and 3 excluding steps with asterisk * 
 
 
-# Summary
+## Summary
 
 In this project, I implemented a web solution for a DevOps team using LAMP stack with remote Database and NFS servers. I have been able to fully understand the concept of network file sharing and also deploying of website code.
 
