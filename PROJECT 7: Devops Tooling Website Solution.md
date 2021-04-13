@@ -79,28 +79,29 @@ Some Definitions
 Based on the set up above, we require four Red Hat instances and one Ubuntu instance 
 
 ## Step 1 - Prepare NFS Server
-1. Spin up a new EC2 instance with RHEL Linux 8 Operating System.
-2. Configure LVM on the Server based on Project 6 experience - To do this, I created an EBS volume of 15GB and attached it to the NFS server instance.
-3. Instead of formating the disk as ext4, I formatted as xfs
+   1. Spin up a new EC2 instance with RHEL Linux 8 Operating System.
+   2. Configure LVM on the Server based on Project 6 experience - To do this, I created an EBS volume of 15GB and attached it to the NFS server instance.
+   3. Instead of formating the disk as ext4, I formatted as xfs
 
-Ensure there are 3 Logical Volumes. lv-opt lv-apps, and lv-logs
-Create mount points on /mnt directory for the logical volumes as follows: Mount lv-apps on /mnt/apps - To be used by webservers. Mount lv-logs on /mnt/logs - To be used by webserver logs Mount lv-opt on /mnt/opt - To be used by Jenkins server in Project 8
+   Ensure there are 3 Logical Volumes. lv-opt lv-apps, and lv-logs
+   Create mount points on /mnt directory for the logical volumes as follows: Mount lv-apps on /mnt/apps - To be used by webservers. Mount lv-logs on     
+   /mnt/logs - To be used by webserver logs Mount lv-opt on /mnt/opt - To be used by Jenkins server in Project 8
 
 ## Step 2 — Configure the database server
 
-1. Install MySQL server
-   $ sudo apt install mysql-server -y
-2. Create a database and name it tooling 
-   mysql> create database tooling;
-   Query OK, 1 row affected (0.01 sec)
+   1. Install MySQL server
+      $ sudo apt install mysql-server -y
+   2. Create a database and name it tooling 
+      mysql> create database tooling;
+      Query OK, 1 row affected (0.01 sec)
 
-3. Create a database user and name it webaccess
-   mysql> CREATE USER `webaccess`@`%` IDENTIFIED WITH mysql_native_password BY 'emmanuel';
-   Query OK, 0 rows affected (0.01 sec)
+   3. Create a database user and name it webaccess
+      mysql> CREATE USER `webaccess`@`%` IDENTIFIED WITH mysql_native_password BY 'emmanuel';
+      Query OK, 0 rows affected (0.01 sec)
 
-4. Grant permission to webaccess user on tooling database to do anything only from the webservers subnet cidr
-   mysql> GRANT ALL PRIVILEGES ON tooling.* TO 'webaccess'@'%' WITH GRANT OPTION;
-   Query OK, 0 rows affected (0.00 sec)
+   4. Grant permission to webaccess user on tooling database to do anything only from the webservers subnet cidr
+      mysql> GRANT ALL PRIVILEGES ON tooling.* TO 'webaccess'@'%' WITH GRANT OPTION;
+      Query OK, 0 rows affected (0.00 sec)
 
 
    ![image](https://user-images.githubusercontent.com/78841364/113601058-dd36d980-960e-11eb-9d71-136cf8ab3d01.png)
@@ -108,15 +109,15 @@ Create mount points on /mnt directory for the logical volumes as follows: Mount 
 
 ## Step 3 — Prepare the Web Servers
 
-    We need to make sure that our Web Servers can serve the same content from shared storage solutions, in this case - NFS Server and MySQL database.    We     know that one DB can be accessed for reads and writes by multiple clients. For storing shared files that our Web Servers will use - we will utilize NFS     and mount previously created Logical Volume lv-apps to the folder where Apache stores files to be served to the users (/var/www).
+   We need to make sure that our Web Servers can serve the same content from shared storage solutions, in this case - NFS Server and MySQL database.    We    know that one DB can be accessed for reads and writes by multiple clients. For storing shared files that our Web Servers will use - we will utilize NFS    and mount previously created Logical Volume lv-apps to the folder where Apache stores files to be served to the users (/var/www).
 
-    This approach will make our Web Servers stateless, which means we will be able to add new ones or remove them whenever we need, and the integrity of  
-    the data (in the database and on NFS) will be preserved.
+   This approach will make our Web Servers stateless, which means we will be able to add new ones or remove them whenever we need, and the integrity of  
+   the data (in the database and on NFS) will be preserved.
 
-    During the next steps we will do following:
-    Configure NFS client (this step must be done on all three servers)
-    Deploy a Tooling application to our Web Servers into a shared NFS folder
-    Configure the Web Servers to work with a single MySQL database
+   During the next steps we will do following:
+   Configure NFS client (this step must be done on all three servers)
+   Deploy a Tooling application to our Web Servers into a shared NFS folder
+   Configure the Web Servers to work with a single MySQL database
 
 1. Launch a new EC2 instance with RHEL 8 Operating System.
 
@@ -227,11 +228,11 @@ Create mount points on /mnt directory for the logical volumes as follows: Mount 
      mysql -h 172.31.40.226 -u webaccess -p tooling < tooling-db.sql
 
 
-    Create in MySQL a new admin user with username: myuser and password: password:
-    INSERT INTO ‘users’ (’id’, ‘username’, ‘password’, ‘email’, ‘user_type’, ‘status’) VALUES -> (1, ‘myuser’, ‘5f4dcc3b5aa765d61d8327deb882cf99’,       
-    ‘user@mail.com’, ‘admin’, ‘1’);
+   Create in MySQL a new admin user with username: myuser and password: password:
+   INSERT INTO ‘users’ (’id’, ‘username’, ‘password’, ‘email’, ‘user_type’, ‘status’) VALUES -> (1, ‘myuser’, ‘5f4dcc3b5aa765d61d8327deb882cf99’,       
+   ‘user@mail.com’, ‘admin’, ‘1’);
 
-14.   Install PHP
+14.   Install PHP using the following commands
       sudo dnf update
       sudo dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
       sudo dnf install dnf-utils http://rpms.remirepo.net/enterprise/remi-release-8.rpm
