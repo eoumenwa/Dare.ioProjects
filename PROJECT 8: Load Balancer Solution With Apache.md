@@ -42,7 +42,9 @@ One RHEL8 NFS server
 ![image](https://user-images.githubusercontent.com/78841364/114838408-b01ebf80-9da2-11eb-88b3-96acb9fafe14.png)
 
 
+## Configure Apache As A Load Balancer
 
+Create an Ubuntu Server 20.04 EC2 instance and name it Project-8-apache-lb
 
 
 ## References
