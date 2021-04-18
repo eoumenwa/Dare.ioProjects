@@ -177,7 +177,7 @@ Based on the set up above, we require four Red Hat instances and one Ubuntu inst
    
     sudo yum install git -y
 
-    ![image](https://user-images.githubusercontent.com/78841364/113620935-fba9ce80-9628-11eb-8897-abeca378ac66.png)
+   ![image](https://user-images.githubusercontent.com/78841364/113620935-fba9ce80-9628-11eb-8897-abeca378ac66.png)
 
 
 9*. Deploy the tooling website’s code to the Webserver. Ensure that the html folder from the repository is deployed to /var/www/html
@@ -188,7 +188,7 @@ Based on the set up above, we require four Red Hat instances and one Ubuntu inst
 
 9.1 Paste the public IP address of the webserver into the browser to confirm the apache default page
 
-    ![image](https://user-images.githubusercontent.com/78841364/113621488-ac17d280-9629-11eb-965d-027274599ab5.png)
+   ![image](https://user-images.githubusercontent.com/78841364/113621488-ac17d280-9629-11eb-965d-027274599ab5.png)
 
 
 9.2 Disable apache welcome page
