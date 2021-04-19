@@ -202,7 +202,9 @@ Based on the set up above, we require four Red Hat instances and one Ubuntu inst
     ![image](https://user-images.githubusercontent.com/78841364/114307661-a64d4180-9aae-11eb-9443-e68c45ebd3c2.png)
 
     Changed ownership and file permissions to httpd as follows
+   
     sudo chown -R root:root /var/log/httpd
+   
     sudo chmod 700 /var/log/httpd
 
     Disabled selinux using sudo setenforce 0 and restarted httpd
