@@ -55,8 +55,16 @@ One RHEL8 NFS server
 
 
 
+
+
+
+
+
 ## References
 
 https://www.nginx.com/resources/glossary/load-balancing/
 https://www.nginx.com/resources/glossary/layer-7-load-balancing/
+https://www.digitalocean.com/community/tutorials/how-to-install-the-apache-web-server-on-ubuntu-20-04
+https://linuxhint.com/how-to-install-and-configure-haproxy-load-balancer-in-linux/
+
 
