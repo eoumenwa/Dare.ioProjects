@@ -235,16 +235,27 @@ Based on the set up above, we require four Red Hat instances and one Ubuntu inst
    ‘user@mail.com’, ‘admin’, ‘1’);
 
 14.   Install PHP using the following commands
+     
       sudo dnf update
+      
       sudo dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+      
       sudo dnf install dnf-utils http://rpms.remirepo.net/enterprise/remi-release-8.rpm
+      
       sudo dnf module list php
+      
       sudo dnf module reset php
+     
       sudo dnf module enable php:remi-7.4
+     
       sudo dnf install php php-opcache php-gd php-curl php-mysqlnd
+     
       php -v
+      
       sudo systemctl restart httpd
+      
       sudo setsebool -P httpd_execmem 1
+      
       sudo systemctl restart httpd
 
 
