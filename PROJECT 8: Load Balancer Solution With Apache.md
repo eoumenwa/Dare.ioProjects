@@ -57,15 +57,19 @@ One RHEL8 NFS server
 8. Try to refresh your browser page http://<Load-Balancer-Public-IP-Address-or-Public-DNS-Name>/index.php several times and make sure that both servers    
    receive HTTP GET requests from your LB - new records must appear in each server’s log file.
 
-    ![image](https://user-images.githubusercontent.com/78841364/115362552-a5dc3700-a18f-11eb-93c3-10389653cf52.png)  Load balancer IP
-    
-    ![image](https://user-images.githubusercontent.com/78841364/115362833-efc51d00-a18f-11eb-9639-af1d18a0b084.png) Webserver 1 serving content to LB
+    ![image](https://user-images.githubusercontent.com/78841364/115430919-c7aadd80-a1d2-11eb-95e6-cdc7cad54001.png) Web 1 responding to LB request
     
     
-
-
+   ![image](https://user-images.githubusercontent.com/78841364/115431127-f628b880-a1d2-11eb-8219-4539dec3e58d.png)  Web 2 responding to LB request
      
+     
+     
+     ![image](https://user-images.githubusercontent.com/78841364/115431320-2b350b00-a1d3-11eb-9b35-658a1a8208fa.png)  Ping stats from LB
 
+
+
+## Summary
+In this project, I learnt how to implement a Load balancing Web Solution and howto test the load balancing through the browser and the curl command.
 
 
 
