@@ -47,8 +47,24 @@ One RHEL8 NFS server
 1. Create an Ubuntu Server 20.04 EC2 instance and name it Project-8-apache-lb
 2. Open TCP port 80 on Project-8-apache-lb by creating an Inbound Rule in Security Group.
 3. Install Apache Load Balancer on Project-8-apache-lb server and configure it to point traffic coming to LB to both Web Servers:
+4. Verify that our configuration works - try to access your LB’s public IP address or Public DNS name from your browser:
+5. Unmount /var/log/httpd/ from the Web Servers to the NFS server 
+   ![image](https://user-images.githubusercontent.com/78841364/115362081-3108fd00-a18f-11eb-87c7-3647cc25adb1.png)
+
+7. Open two ssh/Putty consoles for both Web Servers and run following command:
+   sudo tail -f /var/log/httpd/access_log
+
+8. Try to refresh your browser page http://<Load-Balancer-Public-IP-Address-or-Public-DNS-Name>/index.php several times and make sure that both servers    
+   receive HTTP GET requests from your LB - new records must appear in each server’s log file.
+
+    ![image](https://user-images.githubusercontent.com/78841364/115362552-a5dc3700-a18f-11eb-93c3-10389653cf52.png)  Load balancer IP
+    
+    ![image](https://user-images.githubusercontent.com/78841364/115362833-efc51d00-a18f-11eb-9639-af1d18a0b084.png) Webserver 1 serving content to LB
+    
+    
 
 
+     
 
 
 
