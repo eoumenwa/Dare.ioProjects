@@ -56,6 +56,9 @@ One RHEL8 NFS server
 
 8. Try to refresh your browser page http://<Load-Balancer-Public-IP-Address-or-Public-DNS-Name>/index.php several times and make sure that both servers    
    receive HTTP GET requests from your LB - new records must appear in each server’s log file.
+ 
+ 
+ 
 
     ![image](https://user-images.githubusercontent.com/78841364/115430919-c7aadd80-a1d2-11eb-95e6-cdc7cad54001.png) 
      Web 1 responding to LB request
