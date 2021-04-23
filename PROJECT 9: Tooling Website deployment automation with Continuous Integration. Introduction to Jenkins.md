@@ -9,3 +9,7 @@ Continuous Deployment.
 
 Task
 Enhance the architecture prepared in Project 8 by adding a Jenkins server, configure a job to automatically deploy source codes changes from Git to NFS server
+
+Target setup
+
+![image](https://user-images.githubusercontent.com/78841364/115937552-41a6c500-a466-11eb-8719-8b34014c106b.png)
