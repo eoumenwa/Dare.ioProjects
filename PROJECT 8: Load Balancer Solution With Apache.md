@@ -76,6 +76,11 @@ One RHEL8 NFS server
 
 
 
+## Final setup
+
+![image](https://user-images.githubusercontent.com/78841364/115895702-b65b0e80-a428-11eb-90b7-d150f5ec07de.png)
+
+
 ## Summary
 In this project, I learnt how to implement a Load balancing Web Solution and howto test the load balancing through the browser and the curl command.
 
