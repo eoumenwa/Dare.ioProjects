@@ -54,7 +54,7 @@ server {
   }
 
 #comment out this line
-#       include /etc/nginx/sites-enabled/*;
+(#       include /etc/nginx/sites-enabled/*;
 Restart Nginx and make sure the service is up and running
 
 sudo systemctl restart nginx
