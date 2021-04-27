@@ -15,7 +15,8 @@ There are different types of SSL/TLS certificates - you can learn more about the
 
 In this project you will register your website with LetsEnrcypt Certificate Authority, to automate certificate issuance you will use a shell client recommended by LetsEncrypt - cetrbot.
 
-Task
+## Task
+
 This project consists of two parts:
 
 1. Configure Nginx as a Load Balancer
@@ -23,6 +24,7 @@ This project consists of two parts:
    Our target architecture will look like this:
 
 ![image](https://user-images.githubusercontent.com/78841364/116086691-10004a80-a66e-11eb-9154-18e77e32749b.png)
+
 
 # Part 1 - Configure Nginx As A Load Balancer
 
@@ -34,37 +36,47 @@ This project consists of two parts:
 
 3. Update /etc/hosts file for local DNS with Web Servers’ names (e.g. Web1 and Web2) and their local IP addresses
 
+   
+   ![image](https://user-images.githubusercontent.com/78841364/116270649-4791f400-a74d-11eb-98ca-8d77e15f70ca.png)
+
 
 
 4. Install and configure Nginx as a load balancer to point traffic to the resolvable DNS names of the webservers
-   Install Nginx
 
-sudo apt update
+   sudo apt update
+  
+   sudo apt install nginx
+   
+   sudo systemctl enable nginx
+   sudo systemctl restart nginx
+   sudo systemctl status nginx
 
 
-sudo apt install nginx
+   ![image](https://user-images.githubusercontent.com/78841364/116273182-888b0800-a74f-11eb-99fc-c841c34d7954.png)
 
-Configure Nginx LB using Web Servers’ names defined in /etc/hosts
 
-sudo vi /etc/nginx/nginx.conf
+  
+   Configure Nginx LB using Web Servers’ names defined in /etc/hosts
 
-#insert following configuration into http section
+   sudo vi /etc/nginx/nginx.conf
 
- upstream myproject {
-    server Web1 weight=5;
-    server Web2 weight=5;
-  }
+   #insert following configuration into http section
 
-server {
-    listen 80;
-    server_name www.domain.com;
-    location / {
-      proxy_pass http://myproject;
-    }
-  }
+    upstream myproject {
+       server Web1 weight=5;
+       server Web2 weight=5;
+     }
 
-#comment out this line
-(#       include /etc/nginx/sites-enabled/*;
+   server {
+       listen 80;
+       server_name www.domain.com;
+       location / {
+         proxy_pass http://myproject;
+       }
+     }
+
+   #comment out this line
+   (#       include /etc/nginx/sites-enabled/*;
 
 Restart Nginx and make sure the service is up and running
 
