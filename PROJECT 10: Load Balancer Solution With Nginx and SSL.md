@@ -18,22 +18,24 @@ In this project you will register your website with LetsEnrcypt Certificate Auth
 Task
 This project consists of two parts:
 
-Configure Nginx as a Load Balancer
-Register a new domain name and configure secured connection using SSL/TLS certificates
-Your target architecture will look like this:
+1. Configure Nginx as a Load Balancer
+2. Register a new domain name and configure secured connection using SSL/TLS certificates
+   Our target architecture will look like this:
 
 ![image](https://user-images.githubusercontent.com/78841364/116086691-10004a80-a66e-11eb-9154-18e77e32749b.png)
 
-Part 1 - Configure Nginx As A Load Balancer
-You can either uninstall Apache from the existing Load Balancer server, or create a fresh installation of Linux for Nginx.
+# Part 1 - Configure Nginx As A Load Balancer
 
-Create an EC2 VM based on Ubuntu Server 20.04 LTS and name it Nginx LB (do not forget to open TCP port 80 for HTTP connections, also open TCP port 443 - this port is used for secured HTTPS connections)
+1. Create an EC2 VM based on Ubuntu Server 20.04 LTS and name it Nginx LB (do not forget to open TCP port 80 for HTTP connections, also open TCP port 443 - this port is used for secured HTTPS connections)
 Update /etc/hosts file for local DNS with Web Servers’ names (e.g. Web1 and Web2) and their local IP addresses
 Install and configure Nginx as a load balancer to point traffic to the resolvable DNS names of the webservers
 Install Nginx
 
 sudo apt update
+
+
 sudo apt install nginx
+
 Configure Nginx LB using Web Servers’ names defined in /etc/hosts
 
 sudo vi /etc/nginx/nginx.conf
@@ -55,8 +57,11 @@ server {
 
 #comment out this line
 (#       include /etc/nginx/sites-enabled/*;
+
 Restart Nginx and make sure the service is up and running
 
 sudo systemctl restart nginx
+
 sudo systemctl status nginx
+
 Side Self Study: Read more about HTTP load balancing methods and features supported by Nginx on this pag
