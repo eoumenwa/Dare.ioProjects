@@ -82,7 +82,7 @@ One RHEL8 NFS server
 
 
 ## Summary
-In this project, I learnt how to implement a Load balancing Web Solution and howto test the load balancing through the browser and the curl command.
+In this project, I learnt how to implement a Load balancing Web Solution and how to test the load balancing through a browser and also using the curl command.
 
 
 
