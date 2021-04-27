@@ -154,7 +154,9 @@ ERROR: Exception when publishing, exception message [Permission denied]
 Build step 'Send build artifacts over SSH' changed build result to UNSTABLE
 Finished: UNSTABLE
 
-Resolution: changed ownership of /mnt/apps from root to ec2-user as shown in the lines below
+## Resolution
+
+Changed ownership of /mnt/apps from root to ec2-user as shown in the lines below
  sudo chown -R ec2-user: /mnt/apps
 
 
