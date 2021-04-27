@@ -36,6 +36,7 @@ This project consists of two parts:
 
 ### Result
 ubuntu@ip-172-31-32-231:~$ sudo cat /etc/hosts
+
 127.0.0.1 localhost
 
 172.31.26.39 Web1
