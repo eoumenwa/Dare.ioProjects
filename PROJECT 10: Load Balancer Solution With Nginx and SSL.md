@@ -1,3 +1,4 @@
+# Load Balancer Solution With Nginx and SSL/TLS
 
 By now you have learned what Load Balancing is used for and have configured an LB solution using Apache, but a DevOps engineer must be a versatile professional and know different alternative solutions for the same problem. That is why, in this project we will configure an Nginx Load Balancer solution.
 
@@ -56,32 +57,14 @@ This project consists of two parts:
 
 
   
-   Configure Nginx LB using Web Servers’ names defined in /etc/hosts
-
+5. Configure Nginx LB using Web Servers’ names defined in /etc/hosts
    sudo vi /etc/nginx/nginx.conf
 
-   #insert following configuration into http section
 
-    upstream myproject {
-       server Web1 weight=5;
-       server Web2 weight=5;
-     }
+   Restart Nginx and make sure the service is up and running
 
-   server {
-       listen 80;
-       server_name www.domain.com;
-       location / {
-         proxy_pass http://myproject;
-       }
-     }
+   sudo systemctl restart nginx
 
-   #comment out this line
-   (#       include /etc/nginx/sites-enabled/*;
+   sudo systemctl status nginx
 
-Restart Nginx and make sure the service is up and running
-
-sudo systemctl restart nginx
-
-sudo systemctl status nginx
-
-Side Self Study: Read more about HTTP load balancing methods and features supported by Nginx on this pag
+   Side Self Study: Read more about HTTP load balancing methods and features supported by Nginx on this pag
