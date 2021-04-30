@@ -103,7 +103,10 @@ In order to get a valid SSL certificate - we need to registrar a new domain name
    ![image](https://user-images.githubusercontent.com/78841364/116728379-d6a04580-a9b3-11eb-92de-32dd8e6c446d.png)
 
 
-   ![image](https://user-images.githubusercontent.com/78841364/116728458-f0da2380-a9b3-11eb-8cc7-d189b26a54fd.png) AWS Route 53 dashboard
+
+   ![image](https://user-images.githubusercontent.com/78841364/116728458-f0da2380-a9b3-11eb-8cc7-d189b26a54fd.png) 
+    AWS Route 53 dashboard
+   
    
    We have successfully connected Route 53 and Freenom domain.
    
@@ -121,7 +124,7 @@ In order to get a valid SSL certificate - we need to registrar a new domain name
    
    We have that LB, Route 53 and Domain are noe connected
    
-   ![image](https://user-images.githubusercontent.com/78841364/116737575-639ccc00-a9bf-11eb-8566-7c4c1bdbd0f7.png)
+   ![image](https://user-images.githubusercontent.com/78841364/116737905-c8582680-a9bf-11eb-9234-f560b54ca308.png)
 
  
 5. Next connect LB instance to the terminal
