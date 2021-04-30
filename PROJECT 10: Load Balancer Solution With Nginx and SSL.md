@@ -80,11 +80,53 @@ This project consists of two parts:
 In the following steps, we shall make necessary configurations to make connections to our Tooling Web Solution secured!
 In order to get a valid SSL certificate - we need to registrar a new domain name, uing any Domain name registrar - a company that manages reservation of domain names. The most popular ones are: Godaddy.com, Domain.com, Bluehost.com. we shall howevevr be using my.freenom.com in this project
 
-1. Register the new domain name 
+1. Register the new domain name with freenom.com
+
+   Register and confirm email address
+   
+   Check domain name availability and register
+
+   We shall be using tooling4eou.tk as our domain name.
+   
+   Go to manage domains to see domain information.
+   
+2. Search and select Route 53 on AWS console. On Route 53 dashboard, click create hosted zone.
+
+   Enter the domain name - select public hosted zone and create zone.
+   
+3. Go to freenom dashboard under domains/management tools/nameservers
+
+   Select use custom nameservers and enter the nameservers (under type NS) from AWS Route 53 into customer nameservers field in freenom
+   
+   Click change nameservers
+   
+   ![image](https://user-images.githubusercontent.com/78841364/116728379-d6a04580-a9b3-11eb-92de-32dd8e6c446d.png)
 
 
-Assign an Elastic IP to your Nginx LB server and associate your domain name with this Elastic IP
-You might have noticed, that every time you restart or stop/start your EC2 instance - you get a new public IP address. When you want to associate your domain name - it is better to have a static IP address that does not change after reboot. Elastic IP is the solution for this problem, learn how to allocate an Elastic IP and associate it with an EC2 server on this page.
+   ![image](https://user-images.githubusercontent.com/78841364/116728458-f0da2380-a9b3-11eb-8cc7-d189b26a54fd.png) AWS Route 53 dashboard
+   
+   We have successfully connected Route 53 and Freenom domain.
+   
+   
+ 4. Start the Nginx LB instance 
+   
+ 
+4. Assign an Elastic IP to your Nginx LB server and associate the domain name with this Elastic IP
+   
+   Create an A record on AWS Route 53 pointing to the LB elastic IP (We use a static IP address to prevent changes in IP after an EC2 instance is rebooted. 
+   
+   Input the Elastic IP and leave everything in default then click create
+   
+   Create another A record for www referencing LB Elastic IP
+   
+   We have that LB, Route 53 and Domain are noe connected
+   
+   ![image](https://user-images.githubusercontent.com/78841364/116737575-639ccc00-a9bf-11eb-8566-7c4c1bdbd0f7.png)
+
+ 
+5. Next connect LB instance to the terminal
+   
+   
 
 Update A record in your registrar to point to Nginx LB using Elastic IP address
 Learn how associate your domain name to your Elastic IP on this page.
