@@ -72,4 +72,48 @@ This project consists of two parts:
    
    
 
-   Side Self Study: Read more about HTTP load balancing methods and features supported by Nginx on this pag
+   Side Self Study: Read more about HTTP load balancing methods and features supported by Nginx on this page
+   
+
+## Part 2 - Register a new domain name and configure secured connection using SSL/TLS certificates
+
+In the following steps, we shall make necessary configurations to make connections to our Tooling Web Solution secured!
+In order to get a valid SSL certificate - we need to registrar a new domain name, uing any Domain name registrar - a company that manages reservation of domain names. The most popular ones are: Godaddy.com, Domain.com, Bluehost.com. we shall howevevr be using my.freenom.com in this project
+
+1. Register the new domain name 
+
+
+Assign an Elastic IP to your Nginx LB server and associate your domain name with this Elastic IP
+You might have noticed, that every time you restart or stop/start your EC2 instance - you get a new public IP address. When you want to associate your domain name - it is better to have a static IP address that does not change after reboot. Elastic IP is the solution for this problem, learn how to allocate an Elastic IP and associate it with an EC2 server on this page.
+
+Update A record in your registrar to point to Nginx LB using Elastic IP address
+Learn how associate your domain name to your Elastic IP on this page.
+
+Side Self Study: Read about different DNS record types and learn what they are used for.
+
+Check that your Web Servers can be reached from your browser using new domain name using HTTP protocol - http://<your-domain-name.com>
+
+Configure Nginx to recognize your new domain name
+Update your nginx.conf with server_name www.<your-domain-name.com> instead of server_name www.domain.com
+
+Install certbot and request for an SSL/TLS certificate
+Make sure snapd service is active and running
+
+sudo systemctl status snapd
+Install certbot
+
+sudo snap install --classic certbot
+Request your certificate (just follow the certbot instructions - you will need to choose which domain you want your certificate to be issued for, domain name will be looked up from nginx.conf file so make sure you have updated it on step 4).
+
+sudo ln -s /snap/bin/certbot /usr/bin/certbot
+sudo certbot --nginx
+Test secured access to your Web Solution by trying to reach https://<your-domain-name.com>
+
+You shall be able to access your website by using HTTPS protocol (that uses TCP port 443) and see a padlock pictogram in your browser’s search string. Click on the padlock icon and you can see the details of the certificate issued for your website.
+
+
+
+
+
+
+
