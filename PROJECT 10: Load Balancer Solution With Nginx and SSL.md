@@ -120,7 +120,7 @@ In order to get a valid SSL certificate - we need to registrar a new domain name
    
    Input the Elastic IP and leave everything in default then click create
    
-   Create another A record for www referencing LB Elastic IP
+   Create another A record for www referencing Nginx LB Elastic IP
    
    We have that LB, Route 53 and Domain are noe connected
    
@@ -131,15 +131,13 @@ In order to get a valid SSL certificate - we need to registrar a new domain name
    
    
 
-Update A record in your registrar to point to Nginx LB using Elastic IP address
-Learn how associate your domain name to your Elastic IP on this page.
-
 Side Self Study: Read about different DNS record types and learn what they are used for.
 
-Check that your Web Servers can be reached from your browser using new domain name using HTTP protocol - http://<your-domain-name.com>
 
-Configure Nginx to recognize your new domain name
-Update your nginx.conf with server_name www.<your-domain-name.com> instead of server_name www.domain.com
+6. Check that your Web Servers can be reached from your browser using new domain name using HTTP protocol - http://<your-domain-name.com>
+
+   Configure Nginx to recognize your new domain name
+   Update your nginx.conf with server_name www.<your-domain-name.com> instead of server_name www.domain.com
 
 Install certbot and request for an SSL/TLS certificate
 Make sure snapd service is active and running
