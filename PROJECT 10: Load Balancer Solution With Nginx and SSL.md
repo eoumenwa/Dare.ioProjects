@@ -49,7 +49,9 @@ This project consists of two parts:
    sudo apt install nginx
    
    sudo systemctl enable nginx
+   
    sudo systemctl restart nginx
+   
    sudo systemctl status nginx
 
 
@@ -66,5 +68,7 @@ This project consists of two parts:
    sudo systemctl restart nginx
 
    sudo systemctl status nginx
+   
+   
 
    Side Self Study: Read more about HTTP load balancing methods and features supported by Nginx on this pag
