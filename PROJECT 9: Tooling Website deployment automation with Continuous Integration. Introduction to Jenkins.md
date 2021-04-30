@@ -122,6 +122,7 @@ Scroll down to Publish over SSH plugin configuration section and configure it to
 Provide a private key (content of .pem file that you use to connect to NFS server via SSH/Putty)
 Arbitrary name
 Hostname - can be private IP address of your NFS server
+
 Username - ec2-user (since NFS server is based on EC2 with RHEL 8)
 Remote directory - /mnt/apps since our Web Servers use it as a mointing point to retrieve files from the NFS server
 Test the configuration and make sure the connection returns Success. Remember, that TCP port 22 on NFS server must be open to receive SSH connections.
@@ -132,7 +133,7 @@ Save the configuration, open your Jenkins job/project configuration page and add
 
 _images/send_build.png
 
-Configure it to send all files probuced by the build into our previouslys define remote directory. In our case we want to copy all files and directories - so we use **. If you want to apply some particular pattern to define which files to send - use this syntax.
+Configure it to send all files produced by the build into our previously define remote directory. In our case we want to copy all files and directories - so we use **. If you want to apply some particular pattern to define which files to send - use this syntax.
 
 _images/send_build1.png
 
@@ -162,4 +163,5 @@ Changed ownership of /mnt/apps from root to ec2-user as shown in the lines below
 
 
 ## Summary
+
 In this project, I learnt how to implement a Continous Integration solution using Jenkins CI which involved pushing commits directly from github automatically using a web-hook and also copying build artifacts over SSH from jenkins to the NFS-Server which also makes our webservers (being mnounted) to get updates to /var/www/html for website updates
