@@ -60,8 +60,9 @@ This project consists of two parts:
 
   
 5. Configure Nginx LB using Web Servers’ names defined in /etc/hosts
-   sudo vi /etc/nginx/nginx.conf
 
+
+   sudo vi /etc/nginx/nginx.conf
 
    Restart Nginx and make sure the service is up and running
 
