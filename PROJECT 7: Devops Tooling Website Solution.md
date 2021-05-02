@@ -90,17 +90,25 @@ Based on the set up above, we require four Red Hat instances and one Ubuntu inst
 ## Step 2 — Configure the database server
 
    1. Install MySQL server
+    
       $ sudo apt install mysql-server -y
+      
    2. Create a database and name it tooling 
+      
       mysql> create database tooling;
+     
       Query OK, 1 row affected (0.01 sec)
 
    3. Create a database user and name it webaccess
-      mysql> CREATE USER `webaccess`@`%` IDENTIFIED WITH mysql_native_password BY 'emmanuel';
+     
+      mysql> CREATE USER `webaccess`@`%` IDENTIFIED WITH mysql_native_password BY 'xxxxxl';
+     
       Query OK, 0 rows affected (0.01 sec)
 
    4. Grant permission to webaccess user on tooling database to do anything only from the webservers subnet cidr
+     
       mysql> GRANT ALL PRIVILEGES ON tooling.* TO 'webaccess'@'%' WITH GRANT OPTION;
+     
       Query OK, 0 rows affected (0.00 sec)
 
 
@@ -115,28 +123,36 @@ Based on the set up above, we require four Red Hat instances and one Ubuntu inst
    the data (in the database and on NFS) will be preserved.
 
    During the next steps we will do following:
+   
    Configure NFS client (this step must be done on all three servers)
+   
    Deploy a Tooling application to our Web Servers into a shared NFS folder
+   
    Configure the Web Servers to work with a single MySQL database
 
 1. Launch a new EC2 instance with RHEL 8 Operating System.
 
 2. Install NFS client
+   
    sudo yum install nfs-utils nfs4-acl-tools -y
 
 3. Mount /var/www/ and target the NFS server’s export for apps
+  
    sudo mkdir /var/www
+  
    sudo mount -t nfs -o rw,nosuid <NFS-Server-Private-IP-Address>:/mnt/apps /var/www
  
 4. Verify that NFS was mounted successfully by running df -h
    ![image](https://user-images.githubusercontent.com/78841364/113607377-20954600-9617-11eb-938a-81eb9c83471e.png)
 
 4.1 Make sure that the changes will persist on Web Server after reboot:
+   
    sudo vi /etc/fstab
 
    Add following line
 
    <NFS-Server-Private-IP-Address>:/mnt/apps /var/www nfs defaults 0 0
+  
    <NFS-Server-Private-IP-Address>:/mnt/apps                   /var/www          nfs     defaults        0 0
 
 5. Install Apache
@@ -169,9 +185,11 @@ Based on the set up above, we require four Red Hat instances and one Ubuntu inst
     <NFS-Server-Private-IP-Address>:/mnt/logs /var/log/httpd nfs defaults 0 0
     <NFS-Server-Private-IP-Address>:/mnt/logs                   /var/log/httpd          nfs     defaults        0 0
     
-     Confirm mounting was properly done and restart
-     sudo mount -a
-     sudo systemctl daemon-reload
+   Confirm mounting was properly done and restart
+   
+   sudo mount -a
+    
+   sudo systemctl daemon-reload
 
 8*. Fork the tooling source code from Darey.io Github Account to your Github account.
    
@@ -218,15 +236,21 @@ Based on the set up above, we require four Red Hat instances and one Ubuntu inst
 
 
 11*. Update the website’s configuration to connect to the database (in functions.php file). 
+     
      cd /var/www/html
+    
      sudo vi functions.php
+    
      Update database IP, username (webaccess), password, database name (tooling)
 
 12*. Install mysql client
+    
      sudo yum install mysql-server
 
 13*. Apply tooling-db.sql script to tooling database
+     
      cd tooling
+    
      mysql -h 172.31.40.226 -u webaccess -p tooling < tooling-db.sql
 
 
