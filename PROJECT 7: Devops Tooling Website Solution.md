@@ -177,12 +177,16 @@ Based on the set up above, we require four Red Hat instances and one Ubuntu inst
       '/var/log/httpd/./error_log' -> '/home/log/./error_log'
       '/var/log/httpd/./access_log' -> '/home/log/./access_log'
 
-7.2  Mount using sudo mount -t nfs -o rw,nosuid 172.31.23.215:/mnt/logs /var/log/httpd
+7.2  Mount using 
+
+     sudo mount -t nfs -o rw,nosuid 172.31.23.215:/mnt/logs /var/log/httpd
 
 7.3  Restore files
 
 7.4  Repeat step 4.1 to make sure the mount point will persist after reboot.
+    
     <NFS-Server-Private-IP-Address>:/mnt/logs /var/log/httpd nfs defaults 0 0
+    
     <NFS-Server-Private-IP-Address>:/mnt/logs                   /var/log/httpd          nfs     defaults        0 0
     
    Confirm mounting was properly done and restart
