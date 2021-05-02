@@ -146,29 +146,152 @@ This project consists of two parts:
    
    Update nginx.conf with server_name tooling4eou.tk instead of server_name www.domain.com
    
+   Use command below to create a new config file. Remember to comment out the necessary lines
+   
+   sudo vi /etc/nginx/sites-available/load_balancer.conf
+   
+   Use the command below to remove the default nginx site to redirect new config file
+   
+   sudo rm -f /etc/nginx/sites-enabled/default
+   
+   Use the command below to check if configuration is ok
+      
+   sudo nginx -t
 
-   Install certbot and request for an SSL/TLS certificate
+   nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+
+   nginx: configuration file /etc/nginx/nginx.conf test is successful
+
+   Use the command below to create as symbolic link to the new config file existing under /etc/nginx/sites-available/
+   
+   sudo ln -s /etc/nginx/sites-available/load_balancer.conf /etc/nginx/sites-enabled/
+   
+   Confirm with the command below
+   
+   sudo ls -l /etc/nginx/sites-enabled/
+   
+   total 0
+   
+   lrwxrwxrwx 1 root root 41 May  2 15:41 load_balancer. -> /etc/nginx/sites-available/load_balancer.
+
+   Error as a result of not commenting out the following line
+   
+   #       include /etc/nginx/sites-enabled/*;
+   
+   ![image](https://user-images.githubusercontent.com/78841364/116821966-506a3780-ab4a-11eb-819f-0d1ed37067f2.png)
+
+   
+   Encountered error below after configuration of LB.
+    
+   ![image](https://user-images.githubusercontent.com/78841364/116820848-1e0a0b80-ab45-11eb-80d0-d90397a0ba72.png)
+    
+   Error persisted until I ran the command "sudo setenforce 0" on both webservers.
+
+   ![image](https://user-images.githubusercontent.com/78841364/116821260-2cf1bd80-ab47-11eb-9811-678643e95a47.png)
+    
+    
+
+7. Install certbot and request for an SSL/TLS certificate
    
    Make sure snapd service is active and running
-
+   
    sudo systemctl status snapd
+   
+   ● snapd.service - Snap Daemon
+        Loaded: loaded (/lib/systemd/system/snapd.service; enabled; vendor preset: enabled)
+        Active: active (running) since Sun 2021-05-02 13:40:17 UTC; 3h 50min ago
+   TriggeredBy: ● snapd.socket
+      Main PID: 430 (snapd)
+         Tasks: 8 (limit: 1160)
+        Memory: 65.7M
+        CGroup: /system.slice/snapd.service
+                └─430 /usr/lib/snapd/snapd
+
    Install certbot
 
-   sudo snap install --classic certbot
-  
-   Request your certificate (just follow the certbot instructions - you will need to choose which domain you want your certificate to be issued for, domain    
-   name will be looked up from nginx.conf file so make sure you have updated it on step 4).
+   sudo apt install certbot -y
+   
+   Reading package lists... Done
+   
+   Building dependency tree
+   
+   Reading state information... Done
+   
+   The following additional packages will be installed:
+     
+     python3-acme python3-certbot python3-configargparse python3-future python3-icu python3-josepy python3-mock
+    
+     python3-parsedatetime python3-pbr python3-requests-toolbelt python3-rfc3339 python3-tz python3-zope.component
+     
+     python3-zope.event python3-zope.hookable
 
+   
+   sudo snap install --classic certbot
+   
+   certbot 1.14.0 from Certbot Project (certbot-eff✓) installed
+
+   Install additional dependency package
+   
+   sudo apt install python3-certbot-nginx -y
+
+   Confirm configurations using
+   
+   sudo nginx -t && sudo nginx -s reload
+   
+   nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+   
+   nginx: configuration file /etc/nginx/nginx.conf test is successful
+
+   
+8. Request your certificate 
+   
    sudo ln -s /snap/bin/certbot /usr/bin/certbot
-   sudo certbot --nginx
-   Test secured access to your Web Solution by trying to reach https://<your-domain-name.com>
+   
+   
+   sudo certbot --nginx -d tooling4eou.tk -d www.tooling4eou.tk
+   
+   
+   ![image](https://user-images.githubusercontent.com/78841364/116822681-2e72b400-ab4e-11eb-8a5b-7fe0004ea8e6.png)
+   
+
+   ![image](https://user-images.githubusercontent.com/78841364/116822704-56faae00-ab4e-11eb-83c4-44364985e627.png)
+
+  
+   
+   Test secured access to your Web Solution by trying to reach https://tooling4eou.tK
+   
+   ![image](https://user-images.githubusercontent.com/78841364/116822764-bc4e9f00-ab4e-11eb-8898-5be38ce4f2a7.png)
+
 
    You shall be able to access your website by using HTTPS protocol (that uses TCP port 443) and see a padlock pictogram in your browser’s search string.      Click on the padlock icon and you can see the details of the certificate issued for your website.
+
+   
+9. Set up periodical renewal of your SSL/TLS certificate
+   
+   By default, LetsEncrypt certificate is valid for 90 days, so it is recommended to renew it at least every 60 days or more frequently.
+
+   You can test renewal command in dry-run mode
+
+   sudo certbot renew --dry-run
+   
+   Best practice is to have a scheduled job that to run renew command periodically. Let us configure a cronjob to run the command twice a day.
+
+   Edit the crontab file with the following command:
+
+   crontab -e
+   
+   Add following line:
+
+   * */12 * * *   root /usr/bin/certbot renew > /dev/null 2>&1
+   
+
+   
+   Side Self Study: Refresh your cron configuration knowledge by watching this video.
 
 
 
 ## References
 
 https://stackoverflow.com/questions/22143565/which-nginx-config-file-is-enabled-etc-nginx-conf-d-default-conf-or-etc-nginx
-
+https://crontab.guru/#23_0-20/2_*_*_*
 
