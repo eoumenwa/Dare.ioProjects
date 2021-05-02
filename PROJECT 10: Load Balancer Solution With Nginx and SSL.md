@@ -289,6 +289,9 @@ This project consists of two parts:
    Side Self Study: Refresh your cron configuration knowledge by watching this video.
 
 
+## Summary
+
+You have just implemented an Nginx Load Balancing Web Solution with secured HTTPS connection with periodically updated SSL/TLS certificates.
 
 ## References
 
