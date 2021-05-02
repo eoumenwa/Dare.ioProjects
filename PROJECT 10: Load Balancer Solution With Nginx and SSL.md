@@ -64,6 +64,9 @@ This project consists of two parts:
 
    sudo vi /etc/nginx/nginx.conf
 
+   ![image](https://user-images.githubusercontent.com/78841364/116810828-f0f13500-ab13-11eb-8db6-9efcb3d88a3a.png)
+
+
    Restart Nginx and make sure the service is up and running
 
    sudo systemctl restart nginx
@@ -77,8 +80,8 @@ This project consists of two parts:
 
 ## Part 2 - Register a new domain name and configure secured connection using SSL/TLS certificates
 
-In the following steps, we shall make necessary configurations to make connections to our Tooling Web Solution secured!
-In order to get a valid SSL certificate - we need to registrar a new domain name, uing any Domain name registrar - a company that manages reservation of domain names. The most popular ones are: Godaddy.com, Domain.com, Bluehost.com. we shall howevevr be using my.freenom.com in this project
+   In the following steps, we shall make necessary configurations to make connections to our Tooling Web Solution secured!
+   In order to get a valid SSL certificate - we need to registrar a new domain name, uing any Domain name registrar - a company that manages reservation of    domain names. The most popular ones are: Godaddy.com, Domain.com, Bluehost.com. we shall howevevr be using my.freenom.com in this project
 
 1. Register the new domain name with freenom.com
 
@@ -131,32 +134,41 @@ In order to get a valid SSL certificate - we need to registrar a new domain name
    
    
 
-Side Self Study: Read about different DNS record types and learn what they are used for.
+   Side Self Study: Read about different DNS record types and learn what they are used for.
 
 
-6. Check that your Web Servers can be reached from your browser using new domain name using HTTP protocol - http://<your-domain-name.com>
+6. Check that your Web Servers can be reached from your browser using new domain name using HTTP protocol - http://tooling4eou.tk
+
+   ![image](https://user-images.githubusercontent.com/78841364/116742459-639fca80-a9c5-11eb-82bd-9cff2cfc9805.png)
+
 
    Configure Nginx to recognize your new domain name
-   Update your nginx.conf with server_name www.<your-domain-name.com> instead of server_name www.domain.com
+   
+   Update nginx.conf with server_name tooling4eou.tk instead of server_name www.domain.com
+   
 
-Install certbot and request for an SSL/TLS certificate
-Make sure snapd service is active and running
+   Install certbot and request for an SSL/TLS certificate
+   
+   Make sure snapd service is active and running
 
-sudo systemctl status snapd
-Install certbot
+   sudo systemctl status snapd
+   Install certbot
 
-sudo snap install --classic certbot
-Request your certificate (just follow the certbot instructions - you will need to choose which domain you want your certificate to be issued for, domain name will be looked up from nginx.conf file so make sure you have updated it on step 4).
+   sudo snap install --classic certbot
+  
+   Request your certificate (just follow the certbot instructions - you will need to choose which domain you want your certificate to be issued for, domain    
+   name will be looked up from nginx.conf file so make sure you have updated it on step 4).
 
-sudo ln -s /snap/bin/certbot /usr/bin/certbot
-sudo certbot --nginx
-Test secured access to your Web Solution by trying to reach https://<your-domain-name.com>
+   sudo ln -s /snap/bin/certbot /usr/bin/certbot
+   sudo certbot --nginx
+   Test secured access to your Web Solution by trying to reach https://<your-domain-name.com>
 
-You shall be able to access your website by using HTTPS protocol (that uses TCP port 443) and see a padlock pictogram in your browser’s search string. Click on the padlock icon and you can see the details of the certificate issued for your website.
-
-
+   You shall be able to access your website by using HTTPS protocol (that uses TCP port 443) and see a padlock pictogram in your browser’s search string.      Click on the padlock icon and you can see the details of the certificate issued for your website.
 
 
 
+## References
+
+https://stackoverflow.com/questions/22143565/which-nginx-config-file-is-enabled-etc-nginx-conf-d-default-conf-or-etc-nginx
 
 
