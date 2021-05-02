@@ -173,8 +173,11 @@ Based on the set up above, we require four Red Hat instances and one Ubuntu inst
 7. Locate the log folder for Apache on the Web Server and mount it to NFS server’s export for logs. 
  
 7.1  back up /httpd/var/log
+      
       sudo cp -R -v /var/log/httpd/. /home/log
-      '/var/log/httpd/./error_log' -> '/home/log/./error_log'
+     
+     '/var/log/httpd/./error_log' -> '/home/log/./error_log'
+      
       '/var/log/httpd/./access_log' -> '/home/log/./access_log'
 
 7.2  Mount using 
