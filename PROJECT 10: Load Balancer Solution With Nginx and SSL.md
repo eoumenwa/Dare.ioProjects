@@ -119,15 +119,16 @@ This project consists of two parts:
  
 4. Assign an Elastic IP to your Nginx LB server and associate the domain name with this Elastic IP
    
-   Create an A record on AWS Route 53 pointing to the LB elastic IP (We use a static IP address to prevent changes in IP after an EC2 instance is rebooted. 
+    * Create an A record on AWS Route 53 pointing to the LB elastic IP (We use a static IP address to prevent changes in IP after an EC2 instance is       
+      rebooted. 
    
-   Input the Elastic IP and leave everything in default then click create
+    * Input the Elastic IP and leave everything in default then click create
    
-   Create another A record for www referencing Nginx LB Elastic IP
+    * Create another A record for www referencing Nginx LB Elastic IP
    
-   We have that LB, Route 53 and Domain are noe connected
+      We have that LB, Route 53 and Domain are noe connected
    
-   ![image](https://user-images.githubusercontent.com/78841364/116737905-c8582680-a9bf-11eb-9234-f560b54ca308.png)
+      ![image](https://user-images.githubusercontent.com/78841364/116737905-c8582680-a9bf-11eb-9234-f560b54ca308.png)
 
  
 5. Next connect LB instance to the terminal
@@ -144,19 +145,19 @@ This project consists of two parts:
 
    Configure Nginx to recognize your new domain name
    
-   Update nginx.conf with server_name tooling4eou.tk instead of server_name www.domain.com
+      Update nginx.conf with server_name tooling4eou.tk instead of server_name www.domain.com
    
    Use command below to create a new config file. Remember to comment out the necessary lines
    
-   sudo vi /etc/nginx/sites-available/load_balancer.conf
+         sudo vi /etc/nginx/sites-available/load_balancer.conf
    
    Use the command below to remove the default nginx site to redirect new config file
    
-   sudo rm -f /etc/nginx/sites-enabled/default
+         sudo rm -f /etc/nginx/sites-enabled/default
    
    Use the command below to check if configuration is ok
       
-   sudo nginx -t
+         sudo nginx -t
 
    nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
 
@@ -164,11 +165,11 @@ This project consists of two parts:
 
    Use the command below to create as symbolic link to the new config file existing under /etc/nginx/sites-available/
    
-   sudo ln -s /etc/nginx/sites-available/load_balancer.conf /etc/nginx/sites-enabled/
+         sudo ln -s /etc/nginx/sites-available/load_balancer.conf /etc/nginx/sites-enabled/
    
    Confirm with the command below
    
-   sudo ls -l /etc/nginx/sites-enabled/
+         sudo ls -l /etc/nginx/sites-enabled/
    
    total 0
    
@@ -209,7 +210,7 @@ This project consists of two parts:
 
    Install certbot
 
-   sudo apt install certbot -y
+         sudo apt install certbot -y
    
    Reading package lists... Done
    
@@ -226,17 +227,17 @@ This project consists of two parts:
      python3-zope.event python3-zope.hookable
 
    
-   sudo snap install --classic certbot
+       sudo snap install --classic certbot
    
    certbot 1.14.0 from Certbot Project (certbot-eff✓) installed
 
    Install additional dependency package
    
-   sudo apt install python3-certbot-nginx -y
+         sudo apt install python3-certbot-nginx -y
 
    Confirm configurations using
    
-   sudo nginx -t && sudo nginx -s reload
+         sudo nginx -t && sudo nginx -s reload
    
    nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
    
@@ -245,10 +246,10 @@ This project consists of two parts:
    
 8. Request your certificate 
    
-   sudo ln -s /snap/bin/certbot /usr/bin/certbot
+         sudo ln -s /snap/bin/certbot /usr/bin/certbot
    
    
-   sudo certbot --nginx -d tooling4eou.tk -d www.tooling4eou.tk
+         sudo certbot --nginx -d tooling4eou.tk -d www.tooling4eou.tk
    
    
    ![image](https://user-images.githubusercontent.com/78841364/116822681-2e72b400-ab4e-11eb-8a5b-7fe0004ea8e6.png)
@@ -270,9 +271,9 @@ This project consists of two parts:
    
    By default, LetsEncrypt certificate is valid for 90 days, so it is recommended to renew it at least every 60 days or more frequently.
 
-   You can test renewal command in dry-run mode
+   Test renewal command in dry-run mode
 
-   sudo certbot renew --dry-run
+         sudo certbot renew --dry-run
    
    Best practice is to have a scheduled job that to run renew command periodically. Let us configure a cronjob to run the command twice a day.
 
@@ -282,7 +283,7 @@ This project consists of two parts:
    
    Add following line:
 
-   * */12 * * *   root /usr/bin/certbot renew > /dev/null 2>&1
+       * */12 * * *   root /usr/bin/certbot renew > /dev/null 2>&1
    
 
    
@@ -291,7 +292,8 @@ This project consists of two parts:
 
 ## Summary
 
-You have just implemented an Nginx Load Balancing Web Solution with secured HTTPS connection with periodically updated SSL/TLS certificates.
+In this project, I implemented an Nginx Load Balancing Web Solution with secured HTTPS connection with periodically updated SSL/TLS certificates.
+
 
 ## References
 
