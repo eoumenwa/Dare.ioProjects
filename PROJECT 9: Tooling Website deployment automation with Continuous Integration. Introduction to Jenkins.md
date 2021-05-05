@@ -2,10 +2,17 @@
 
 In this project we are going to utilize Jenkins CI capabilities to make sure that every change made to the source code in GitHub will be automatically be updated to the Tooling Website.
 
+Continuous integration
+The automated building and testing of an application on every new commit.
 
-Continuous Integration
-Continuous Delivery
-Continuous Deployment.
+Continuous delivery
+A state where an application is always ready to be deployed. A manual step is required to actually deploy the application.
+
+Continuous deployment
+The automation of building, testing, and deploying. If all tests pass, every new commit will push new code through the entire development pipeline to production with no manual intervention..
+
+ ![image](https://user-images.githubusercontent.com/78841364/117133210-f64bbb00-ad71-11eb-9323-1891c2c57c9f.png)
+
 
 ## Task
 Enhance the architecture prepared in Project 8 by adding a Jenkins server, configure a job to automatically deploy source codes changes from Git to NFS server
