@@ -34,18 +34,18 @@
 
     Install Jenkins
 
-    wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+        wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
 
-    sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > \
-    /etc/apt/sources.list.d/jenkins.list'
+        sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > \
+        /etc/apt/sources.list.d/jenkins.list'
 
-    sudo apt update
+        sudo apt update
 
-    sudo apt-get install jenkins
+        sudo apt-get install jenkins
 
    Make sure Jenkins is up and running
 
-    sudo systemctl status jenkins
+        sudo systemctl status jenkins
 
 
     By default Jenkins server uses TCP port 8080 - open it by creating a new Inbound Rule in your EC2 Security Group
@@ -74,100 +74,107 @@
 
 ## Step 2 - Configure Jenkins to retrieve source codes from GitHub using Webhooks
 
-In this part, We will configure a simple Jenkins job/project. This job will be triggered by GitHub webhooks and will execute a ‘build’ task to retrieve codes from GitHub and store it locally on Jenkins server.
+  In this part, We will configure a simple Jenkins job/project. This job will be triggered by GitHub webhooks and will execute a ‘build’ task to retrieve     codes from GitHub and store it locally on Jenkins server.
 
-1. Enable webhooks in GitHub repository settings
-_images/webhook_github.gif
+  1. Enable webhooks in GitHub repository settings
 
-Go to Jenkins web console, click “New Item” and create a “Freestyle project”
-_images/create_freestyle.png
+  _images/webhook_github.gif
 
-To connect GitHub repository, we need to provide its URL which cannbe copied from the repository itself
+  Go to Jenkins web console, click “New Item” and create a “Freestyle project”
+  _images/create_freestyle.png
 
-_images/github_url.png
+  To connect GitHub repository, we need to provide its URL which cannbe copied from the repository itself
 
-In configuration of Jenkins freestyle project choose Git repository, provide there the link to Tooling GitHub repository and credentials (user/password) so Jenkins could access files in the repository.
+  _images/github_url.png
 
-_images/github_add_jenkins.png
+  In configuration of Jenkins freestyle project choose Git repository, provide there the link to Tooling GitHub repository and credentials (user/password)    so Jenkins could access files in the repository.
 
-Save the configuration and run the build manually by clicking “Build Now” button, if you have configured everything correctly, the build will be successfull and you will see it under #1
-_images/jenkins_run1.png
+  _images/github_add_jenkins.png
 
-You can open the build and check in “Console Output” if it has run successfully.
+  Save the configuration and run the build manually by clicking “Build Now” button, if you have configured everything correctly, the build will be            successfull and you will see it under #1
+  _images/jenkins_run1.png
 
-If so - congratulations! You have just made your very first Jenkins build!
+  You can open the build and check in “Console Output” if it has run successfully.
+
+  If so - congratulations! You have just made your very first Jenkins build!
 
 
 ## Automation
 
-But this build does not produce anything and it runs only when we trigger it manually. Let us fix it.
+  But this build does not produce anything and it runs only when we trigger it manually. Let us fix it.
 
-Click “Configure” your job/project and add these two configurations
-Configure triggering the job from GitHub webhook:
+  Click “Configure” your job/project and add these two configurations
+  Configure triggering the job from GitHub webhook:
 
-_images/jenkins_trigger.png
+  _images/jenkins_trigger.png
 
-Configure “Post-build Actions” to archive all the files - files resulted from a build are called “artifacts”.
+  Configure “Post-build Actions” to archive all the files - files resulted from a build are called “artifacts”.
 
-_images/archive_artifacts.gif
+  _images/archive_artifacts.gif
 
-Now, go ahead and make some change in any file in your GitHub repository (e.g. README.MD file) and push the changes to the master branch.
+  Now, go ahead and make some change in any file in your GitHub repository (e.g. README.MD file) and push the changes to the master branch.
 
-You will see that a new build has been launched automatically (by webhook) and you can see its results - artifacts, saved on Jenkins server.
+  You will see that a new build has been launched automatically (by webhook) and you can see its results - artifacts, saved on Jenkins server.
 
-_images/build_success_archive.png
+  _images/build_success_archive.png
 
-You have now configured an automated Jenkins job that receives files from GitHub by webhook trigger (this method is considered as ‘push’ because the changes are being ‘pushed’ and files transfer is initiated by GitHub). There are also other methods: trigger one job (downstreadm) from another (upstream), poll GitHub periodically and others.
+  You have now configured an automated Jenkins job that receives files from GitHub by webhook trigger (this method is considered as ‘push’ because the       changes are being ‘pushed’ and files transfer is initiated by GitHub). There are also other methods: trigger one job (downstreadm) from another      
+  (upstream), poll GitHub periodically and others.
 
-By default, the artifacts are stored on Jenkins server locally
+  By default, the artifacts are stored on Jenkins server locally
 
-ls /var/lib/jenkins/jobs/tooling_github/builds/<build_number>/archive/
+    ls /var/lib/jenkins/jobs/tooling_github/builds/<build_number>/archive/
 
-Step 3 - Configure Jenkins to copy files to NFS server via SSH
-Now we have our artifacts saved locally on Jenkins server, the next step is to copy them to our NFS server to /mnt/apps directory.
+  ## Step 3 - Configure Jenkins to copy files to NFS server via SSH
+  
+  Now we have our artifacts saved locally on Jenkins server, the next step is to copy them to our NFS server to /mnt/apps directory.
 
-Jenkins is a highly extendable application and there are 1400+ plugins available. We will need a plugin that is called “Publish Over SSH”.
+  Jenkins is a highly extendable application and there are 1400+ plugins available. We will need a plugin that is called “Publish Over SSH”.
 
-Install “Publish Over SSH” plugin.
-On main dashboard select “Manage Jenkins” and choose “Manage Plugins” menu item.
+  Install “Publish Over SSH” plugin.
+  On main dashboard select “Manage Jenkins” and choose “Manage Plugins” menu item.
 
-On “Available” tab search for “Publish Over SSH” plugin and install it
+  On “Available” tab search for “Publish Over SSH” plugin and install it
 
-_images/plugin_ssh_install.png
+  _images/plugin_ssh_install.png
 
-Configure the job/project to copy artifacts over to NFS server.
-On main dashboard select “Manage Jenkins” and choose “Configure System” menu item.
+  Configure the job/project to copy artifacts over to NFS server.
+  On main dashboard select “Manage Jenkins” and choose “Configure System” menu item.
 
-Scroll down to Publish over SSH plugin configuration section and configure it to be able to connect to your NFS server:
+  Scroll down to Publish over SSH plugin configuration section and configure it to be able to connect to your NFS server:
 
-Provide a private key (content of .pem file that you use to connect to NFS server via SSH/Putty)
-Arbitrary name
-Hostname - can be private IP address of your NFS server
+  Provide a private key (content of .pem file that you use to connect to NFS server via SSH/Putty)
+  Arbitrary name
+  Hostname - can be private IP address of your NFS server
 
-Username - ec2-user (since NFS server is based on EC2 with RHEL 8)
-Remote directory - /mnt/apps since our Web Servers use it as a mointing point to retrieve files from the NFS server
-Test the configuration and make sure the connection returns Success. Remember, that TCP port 22 on NFS server must be open to receive SSH connections.
+  Username - ec2-user (since NFS server is based on EC2 with RHEL 8)
+  Remote directory - /mnt/apps since our Web Servers use it as a mointing point to retrieve files from the NFS server
+  Test the configuration and make sure the connection returns Success. Remember, that TCP port 22 on NFS server must be open to receive SSH connections.
 
-_images/publish_ssh_config.png
+  _images/publish_ssh_config.png
 
-Save the configuration, open your Jenkins job/project configuration page and add another one “Post-build Action”
+  Save the configuration, open your Jenkins job/project configuration page and add another one “Post-build Action”
 
-_images/send_build.png
+  _images/send_build.png
 
-Configure it to send all files produced by the build into our previously define remote directory. In our case we want to copy all files and directories - so we use **. If you want to apply some particular pattern to define which files to send - use this syntax.
+  Configure it to send all files produced by the build into our previously define remote directory. In our case we want to copy all files and directories -   so we use **.
 
-_images/send_build1.png
+  _images/send_build1.png
+  
+  ## Test
 
-Save this configuration and go ahead, change something in README.MD file in your GitHub Tooling repository.
+  Make changes to README.MD file in GitHub Tooling repository.
 
-Webhook will trigger a new job and in the “Console Output” of the job you will find something like this:
+  Webhook will trigger a new job and in the “Console Output” of the job with the following result:
 
-SSH: Transferred 25 file(s)
-Finished: SUCCESS
-To make sure that the files in /mnt/apps have been udated - connect via SSH/Putty to your NFS server and check README.MD file
+  SSH: Transferred 25 file(s)
+  Finished: SUCCESS
+  To make sure that the files in /mnt/apps have been udated - connect via SSH/Putty to your NFS server and check README.MD file
 
-cat /mnt/apps/README.md
-If you see the changes you had previously made in your GitHub - the job works as expected.
+      cat /mnt/apps/README.md
+ 
+  Cat out the README.md file and confirm the changes previously made in GitHub - the job works as expected.
+
 
 ## Challenges
 
@@ -176,11 +183,11 @@ ERROR: Exception when publishing, exception message [Permission denied]
 Build step 'Send build artifacts over SSH' changed build result to UNSTABLE
 Finished: UNSTABLE
 
+
 ## Resolution
 
 Changed ownership of /mnt/apps from root to ec2-user as shown in the lines below
  sudo chown -R ec2-user: /mnt/apps
-
 
 
 ## Summary
