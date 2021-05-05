@@ -1,25 +1,26 @@
 # Tooling Website deployment automation with Continuous Integration. Introduction to Jenkins
 
-In this project we are going to utilize Jenkins CI capabilities to make sure that every change made to the source code in GitHub will be automatically be updated to the Tooling Website.
+  In this project we are going to utilize Jenkins CI capabilities to make sure that every change made to the source code in GitHub will be automatically be   updated to the Tooling Website.
 
-Continuous integration
-The automated building and testing of an application on every new commit.
+  Continuous integration
+  The automated building and testing of an application on every new commit.
 
-Continuous delivery
-A state where an application is always ready to be deployed. A manual step is required to actually deploy the application.
+  Continuous delivery
+  A state where an application is always ready to be deployed. A manual step is required to actually deploy the application.
 
-Continuous deployment
-The automation of building, testing, and deploying. If all tests pass, every new commit will push new code through the entire development pipeline to production with no manual intervention..
+  Continuous deployment
+  The automation of building, testing, and deploying. If all tests pass, every new commit will push new code through the entire development pipeline to     
+  production with no manual intervention..
 
- ![image](https://user-images.githubusercontent.com/78841364/117133210-f64bbb00-ad71-11eb-9323-1891c2c57c9f.png)
+    ![image](https://user-images.githubusercontent.com/78841364/117133210-f64bbb00-ad71-11eb-9323-1891c2c57c9f.png)
 
 
 ## Task
-Enhance the architecture prepared in Project 8 by adding a Jenkins server, configure a job to automatically deploy source codes changes from Git to NFS server
+   Enhance the architecture prepared in Project 8 by adding a Jenkins server, configure a job to automatically deploy source codes changes from Git to NFS    server
 
 ## Target setup
 
-![image](https://user-images.githubusercontent.com/78841364/115937552-41a6c500-a466-11eb-8719-8b34014c106b.png)
+ ![image](https://user-images.githubusercontent.com/78841364/115937552-41a6c500-a466-11eb-8719-8b34014c106b.png)
 
 
 ## Step 1 - Install Jenkins server
@@ -27,47 +28,49 @@ Enhance the architecture prepared in Project 8 by adding a Jenkins server, confi
 1. Create an AWS EC2 server based on Ubuntu Server 20.04 LTS and name it “Jenkins”
 2. Install JDK (since Jenkins is a Java-based application)
 
-   sudo apt update
+       sudo apt update
 
-   sudo apt install default-jdk-headless
+       sudo apt install default-jdk-headless
 
-Install Jenkins
+    Install Jenkins
 
-wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+    wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
 
-sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > \
+    sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > \
     /etc/apt/sources.list.d/jenkins.list'
 
-sudo apt update
+    sudo apt update
 
-sudo apt-get install jenkins
+    sudo apt-get install jenkins
 
-Make sure Jenkins is up and running
+   Make sure Jenkins is up and running
 
-sudo systemctl status jenkins
+    sudo systemctl status jenkins
 
-By default Jenkins server uses TCP port 8080 - open it by creating a new Inbound Rule in your EC2 Security Group
-_images/open_port8080.png
 
-Perform initial Jenkins setup.
-From your browser access http://<Jenkins-Server-Public-IP-Address-or-Public-DNS-Name>:8080
+    By default Jenkins server uses TCP port 8080 - open it by creating a new Inbound Rule in your EC2 Security Group
+   _images/open_port8080.png
 
-You will be prompted to provide a default admin password
+      Perform initial Jenkins setup.
+      From your browser access http://<Jenkins-Server-Public-IP-Address-or-Public-DNS-Name>:8080
 
-_images/unlock_jenkins.png
+   You will be prompted to provide a default admin password
 
-Retrieve it from your server:
+   _images/unlock_jenkins.png
 
-sudo cat /var/lib/jenkins/secrets/initialAdminPassword
-Then you will be asked which plugings to install - choose suggested plugins.
+   Retrieve it from your server:
 
-_images/jenkins_plugins.png
+   sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+   Then you will be asked which plugings to install - choose suggested plugins.
 
-Once plugins installation is done - create an admin user and you will get your Jenkins server address.
+   _images/jenkins_plugins.png
 
-The installation is completed!
+   Once plugins installation is done - create an admin user and you will get your Jenkins server address.
 
-_images/jenkins_ready.png
+   The installation is completed!
+
+   _images/jenkins_ready.png
+
 
 ## Step 2 - Configure Jenkins to retrieve source codes from GitHub using Webhooks
 
@@ -93,6 +96,7 @@ _images/jenkins_run1.png
 You can open the build and check in “Console Output” if it has run successfully.
 
 If so - congratulations! You have just made your very first Jenkins build!
+
 
 ## Automation
 
