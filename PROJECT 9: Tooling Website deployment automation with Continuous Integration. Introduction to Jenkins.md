@@ -2,13 +2,13 @@
 
   In this project we are going to utilize Jenkins CI capabilities to make sure that every change made to the source code in GitHub will be automatically be   updated to the Tooling Website.
 
-  Continuous integration
+  Continuous integration:
   The automated building and testing of an application on every new commit.
 
-  Continuous delivery
+  Continuous delivery:
   A state where an application is always ready to be deployed. A manual step is required to actually deploy the application.
 
-  Continuous deployment
+  Continuous deployment:
   The automation of building, testing, and deploying. If all tests pass, every new commit will push new code through the entire development pipeline to     
   production with no manual intervention..
 
@@ -176,12 +176,12 @@
   Cat out the README.md file and confirm the changes previously made in GitHub - the job works as expected.
 
 
-## Challenges
+  ## Challenges
 
-Got the error message below when I tried to test for SSH transfer of build artifacts
-ERROR: Exception when publishing, exception message [Permission denied]
-Build step 'Send build artifacts over SSH' changed build result to UNSTABLE
-Finished: UNSTABLE
+  Got the error message below when I tried to test for SSH transfer of build artifacts
+  ERROR: Exception when publishing, exception message [Permission denied]
+  Build step 'Send build artifacts over SSH' changed build result to UNSTABLE
+  Finished: UNSTABLE
 
 
 ## Resolution
