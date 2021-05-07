@@ -1,7 +1,5 @@
 # Devops Tooling Website Solution
 
-https://drive.google.com/file/d/1FGYsJ56l8KyRjKc_d0FQYez8ghxZ8Hud/view?usp=sharing (Link to Project 7 Demo)
-
 This project describes a set of DevOps tools that will help a team in day to day activities in managing, developing, testing, deploying and monitoring different projects. This single DevOps Tooling Solution consists of:
 
 1. Jenkins - free and open source automation server used to build CI/CD pipelines.
@@ -303,6 +301,10 @@ Based on the set up above, we require four Red Hat instances and one Ubuntu inst
 
    In this project, I implemented a web solution for a DevOps team using LAMP stack with remote Database and NFS servers. I have been able to fully     
    understand the concept of network file sharing and also deploying of website code.
+   
+## Link to Project 7 Demo
+
+   https://drive.google.com/file/d/1FGYsJ56l8KyRjKc_d0FQYez8ghxZ8Hud/view?usp=sharing
 
 ## References
 
