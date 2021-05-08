@@ -57,6 +57,7 @@ Now it is time for us to test how our Apache HTTP server can respond to requests
 
 http://<Public-IP-Address>:80
    
+
 ## Step 2 — Installing MySQL
 
 Now that you have a web server up and running, you need to install a Database Management System (DBMS) to be able to store and manage data for your site in a relational database. MySQL is a popular relational database management system used within PHP environments, so we will use it in our project.
@@ -78,5 +79,30 @@ Note: Enabling this feature is something of a judgment call. If enabled, passwor
 Answer Y for yes, or anything else to continue without enabling.
 
 
-   
+Test log in to the MySQL console by typing:
+
+    sudo mysql
+
+This will connect to the MySQL server as the administrative database user root, which is inferred by the use of sudo when running this command.
+
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+
+To exit the MySQL console, type:
+
+mysql> exit
+
+
+Notice that you didn’t need to provide a password to connect as the root user, even though you have defined one when running the mysql_secure_installation script. That is because the default authentication method for the administrative MySQL user is unix_socket instead of password. Even though this might look like a security concern at first, it makes the database server more secure because the only users allowed to log in as the root MySQL user are the system users with sudo privileges connecting from the console or through an application running with the same privileges. In practical terms, that means you won’t be able to use the administrative database root user to connect from your PHP application. Setting a password for the root MySQL account works as a safeguard, in case the default authentication method is changed from unix_socket to password.
+
+For increased security, it’s best to have dedicated user accounts with less expansive privileges set up for every database, especially if you plan on having multiple databases hosted on your server.
+
+Note: At the time of this writing, the native MySQL PHP library mysqlnd doesn’t support caching_sha2_authentication, the default authentication method for MySQL 8. For that reason, when creating database users for PHP applications on MySQL 8, you’ll need to make sure they’re configured to use mysql_native_password instead.
+
+Your MySQL server is now installed and secured. Next, we will install PHP, the final component in the LAMP stack.
+
+## Step 3 — Installing PHP
+
+
+
+
    
