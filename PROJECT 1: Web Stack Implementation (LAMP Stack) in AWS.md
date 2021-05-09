@@ -146,7 +146,7 @@ Create the directory for projectlamp using ‘mkdir’ command as follows:
 $ sudo mkdir /var/www/projectlamp
 Next, assign ownership of the directory with the $USER environment variable, which will reference your current system user:
 
-$ sudo chown -R $USER:$USER /var/www/projectlamp
+         $ sudo chown -R $USER:$USER /var/www/projectlamp
 
 
 ubuntu@ip-172-31-26-86:~$ ls -la /var/www
@@ -185,7 +185,7 @@ This will create a new blank file. Paste in the following bare-bones configurati
 
 You can use the ls command to show the new file in the sites-available directory
 
-$ sudo ls /etc/apache2/sites-available
+     $ sudo ls /etc/apache2/sites-available
 
 ubuntu@ip-172-31-26-86:~$ sudo ls /etc/apache2/sites-available
 000-default.conf  default-ssl.conf  projectlamp.conf
@@ -195,14 +195,18 @@ With this VirtualHost configuration, we’re telling Apache to serve projectlamp
 
 You can now use a2ensite command to enable the new virtual host:
 
-$ sudo a2ensite projectlamp
+    $ sudo a2ensite projectlamp
 
-ubuntu@ip-172-31-26-86:~$ sudo a2ensite projectlamp      
+    ubuntu@ip-172-31-26-86:~$ sudo a2ensite projectlamp      
 
 Enabling site projectlamp.
+
 To activate the new configuration, you need to run:
-  systemctl reload apache2
+              
+              systemctl reload apache2
+
 ubuntu@ip-172-31-26-86:~$ sudo systemctl reload apache2
+
 ubuntu@ip-172-31-26-86:~$
 
 ## Note: the above step has the same effect as creating a symbolic link using 
@@ -215,6 +219,7 @@ You might want to disable the default website that comes installed with Apache. 
      $ sudo a2dissite 000-default
 
 ubuntu@ip-172-31-26-86:~$ sudo a2dissite 000-default
+
 Site 000-default disabled.
 
 The above command has the same effect as unlinking the default conf file in sites-enabled or removing it using rm -f
@@ -224,6 +229,7 @@ To make sure your configuration file doesn’t contain syntax errors, run:
      $ sudo apache2ctl configtest
 
 ubuntu@ip-172-31-26-86:~$ sudo apache2ctl configtest
+
 Syntax OK
 
 
@@ -238,13 +244,13 @@ Your new website is now active, but the web root /var/www/projectlamp is still e
 
 Now go to your browser and try to open your website URL using IP address:
 
-http://<Public-IP-Address>:80
+     http://<Public-IP-Address>:80
        
        ![image](https://user-images.githubusercontent.com/78841364/117537478-293eba80-afcf-11eb-9cc2-a91e6f21a997.png)
 
 If you see the text from ‘echo’ command you wrote to index.html file, then it means your Apache virtual host is working as expected. In the output you will see your server’s public hostname (DNS name) and public IP address. You can also access your website in your browser by public DNS name, not only by IP - try it out, the result must be the same (port is optional)
 
-http://<Public-DNS-Name>:80
+    http://<Public-DNS-Name>:80
        
        
 You can leave this file in place as a temporary landing page for your application until you set up an index.php file to replace it. Once you do that, remember to remove or rename the index.html file from your document root, as it would take precedence over an index.php file by default.
@@ -256,27 +262,29 @@ With the default DirectoryIndex settings on Apache, a file named index.html will
 
 In case you want to change this behavior, you’ll need to edit the /etc/apache2/mods-enabled/dir.conf file and change the order in which the index.php file is listed within the DirectoryIndex directive:
 
-sudo vim /etc/apache2/mods-enabled/dir.conf
-<IfModule mod_dir.c>
-        #Change this:
-        #DirectoryIndex index.html index.cgi index.pl index.php index.xhtml index.htm
-        #To this:
-        DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm
-</IfModule>
+     sudo vim /etc/apache2/mods-enabled/dir.conf
+     
+              <IfModule mod_dir.c>
+                      #Change this:
+                      #DirectoryIndex index.html index.cgi index.pl index.php index.xhtml index.htm
+                      #To this:
+                      DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm
+              </IfModule>
+              
 After saving and closing the file, you will need to reload Apache so the changes take effect:
 
-$ sudo systemctl reload apache2
+     $ sudo systemctl reload apache2
 Finally, we will create a PHP script to test that PHP is correctly installed and configured on your server.
 
 Now that you have a custom location to host your website’s files and folders, we’ll create a PHP test script to confirm that Apache is able to handle and process requests for PHP files.
 
 Create a new file named index.php inside your custom web root folder:
 
-$ vim /var/www/projectlamp/index.php
+     $ vim /var/www/projectlamp/index.php
 This will open a blank file. Add the following text, which is valid PHP code, inside the file:
 
-<?php
-phpinfo();
+     <?php
+     phpinfo();
 When you are finished, save and close the file, refresh the page and you will see a page similar to this:
 
 https://drive.google.com/uc?export=view&id=1ibJUPX_HrKyL-SuSrLfvcgWmH_aUdEAY
@@ -291,9 +299,12 @@ $ sudo rm /var/www/projectlamp/index.php
 You can always recreate this page if you need to access the information again later.
 
 
-Congratulations! You have finished your very first REAL LIFE PROJECT by deploying a LAMP stack website in AWS Cloud!
+## Summary
+
+In this project I learnt how to deploying a LAMP stack website in AWS Cloud.
 
 ## References
+
 https://starter-pbl.darey.io/en/latest/project1.html
 digitalocean
 
