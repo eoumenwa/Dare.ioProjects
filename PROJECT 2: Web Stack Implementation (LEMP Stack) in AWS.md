@@ -7,11 +7,11 @@ You have done a great job with successful completion of Project 1.
 In this project you will implement a similar stack, but with an alternative Web Server - NGINX, which is also very popular and widely used by many websites in the Internet.
 
 
-Step 0 - Preparing prerequisites
+## Step 0 - Preparing prerequisites
 
 Hint: In previous project we used Putty on Windows to connect to our EC2 Instance, but there is a simpler way that do not require conversion of .pem key to .ppk - using Git Bash.
 
-## Error and Resolution 1
+## Error and Resolution 0
 
 Failure to connect using 
 
@@ -25,13 +25,14 @@ In order to display web pages to our site visitors, we are going to employ Nginx
 
 Since this is our first time using apt for this session, start off by updating your server’s package index. Following that, you can use apt install to get Nginx installed:
 
-$ sudo apt update
-$ sudo apt install nginx
+     $ sudo apt update
+     $ sudo apt install nginx
+
 When prompted, enter Y to confirm that you want to install Nginx. Once the installation is finished, the Nginx web server will be active and running on your Ubuntu 20.04 server.
 
 To verify that nginx was successfully installed and is running as a service in Ubuntu, run:
 
-$ sudo systemctl status nginx
+    $ sudo systemctl status nginx
 If it is green and running, then you did everything correctly - you have just launched your first Web Server in the Clouds!
 
 Before we can receive any traffic by our Web Server, we need to open TCP port 80 which is default port that web brousers use to access web pages in the Internet.
@@ -44,9 +45,9 @@ Our server is running and we can access it locally and from the Internet (Source
 
 First, let us try to check how we can access it locally in our Ubuntu shell, run:
 
-$ curl http://localhost:80
-or
-$ curl http://127.0.0.1:80
+      $ curl http://localhost:80
+       or
+      $ curl http://127.0.0.1:80
 
 These 2 commands above actually do pretty much the same - they use ‘curl’ command to request our Nginx on port 80 (actually you can even try to not specify any port - it will work anyway). The difference is that: in the first case we try to access our server via DNS name and in the second one - by IP address (in this case IP address 127.0.0.1 corresponds to DNS name ‘localhost’ and the process of converting a DNS name to IP address is called “resolution”). We will touch DNS in further lectures and projects.
 
@@ -67,12 +68,14 @@ _images/Nginx_welcome.png
 
 In fact, it is the same content that you previously got by ‘curl’ command, but represented in nice HTML formatting by your web browser.
 
-Step 2 — Installing MySQL
+## Step 2 — Installing MySQL
+
 Now that you have a web server up and running, you need to install a Database Management System (DBMS) to be able to store and manage data for your site in a relational database. MySQL is a popular relational database management system used within PHP environments, so we will use it in our project.
 
 Again, use apt to acquire and install this software:
 
     $ sudo apt install mysql-server
+
 When prompted, confirm installation by typing Y, and then ENTER.
 
 When the installation is finished, it’s recommended that you run a security script that comes pre-installed with MySQL. This script will remove some insecure default settings and lock down access to your database system. Start the interactive script by running:
@@ -126,6 +129,7 @@ owners.
 Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 
     mysql> 
+    
 To exit the MySQL console, type:
 
     mysql> exit
@@ -145,6 +149,7 @@ While Apache embeds the PHP interpreter in each request, Nginx requires an exter
 To install these 2 packages at once, run:
 
     $ sudo apt install php-fpm php-mysql
+    
 When prompted, type Y and press ENTER to confirm installation.
 
 You now have your PHP components installed. Next, you will configure Nginx to use them.
@@ -158,6 +163,7 @@ On Ubuntu 20.04, Nginx has one server block enabled by default and is configured
 Create the root web directory for your_domain as follows:
 
      $ sudo mkdir /var/www/projectLEMP
+     
 Next, assign ownership of the directory with the $USER environment variable, which will reference your current system user:
 
      $ sudo chown -R $USER:$USER /var/www/projectLEMP
@@ -194,21 +200,27 @@ server {
 Here’s what each of these directives and location blocks do:
 
 listen — Defines what port Nginx will listen on. In this case, it will listen on port 80, the default port for HTTP.
+
 root — Defines the document root where the files served by this website are stored.
+
 index— Defines in which order Nginx will prioritize index files for this website. It is a common practice to list index.html files with a higher precedence than index.php files to allow for quickly setting up a maintenance landing page in PHP applications. You can adjust these settings to better suit your application needs.
+
 server_name — Defines which domain names and/or IP addresses this server block should respond for. Point this directive to your server’s domain name or public IP address.
+
 location / — The first location block includes a try_files directive, which checks for the existence of files or directories matching a URI request. If Nginx cannot find the appropriate resource, it will return a 404 error.
+
 location ~ \.php$ — This location block handles the actual PHP processing by pointing Nginx to the fastcgi-php.conf configuration file and the php7.4-fpm.sock file, which declares what socket is associated with php-fpm.
+
 location ~ /\.ht— The last location block deals with .htaccess files, which Nginx does not process. By adding the deny all directive, if any .htaccess files happen to find their way into the document root ,they will not be served to visitors.
 When you’re done editing, save and close the file. If you’re using nano, you can do so by typing CTRL+X and then y and ENTER to confirm.
 
 Activate your configuration by linking to the config file from Nginx’s sites-enabled directory:
 
-$ sudo ln -s /etc/nginx/sites-available/projectLEMP /etc/nginx/sites-enabled/
+     $ sudo ln -s /etc/nginx/sites-available/projectLEMP /etc/nginx/sites-enabled/
 
 This will tell Nginx to use the configuration next time it is reloaded. You can test your configuration for syntax errors by typing:
 
-$ sudo nginx -t
+     $ sudo nginx -t
 
 You shall see following message:
 
@@ -219,11 +231,11 @@ If any errors are reported, go back to your configuration file to review its con
 
 We also need to disable default Nginx host that is currently configured to listen on port 80, for this run:
 
-sudo unlink /etc/nginx/sites-enabled/default
+    sudo unlink /etc/nginx/sites-enabled/default
 
 When you are ready, reload Nginx to apply the changes:
 
-$ sudo systemctl reload nginx
+     $ sudo systemctl reload nginx
 
 Your new website is now active, but the web root /var/www/projectLEMP is still empty. Create an index.html file in that location so that we can test that your new server block works as expected:
 
@@ -247,14 +259,17 @@ You can test it to validate that Nginx can correctly hand .php files off to your
 
 You can do this by creating a test PHP file in your document root. Open a new file called info.php within your document root in your text editor:
 
-$ nano /var/www/projectLEMP/info.php
+     $ nano /var/www/projectLEMP/info.php
+
 Type or paste the following lines into the new file. This is valid PHP code that will return information about your server:
 
 <?php
 phpinfo();
+
 You can now access this page in your web browser by visiting the domain name or public IP address you’ve set up in your Nginx configuration file, followed by /info.php:
 
 http://`server_domain_or_IP`/info.php
+
 You will see a web page containing detailed information about your server:
 
 https://drive.google.com/uc?export=view&id=1ibJUPX_HrKyL-SuSrLfvcgWmH_aUdEAY
@@ -262,9 +277,11 @@ https://drive.google.com/uc?export=view&id=1ibJUPX_HrKyL-SuSrLfvcgWmH_aUdEAY
 After checking the relevant information about your PHP server through that page, it’s best to remove the file you created as it contains sensitive information about your PHP environment and your Ubuntu server. You can use rm to remove that file:
 
 $ sudo rm /var/www/your_domain/info.php
+
 You can always regenerate this file if you need it later.
 
-Step 6 — Retrieving data from MySQL database with PHP
+## Step 6 — Retrieving data from MySQL database with PHP
+
 In this step you will create a test database (DB) with simple “To do list” and configure access to it, so the Nginx website would be able to query data from the DB and display it.
 
 At the time of this writing, the native MySQL PHP library mysqlnd doesn’t support caching_sha2_authentication, the default authentication method for MySQL 8. We’ll need to create a new user with the mysql_native_password authentication method in order to be able to connect to the MySQL database from PHP.
@@ -273,29 +290,37 @@ We will create a database named example_database and a user named example_user, 
 
 First, connect to the MySQL console using the root account:
 
-$ sudo mysql
+     $ sudo mysql
+
 To create a new database, run the following command from your MySQL console:
 
 mysql> CREATE DATABASE `example_database`;
+
 Now you can create a new user and grant him full privileges on the database you have just created.
 
 The following command creates a new user named example_user, using mysql_native_password as default authentication method. We’re defining this user’s password as password, but you should replace this value with a secure password of your own choosing.
 
-mysql>  CREATE USER 'example_user'@'%' IDENTIFIED WITH mysql_native_password BY 'password';
+     mysql>  CREATE USER 'example_user'@'%' IDENTIFIED WITH mysql_native_password BY 'password';
+
 Now we need to give this user permission over the example_database database:
 
-mysql> GRANT ALL ON example_database.* TO 'example_user'@'%';
+    mysql> GRANT ALL ON example_database.* TO 'example_user'@'%';
+
 This will give the example_user user full privileges over the example_database database, while preventing this user from creating or modifying other databases on your server.
 
 Now exit the MySQL shell with:
 
 mysql> exit
+
 You can test if the new user has the proper permissions by logging in to the MySQL console again, this time using the custom user credentials:
 
 $ mysql -u example_user -p
+
 Notice the -p flag in this command, which will prompt you for the password used when creating the example_user user. After logging in to the MySQL console, confirm that you have access to the example_database database:
 
 mysql> SHOW DATABASES;
+
+
 This will give you the following output:
 
 Output
@@ -305,6 +330,7 @@ Output
 | example_database   |
 | information_schema |
 +--------------------+
+
 2 rows in set (0.000 sec)
 Next, we’ll create a test table named todo_list. From the MySQL console, run the following statement:
 
@@ -316,6 +342,7 @@ mysql> );
 Insert a few rows of content in the test table. You might want to repeat the next command a few times, using different VALUES:
 
 mysql> INSERT INTO example_database.todo_list (content) VALUES ("My first important item");
+
 To confirm that the data was successfully saved to your table, run:
 
 mysql>  SELECT * FROM example_database.todo_list;
@@ -330,13 +357,17 @@ Output
 |       3 | My third important item  |
 |       4 | and this one more thing  |
 +---------+--------------------------+
+
 4 rows in set (0.000 sec)
 After confirming that you have valid data in your test table, you can exit the MySQL console:
 
-mysql> exit
+     mysql> exit
+
 Now you can create a PHP script that will connect to MySQL and query for your content. Create a new PHP file in your custom web root directory using your preferred editor. We’ll use vi for that:
 
-$ nano /var/www/projectLEMP/todo_list.php
+     $ nano /var/www/projectLEMP/todo_list.php
+
+
 The following PHP script connects to the MySQL database and queries for the content of the todo_list table, displays the results in a list. If there is a problem with the database connection, it will throw an exception.
 
 Copy this content into your todo_list.php script:
@@ -374,6 +405,8 @@ That means your PHP environment is ready to connect and interact with your MySQL
 In this project, I built a flexible foundation for serving PHP websites and applications to my visitors, using Nginx as web server and MySQL as database management system.
 
 ################################################################################
+
+
 oeume@KRISOLIZ-SFFHPDPC MINGW64 ~/Downloads
 $ ssh -i "projectreload.pem" ubuntu@ec2-54-147-3-6.compute-1.amazonaws.com
 ssh: connect to host ec2-54-147-3-6.compute-1.amazonaws.com port 22: Connection timed out
@@ -383,90 +416,9 @@ $
 
 oeume@KRISOLIZ-SFFHPDPC MINGW64 ~/Downloads
 ubuntu@ip-172-31-29-38:~$ sudo apt update
-Hit:1 http://us-east-1.ec2.archive.ubuntu.com/ubuntu focal InRelease
-Get:2 http://us-east-1.ec2.archive.ubuntu.com/ubuntu focal-updates InRelease [114 kB]  
-Get:3 http://us-east-1.ec2.archive.ubuntu.com/ubuntu focal-backports InRelease [101 kB]
-Get:4 http://security.ubuntu.com/ubuntu focal-security InRelease [109 kB]
-Get:5 http://us-east-1.ec2.archive.ubuntu.com/ubuntu focal/universe amd64 Packages [8628 kB]
-Get:6 http://us-east-1.ec2.archive.ubuntu.com/ubuntu focal/universe Translation-en [5124 kB]
-Get:7 http://security.ubuntu.com/ubuntu focal-security/main amd64 Packages [629 kB]         
-Get:8 http://us-east-1.ec2.archive.ubuntu.com/ubuntu focal/universe amd64 c-n-f Metadata [265 kB]
-Get:9 http://us-east-1.ec2.archive.ubuntu.com/ubuntu focal/multiverse amd64 Packages [144 kB]  
-Get:10 http://us-east-1.ec2.archive.ubuntu.com/ubuntu focal/multiverse Translation-en [104 kB]      
-Get:11 http://us-east-1.ec2.archive.ubuntu.com/ubuntu focal/multiverse amd64 c-n-f Metadata [9136 B]
-Get:12 http://us-east-1.ec2.archive.ubuntu.com/ubuntu focal-updates/main amd64 Packages [955 kB]    
-Get:13 http://us-east-1.ec2.archive.ubuntu.com/ubuntu focal-updates/main Translation-en [218 kB]       
-Get:14 http://us-east-1.ec2.archive.ubuntu.com/ubuntu focal-updates/main amd64 c-n-f Metadata [13.2 kB]
-Get:15 http://us-east-1.ec2.archive.ubuntu.com/ubuntu focal-updates/restricted amd64 Packages [208 kB] 
-Get:16 http://us-east-1.ec2.archive.ubuntu.com/ubuntu focal-updates/restricted Translation-en [30.9 kB]
-Get:17 http://us-east-1.ec2.archive.ubuntu.com/ubuntu focal-updates/universe amd64 Packages [768 kB]
-Get:18 http://us-east-1.ec2.archive.ubuntu.com/ubuntu focal-updates/universe Translation-en [165 kB]       
-Get:19 http://us-east-1.ec2.archive.ubuntu.com/ubuntu focal-updates/universe amd64 c-n-f Metadata [17.2 kB]
-Get:20 http://us-east-1.ec2.archive.ubuntu.com/ubuntu focal-updates/multiverse amd64 Packages [21.7 kB]      
-Get:21 http://us-east-1.ec2.archive.ubuntu.com/ubuntu focal-updates/multiverse Translation-en [5508 B]       
-Get:22 http://us-east-1.ec2.archive.ubuntu.com/ubuntu focal-updates/multiverse amd64 c-n-f Metadata [600 B]  
-Get:23 http://us-east-1.ec2.archive.ubuntu.com/ubuntu focal-backports/main amd64 c-n-f Metadata [112 B]      
-Get:24 http://us-east-1.ec2.archive.ubuntu.com/ubuntu focal-backports/restricted amd64 c-n-f Metadata [116 B]
-Get:25 http://us-east-1.ec2.archive.ubuntu.com/ubuntu focal-backports/universe amd64 Packages [4032 B]       
-Get:26 http://us-east-1.ec2.archive.ubuntu.com/ubuntu focal-backports/universe Translation-en [1448 B]       
-Get:27 http://us-east-1.ec2.archive.ubuntu.com/ubuntu focal-backports/universe amd64 c-n-f Metadata [224 B]  
-Get:28 http://us-east-1.ec2.archive.ubuntu.com/ubuntu focal-backports/multiverse amd64 c-n-f Metadata [116 B]
-Get:29 http://security.ubuntu.com/ubuntu focal-security/main Translation-en [128 kB]
-Get:30 http://security.ubuntu.com/ubuntu focal-security/main amd64 c-n-f Metadata [7476 B]
-Get:31 http://security.ubuntu.com/ubuntu focal-security/restricted amd64 Packages [185 kB]
-Get:32 http://security.ubuntu.com/ubuntu focal-security/restricted Translation-en [27.2 kB]
-Get:33 http://security.ubuntu.com/ubuntu focal-security/universe amd64 Packages [558 kB]
-Get:34 http://security.ubuntu.com/ubuntu focal-security/universe Translation-en [84.1 kB]
-Get:35 http://security.ubuntu.com/ubuntu focal-security/universe amd64 c-n-f Metadata [10.8 kB]
-Get:36 http://security.ubuntu.com/ubuntu focal-security/multiverse amd64 Packages [14.9 kB]    
-Get:37 http://security.ubuntu.com/ubuntu focal-security/multiverse Translation-en [3160 B]     
-Get:38 http://security.ubuntu.com/ubuntu focal-security/multiverse amd64 c-n-f Metadata [340 B]
-Fetched 18.7 MB in 4s (4495 kB/s) 
-Reading package lists... Done
-Building dependency tree       
-Reading state information... Done
-15 packages can be upgraded. Run 'apt list --upgradable' to see them.
-Selecting previously unselected package libnginx-mod-http-image-filter.
-Preparing to unpack .../11-libnginx-mod-http-image-filter_1.18.0-0ubuntu1_amd64.deb ...
-Unpacking libnginx-mod-http-image-filter (1.18.0-0ubuntu1) ...
-Selecting previously unselected package libnginx-mod-http-xslt-filter.
-Preparing to unpack .../12-libnginx-mod-http-xslt-filter_1.18.0-0ubuntu1_amd64.deb ...
-Unpacking libnginx-mod-http-xslt-filter (1.18.0-0ubuntu1) ...
-Selecting previously unselected package libnginx-mod-mail.
-Preparing to unpack .../13-libnginx-mod-mail_1.18.0-0ubuntu1_amd64.deb ...
-Unpacking libnginx-mod-mail (1.18.0-0ubuntu1) ...
-Selecting previously unselected package libnginx-mod-stream.
-Preparing to unpack .../14-libnginx-mod-stream_1.18.0-0ubuntu1_amd64.deb ...
-Unpacking libnginx-mod-stream (1.18.0-0ubuntu1) ...
-Selecting previously unselected package nginx-core.
-Preparing to unpack .../15-nginx-core_1.18.0-0ubuntu1_amd64.deb ...
-Unpacking nginx-core (1.18.0-0ubuntu1) ...
-Selecting previously unselected package nginx.
-Preparing to unpack .../16-nginx_1.18.0-0ubuntu1_all.deb ...
-Unpacking nginx (1.18.0-0ubuntu1) ...
-Setting up libxpm4:amd64 (1:3.5.12-1) ...
-Setting up nginx-common (1.18.0-0ubuntu1) ...
-Created symlink /etc/systemd/system/multi-user.target.wants/nginx.service → /lib/systemd/system/nginx.service.
-Setting up libjbig0:amd64 (2.1-3.1build1) ...
-Setting up libnginx-mod-http-xslt-filter (1.18.0-0ubuntu1) ...
-Setting up libwebp6:amd64 (0.6.1-2) ...
-Setting up fonts-dejavu-core (2.37-1) ...
-Setting up libjpeg-turbo8:amd64 (2.0.3-0ubuntu1.20.04.1) ...
-Setting up libjpeg8:amd64 (8c-2ubuntu8) ...
-Setting up libnginx-mod-mail (1.18.0-0ubuntu1) ...
-Setting up fontconfig-config (2.13.1-2ubuntu3) ...
-Setting up libnginx-mod-stream (1.18.0-0ubuntu1) ...
-Setting up libtiff5:amd64 (4.1.0+git191117-2ubuntu0.20.04.1) ...
-Setting up libfontconfig1:amd64 (2.13.1-2ubuntu3) ...
-Setting up libgd3:amd64 (2.2.5-5.2ubuntu2) ...
-Setting up libnginx-mod-http-image-filter (1.18.0-0ubuntu1) ...
-Setting up nginx-core (1.18.0-0ubuntu1) ...
-Setting up nginx (1.18.0-0ubuntu1) ...
-Processing triggers for ufw (0.36-6) ...
-Processing triggers for systemd (245.4-4ubuntu3.6) ...
-Processing triggers for man-db (2.9.1-1) ...
-Processing triggers for libc-bin (2.31-0ubuntu9.2) ...
+
 ubuntu@ip-172-31-29-38:~$ sudo systemctl status nginx
+
 ● nginx.service - A high performance web server and a reverse proxy server
      Loaded: loaded (/lib/systemd/system/nginx.service; enabled; vendor preset: enabled)
      Active: active (running) since Sun 2021-05-09 16:41:21 UTC; 5min ago
@@ -480,6 +432,7 @@ ubuntu@ip-172-31-29-38:~$ sudo systemctl status nginx
 
 May 09 16:41:18 ip-172-31-29-38 systemd[1]: Starting A high performance web server and a reverse proxy server...
 May 09 16:41:21 ip-172-31-29-38 systemd[1]: Started A high performance web server and a reverse proxy server.
+
 ubuntu@ip-172-31-29-38:~$ curl http://localhost:80
 <!DOCTYPE html>
 <html>
@@ -506,6 +459,8 @@ Commercial support is available at
 <p><em>Thank you for using nginx.</em></p>
 </body>
 </html>
+
+
 ubuntu@ip-172-31-29-38:~$ curl http://127.0.0.1:80
 <!DOCTYPE html>
 <html>
@@ -532,8 +487,13 @@ Commercial support is available at
 <p><em>Thank you for using nginx.</em></p>
 </body>
 </html>
+
+
+
 ubuntu@ip-172-31-29-38:~$ curl -s http://169.254.169.254/latest/meta-data/public-ipv4
 54.147.3.6ubuntu@ip-172-31-29-38:~$ 
+
+
 ubuntu@ip-172-31-29-38:~$ sudo apt install mysql-server
 Reading package lists... Done
 Building dependency tree       
@@ -570,21 +530,7 @@ emitting matrix      : 100% |###########################################|
 
 done!
 update-alternatives: using /var/lib/mecab/dic/ipadic-utf8 to provide /var/lib/mecab/dic/debian (mecab-dictionary) in auto mode 
-Setting up libhtml-parser-perl (3.72-5) ...
-Setting up libhttp-message-perl (6.22-1) ...
-Setting up mysql-server-8.0 (8.0.23-0ubuntu0.20.04.1) ...
-update-alternatives: using /etc/mysql/mysql.cnf to provide /etc/mysql/my.cnf (my.cnf) in auto mode
-Renaming removed key_buffer and myisam-recover options (if present)
-mysqld will log errors to /var/log/mysql/error.log
-mysqld is running as pid 2659
-Created symlink /etc/systemd/system/multi-user.target.wants/mysql.service → /lib/systemd/system/mysql.service.
-Setting up libcgi-pm-perl (4.46-1) ...
-Setting up libhtml-template-perl (2.97-1) ...
-Setting up mysql-server (8.0.23-0ubuntu0.20.04.1) ...
-Setting up libcgi-fast-perl (1:2.15-1) ...
-Processing triggers for systemd (245.4-4ubuntu3.6) ...
-Processing triggers for man-db (2.9.1-1) ...
-Processing triggers for libc-bin (2.31-0ubuntu9.2) ...
+
 ubuntu@ip-172-31-29-38:~$ sudo mysql_secure_installation
 
 Securing the MySQL server deployment.
@@ -640,50 +586,17 @@ Reload privilege tables now? (Press y|Y for Yes, any other key for No) : y
 Success.
 
 All done!
+
 ubuntu@ip-172-31-29-38:~$ sudo mysql
 Welcome to the MySQL monitor.  Commands end with ; or \g.
 Your MySQL connection id is 10
 Server version: 8.0.23-0ubuntu0.20.04.1 (Ubuntu)
 
-Creating config file /etc/php/7.4/mods-available/sysvmsg.ini with new version
-
-Creating config file /etc/php/7.4/mods-available/sysvsem.ini with new version
-
-Creating config file /etc/php/7.4/mods-available/sysvshm.ini with new version
-
-Creating config file /etc/php/7.4/mods-available/tokenizer.ini with new version
-Setting up php7.4-mysql (7.4.3-4ubuntu2.4) ...
-
-Creating config file /etc/php/7.4/mods-available/mysqlnd.ini with new version
-
-Creating config file /etc/php/7.4/mods-available/mysqli.ini with new version
-
-Creating config file /etc/php/7.4/mods-available/pdo_mysql.ini with new version
-Setting up php7.4-readline (7.4.3-4ubuntu2.4) ...
-
-Creating config file /etc/php/7.4/mods-available/readline.ini with new version
 Setting up php7.4-opcache (7.4.3-4ubuntu2.4) ...
 
 Creating config file /etc/php/7.4/mods-available/opcache.ini with new version
 Setting up php7.4-json (7.4.3-4ubuntu2.4) ...
 
-Creating config file /etc/php/7.4/mods-available/json.ini with new version
-Setting up php-mysql (2:7.4+75) ...
-Setting up php7.4-cli (7.4.3-4ubuntu2.4) ...
-update-alternatives: using /usr/bin/php7.4 to provide /usr/bin/php (php) in auto mode
-update-alternatives: using /usr/bin/phar7.4 to provide /usr/bin/phar (phar) in auto mode
-update-alternatives: using /usr/bin/phar.phar7.4 to provide /usr/bin/phar.phar (phar.phar) in auto mode
-
-Creating config file /etc/php/7.4/cli/php.ini with new version
-Setting up php7.4-fpm (7.4.3-4ubuntu2.4) ...
-
-Creating config file /etc/php/7.4/fpm/php.ini with new version
-Created symlink /etc/systemd/system/multi-user.target.wants/php7.4-fpm.service → /lib/systemd/system/php7.4-fpm.service.       
-Setting up php-fpm (2:7.4+75) ...
-Processing triggers for man-db (2.9.1-1) ...
-Processing triggers for systemd (245.4-4ubuntu3.6) ...
-Processing triggers for php7.4-cli (7.4.3-4ubuntu2.4) ...
-Processing triggers for php7.4-fpm (7.4.3-4ubuntu2.4) ...
 ubuntu@ip-172-31-29-38:~$
 ubuntu@ip-172-31-29-38:~$
 ubuntu@ip-172-31-29-38:~$
