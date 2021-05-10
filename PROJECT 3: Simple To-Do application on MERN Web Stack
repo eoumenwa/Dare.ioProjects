@@ -583,7 +583,148 @@ ubuntu@ip-172-31-24-174:~/Todo$ npm run dev
 [1] To create a production build, use npm run build.
 [1]
 
+
 ### Connect with the public IP address:3000
+
+ubuntu@ip-172-31-24-174:~/Todo$ cd client/
+ubuntu@ip-172-31-24-174:~/Todo/client$
+ubuntu@ip-172-31-24-174:~/Todo/client$
+ubuntu@ip-172-31-24-174:~/Todo/client$
+ubuntu@ip-172-31-24-174:~/Todo/client$ ls
+README.md  node_modules  package-lock.json  package.json  public  src
+ubuntu@ip-172-31-24-174:~/Todo/client$ cd src/
+ubuntu@ip-172-31-24-174:~/Todo/client/src$ mkdir components
+ubuntu@ip-172-31-24-174:~/Todo/client/src$ ls
+App.css  App.js  App.test.js  components  index.css  index.js  logo.svg  reportWebVitals.js  setupTests.js
+ubuntu@ip-172-31-24-174:~/Todo/client/src$
+ubuntu@ip-172-31-24-174:~/Todo/client/src$
+ubuntu@ip-172-31-24-174:~/Todo/client/src$
+ubuntu@ip-172-31-24-174:~/Todo/client/src$
+ubuntu@ip-172-31-24-174:~/Todo/client/src$
+ubuntu@ip-172-31-24-174:~/Todo/client/src$
+ubuntu@ip-172-31-24-174:~/Todo/client/src$
+ubuntu@ip-172-31-24-174:~/Todo/client/src$ cd components/
+ubuntu@ip-172-31-24-174:~/Todo/client/src/components$
+ubuntu@ip-172-31-24-174:~/Todo/client/src/components$
+ubuntu@ip-172-31-24-174:~/Todo/client/src/components$
+ubuntu@ip-172-31-24-174:~/Todo/client/src/components$
+ubuntu@ip-172-31-24-174:~/Todo/client/src/components$ ls
+ubuntu@ip-172-31-24-174:~/Todo/client/src/components$ touch Input.js ListTodo.js Todo.js
+ubuntu@ip-172-31-24-174:~/Todo/client/src/components$
+ubuntu@ip-172-31-24-174:~/Todo/client/src/components$
+ubuntu@ip-172-31-24-174:~/Todo/client/src/components$
+ubuntu@ip-172-31-24-174:~/Todo/client/src/components$
+ubuntu@ip-172-31-24-174:~/Todo/client/src/components$ ls
+Input.js  ListTodo.js  Todo.js
+ubuntu@ip-172-31-24-174:~/Todo/client/src/components$ ls -l
+total 0
+-rw-rw-r-- 1 ubuntu ubuntu 0 May 10 19:09 Input.js
+-rw-rw-r-- 1 ubuntu ubuntu 0 May 10 19:09 ListTodo.js
+-rw-rw-r-- 1 ubuntu ubuntu 0 May 10 19:09 Todo.js
+ubuntu@ip-172-31-24-174:~/Todo/client/src/components$
+ubuntu@ip-172-31-24-174:~/Todo/client/src/components$
+ubuntu@ip-172-31-24-174:~/Todo/client/src/components$
+ubuntu@ip-172-31-24-174:~/Todo/client/src/components$ vi Input.js
+ubuntu@ip-172-31-24-174:~/Todo/client/src/components$
+ubuntu@ip-172-31-24-174:~/Todo/client/src/components$
+ubuntu@ip-172-31-24-174:~/Todo/client/src/components$
+ubuntu@ip-172-31-24-174:~/Todo/client/src/components$
+ubuntu@ip-172-31-24-174:~/Todo/client/src/components$ cd ..
+ubuntu@ip-172-31-24-174:~/Todo/client/src$
+ubuntu@ip-172-31-24-174:~/Todo/client/src$
+ubuntu@ip-172-31-24-174:~/Todo/client/src$
+ubuntu@ip-172-31-24-174:~/Todo/client/src$
+ubuntu@ip-172-31-24-174:~/Todo/client/src$ cd ..
+ubuntu@ip-172-31-24-174:~/Todo/client$ ls
+README.md  node_modules  package-lock.json  package.json  public  src
+ubuntu@ip-172-31-24-174:~/Todo/client$
+ubuntu@ip-172-31-24-174:~/Todo/client$
+ubuntu@ip-172-31-24-174:~/Todo/client$
+ubuntu@ip-172-31-24-174:~/Todo/client$ npm install axios
+npm WARN @babel/plugin-bugfix-v8-spread-parameters-in-optional-chaining@7.13.12 requires a peer of @babel/core@^7.13.0 but none is installed. You must install peer dependencies yourself.
+npm WARN tsutils@3.21.0 requires a peer of typescript@>=2.8.0 || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.6.0-beta || >= 3.7.0-dev || >= 3.7.0-beta but none is installed. You must install peer dependencies yourself.
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@2.3.2 (node_modules/fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@2.3.2: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.13 (node_modules/watchpack-chokidar2/node_modules/fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.13: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.13 (node_modules/webpack-dev-server/node_modules/fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.13: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+
++ axios@0.21.1
+added 1 package from 1 contributor and audited 1956 packages in 18.016s
+
+136 packages are looking for funding
+  run `npm fund` for details
+
+found 79 moderate severity vulnerabilities
+  run `npm audit fix` to fix them, or `npm audit` for details
+ubuntu@ip-172-31-24-174:~/Todo/client$ cd src/components/
+ubuntu@ip-172-31-24-174:~/Todo/client/src/components$
+ubuntu@ip-172-31-24-174:~/Todo/client/src/components$
+ubuntu@ip-172-31-24-174:~/Todo/client/src/components$
+ubuntu@ip-172-31-24-174:~/Todo/client/src/components$ ls -l
+total 4
+-rw-rw-r-- 1 ubuntu ubuntu 794 May 10 19:10 Input.js
+-rw-rw-r-- 1 ubuntu ubuntu   0 May 10 19:09 ListTodo.js
+-rw-rw-r-- 1 ubuntu ubuntu   0 May 10 19:09 Todo.js
+ubuntu@ip-172-31-24-174:~/Todo/client/src/components$ vi ListTodo.js
+ubuntu@ip-172-31-24-174:~/Todo/client/src/components$
+ubuntu@ip-172-31-24-174:~/Todo/client/src/components$
+ubuntu@ip-172-31-24-174:~/Todo/client/src/components$
+ubuntu@ip-172-31-24-174:~/Todo/client/src/components$
+ubuntu@ip-172-31-24-174:~/Todo/client/src/components$
+ubuntu@ip-172-31-24-174:~/Todo/client/src/components$ ls -l
+total 8
+-rw-rw-r-- 1 ubuntu ubuntu 794 May 10 19:10 Input.js
+-rw-rw-r-- 1 ubuntu ubuntu 300 May 10 19:12 ListTodo.js
+-rw-rw-r-- 1 ubuntu ubuntu   0 May 10 19:09 Todo.js
+ubuntu@ip-172-31-24-174:~/Todo/client/src/components$ vi Todo.js
+ubuntu@ip-172-31-24-174:~/Todo/client/src/components$
+ubuntu@ip-172-31-24-174:~/Todo/client/src/components$
+ubuntu@ip-172-31-24-174:~/Todo/client/src/components$
+ubuntu@ip-172-31-24-174:~/Todo/client/src/components$
+ubuntu@ip-172-31-24-174:~/Todo/client/src/components$ cd ..
+ubuntu@ip-172-31-24-174:~/Todo/client/src$ ls -l
+total 36
+-rw-rw-r-- 1 ubuntu ubuntu  564 May 10 18:07 App.css
+-rw-rw-r-- 1 ubuntu ubuntu  528 May 10 18:07 App.js
+-rw-rw-r-- 1 ubuntu ubuntu  246 May 10 18:07 App.test.js
+drwxrwxr-x 2 ubuntu ubuntu 4096 May 10 19:13 components
+-rw-rw-r-- 1 ubuntu ubuntu  366 May 10 18:07 index.css
+-rw-rw-r-- 1 ubuntu ubuntu  500 May 10 18:07 index.js
+-rw-rw-r-- 1 ubuntu ubuntu 2632 May 10 18:07 logo.svg
+-rw-rw-r-- 1 ubuntu ubuntu  362 May 10 18:07 reportWebVitals.js
+-rw-rw-r-- 1 ubuntu ubuntu  241 May 10 18:07 setupTests.js
+ubuntu@ip-172-31-24-174:~/Todo/client/src$ vi App.js
+ubuntu@ip-172-31-24-174:~/Todo/client/src$
+ubuntu@ip-172-31-24-174:~/Todo/client/src$
+ubuntu@ip-172-31-24-174:~/Todo/client/src$
+ubuntu@ip-172-31-24-174:~/Todo/client/src$
+ubuntu@ip-172-31-24-174:~/Todo/client/src$ vi App.css
+ubuntu@ip-172-31-24-174:~/Todo/client/src$
+ubuntu@ip-172-31-24-174:~/Todo/client/src$
+ubuntu@ip-172-31-24-174:~/Todo/client/src$
+ubuntu@ip-172-31-24-174:~/Todo/client/src$
+ubuntu@ip-172-31-24-174:~/Todo/client/src$
+ubuntu@ip-172-31-24-174:~/Todo/client/src$ vi index.css
+ubuntu@ip-172-31-24-174:~/Todo/client/src$
+ubuntu@ip-172-31-24-174:~/Todo/client/src$
+ubuntu@ip-172-31-24-174:~/Todo/client/src$
+ubuntu@ip-172-31-24-174:~/Todo/client/src$
+ubuntu@ip-172-31-24-174:~/Todo/client/src$ cd ../..
+ubuntu@ip-172-31-24-174:~/Todo$
+ubuntu@ip-172-31-24-174:~/Todo$
+ubuntu@ip-172-31-24-174:~/Todo$
+ubuntu@ip-172-31-24-174:~/Todo$
+ubuntu@ip-172-31-24-174:~/Todo$ curl icanhazip.com
+3.92.139.85
+ubuntu@ip-172-31-24-174:~/Todo$
+ubuntu@ip-172-31-24-174:~/Todo$
+
+
+### Connect with the public IP address:3000
+
+
 
 In this Project #3 you have created a simple To-Do and deployed it to MERN stack. 
 You wrote a frontend application using React.js that communicates with a backend application written using Expressjs. 
