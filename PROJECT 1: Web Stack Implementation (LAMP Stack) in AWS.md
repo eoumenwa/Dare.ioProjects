@@ -1,6 +1,4 @@
-## Web Stack Implementation (LAMP Stack) in AWS
-
-## What is a Technology stack?
+# What is a Technology stack?
 A technology stack is a set of frameworks and tools used to develop a software product. This set of frameworks and tools are very specifically chosen to work together in creating a well-functioning software. They are acronymns for individual technologies used together for a specific technology product. some examples are…
 
 LAMP (Linux, Apache, MySQL, PHP or Python, or Perl)
@@ -125,8 +123,11 @@ Zend Engine v3.4.0, Copyright (c) Zend Technologies
 At this point, your LAMP stack is completely installed and fully operational.
 
 [x] Linux (Ubuntu)
+
 [x] Apache HTTP Server
+
 [x] MySQL
+
 [x] PHP
 
 To test your setup with a PHP script, it’s best to set up a proper Apache Virtual Host to hold your website’s files and folders. Virtual host allows you to have multiple websites located on a single machine and users of the websites will not even notice it.
@@ -177,6 +178,7 @@ $ sudo vi /etc/apache2/sites-available/projectlamp.conf
 This will create a new blank file. Paste in the following bare-bones configuration by hitting on i on the keyboard to enter the insert mode, and paste the text:
 
 <VirtualHost *:80>
+
     ServerName projectlamp
     ServerAlias www.projectlamp 
     ServerAdmin webmaster@localhost
@@ -190,6 +192,7 @@ You can use the ls command to show the new file in the sites-available directory
      $ sudo ls /etc/apache2/sites-available
 
 ubuntu@ip-172-31-26-86:~$ sudo ls /etc/apache2/sites-available
+
 000-default.conf  default-ssl.conf  projectlamp.conf
 
 
@@ -211,7 +214,7 @@ ubuntu@ip-172-31-26-86:~$ sudo systemctl reload apache2
 
 ubuntu@ip-172-31-26-86:~$
 
-## Note: the above step has the same effect as creating a symbolic link using 
+### Note: the above step has the same effect as creating a symbolic link using 
 
     sudo ln -s /etc/apache2/sites-available/projectlamp.conf /etc/apache2/sites-enabled/
 
@@ -248,7 +251,7 @@ Now go to your browser and try to open your website URL using IP address:
 
      http://<Public-IP-Address>:80
        
-       ![image](https://user-images.githubusercontent.com/78841364/117537478-293eba80-afcf-11eb-9cc2-a91e6f21a997.png)
+  ![image](https://user-images.githubusercontent.com/78841364/117537478-293eba80-afcf-11eb-9cc2-a91e6f21a997.png)
 
 If you see the text from ‘echo’ command you wrote to index.html file, then it means your Apache virtual host is working as expected. In the output you will see your server’s public hostname (DNS name) and public IP address. You can also access your website in your browser by public DNS name, not only by IP - try it out, the result must be the same (port is optional)
 
@@ -276,6 +279,7 @@ In case you want to change this behavior, you’ll need to edit the /etc/apache2
 After saving and closing the file, you will need to reload Apache so the changes take effect:
 
      $ sudo systemctl reload apache2
+     
 Finally, we will create a PHP script to test that PHP is correctly installed and configured on your server.
 
 Now that you have a custom location to host your website’s files and folders, we’ll create a PHP test script to confirm that Apache is able to handle and process requests for PHP files.
@@ -283,10 +287,12 @@ Now that you have a custom location to host your website’s files and folders, 
 Create a new file named index.php inside your custom web root folder:
 
      $ vim /var/www/projectlamp/index.php
+     
 This will open a blank file. Add the following text, which is valid PHP code, inside the file:
 
      <?php
      phpinfo();
+     
 When you are finished, save and close the file, refresh the page and you will see a page similar to this:
 
 https://drive.google.com/uc?export=view&id=1ibJUPX_HrKyL-SuSrLfvcgWmH_aUdEAY
