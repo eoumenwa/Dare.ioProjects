@@ -304,7 +304,7 @@ Based on the set up above, we require four Red Hat instances and one Ubuntu inst
    
 ## Link to Project 7 Demo
 
-   https://drive.google.com/file/d/1FGYsJ56l8KyRjKc_d0FQYez8ghxZ8Hud/view?usp=sharing
+  https://drive.google.com/file/d/1cQPoSUbTDjSBwr5K8LehqN0623z2AcWh/view?usp=sharing
 
 ## References
 
