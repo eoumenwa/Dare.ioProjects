@@ -1,6 +1,6 @@
-Now, when you have already learned how to deploy LAMP, LEMP and MERN Web stacks - it is time to get yourself familiar with MEAN stack and deploy it to Ubuntu server.
+## MEAN Stack Deployment to Ubuntu in AWS
 
-## MEAN Stack is a combination of following components:
+MEAN Stack is a combination of following components:
 
 MongoDB (Document database) - Stores and allows to retrieve data.
 
@@ -41,7 +41,9 @@ sudo apt upgrade
 Install NodeJS
 
 sudo apt install -y nodejs
-Step 2: Install MongoDB
+
+## Step 2: Install MongoDB
+
 MongoDB stores data in flexible, JSON-like documents. Fields in a database can vary from document to document and data structure can be changed over time. For our example application, we are adding book records to MongoDB that contain book name, isbn number, author, and number of pages.
 
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6
