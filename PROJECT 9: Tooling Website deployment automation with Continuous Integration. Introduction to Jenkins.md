@@ -49,47 +49,38 @@
 
 
     By default Jenkins server uses TCP port 8080 - open it by creating a new Inbound Rule in your EC2 Security Group
-   _images/open_port8080.png
+  
 
       Perform initial Jenkins setup.
       From your browser access http://<Jenkins-Server-Public-IP-Address-or-Public-DNS-Name>:8080
 
    You will be prompted to provide a default admin password
 
-   _images/unlock_jenkins.png
 
    Retrieve it from your server:
 
    sudo cat /var/lib/jenkins/secrets/initialAdminPassword
    Then you will be asked which plugings to install - choose suggested plugins.
 
-   _images/jenkins_plugins.png
-
+ 
    Once plugins installation is done - create an admin user and you will get your Jenkins server address.
 
    The installation is completed!
-
-   _images/jenkins_ready.png
 
 
 ## Step 2 - Configure Jenkins to retrieve source codes from GitHub using Webhooks
 
   1. Enable webhooks in GitHub repository settings
 
-  _images/webhook_github.gif
-
+ 
   On Jenkins web console, click “New Item” and create a “Freestyle project”
-  _images/create_freestyle.png
 
   Provide github repository URL
 
-  _images/github_url.png
 
   Under freestyle project configuration/Git repository, 
   provide the link to Tooling GitHub repository and credentials (user/password)
   so Jenkins could access files in the repository.
-
-  _images/github_add_jenkins.png
 
   Save the configuration and run the build manually by clicking “Build Now” button.
   
@@ -102,24 +93,20 @@
  
     1. Configure triggering the job from GitHub webhook:
 
-  _images/jenkins_trigger.png
 
    2. Configure “Post-build Actions” to archive all the files - files resulted from a build are called “artifacts”.
-
-  _images/archive_artifacts.gif
 
   Make some change in any file in GitHub repository and push the changes to the master branch.
 
   Check to see if new build has been launched automatically (by webhook) and its results - artifacts, saved on Jenkins server.
-
-  _images/build_success_archive.png
 
  
   By default, the artifacts are stored on Jenkins server locally
 
     ls /var/lib/jenkins/jobs/tooling_github/builds/<build_number>/archive/
 
-  ## Step 3 - Configure Jenkins to copy files to NFS server via SSH
+ 
+ ## Step 3 - Configure Jenkins to copy files to NFS server via SSH
   
   Now we have our artifacts saved locally on Jenkins server, the next step is to copy them to our NFS server to /mnt/apps directory.
 
@@ -130,7 +117,6 @@
 
   On “Available” tab search for “Publish Over SSH” plugin and install it
 
-  _images/plugin_ssh_install.png
 
   Configure the job/project to copy artifacts over to NFS server.
   On main dashboard select “Manage Jenkins” and choose “Configure System” menu item.
@@ -145,15 +131,13 @@
   Remote directory - /mnt/apps since our Web Servers use it as a mointing point to retrieve files from the NFS server
   Test the configuration and make sure the connection returns Success. Remember, that TCP port 22 on NFS server must be open to receive SSH connections.
 
-  _images/publish_ssh_config.png
 
   Save the configuration, open your Jenkins job/project configuration page and add another one “Post-build Action”
 
-  _images/send_build.png
 
   Configure it to send all files produced by the build into our previously define remote directory. In our case we want to copy all files and directories -   so we use **.
 
-  _images/send_build1.png
+ 
   
   ## Test
 
