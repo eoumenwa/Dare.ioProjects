@@ -177,7 +177,7 @@ This project consists of two parts:
 
    Error as a result of not commenting out the following line
    
-   #       include /etc/nginx/sites-enabled/*;
+   #####  include /etc/nginx/sites-enabled/*;
    
    ![image](https://user-images.githubusercontent.com/78841364/116821966-506a3780-ab4a-11eb-819f-0d1ed37067f2.png)
 
