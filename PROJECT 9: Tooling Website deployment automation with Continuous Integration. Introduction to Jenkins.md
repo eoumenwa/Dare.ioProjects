@@ -43,7 +43,7 @@
 
         sudo apt-get install jenkins
 
-   Make sure Jenkins is up and running
+   Ensure that Jenkins is up and running
 
         sudo systemctl status jenkins
 
@@ -75,6 +75,8 @@
         sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 
 5. Enable Jenkins
+
+       sudo systemctl enable jenkins
 
    Output
    
