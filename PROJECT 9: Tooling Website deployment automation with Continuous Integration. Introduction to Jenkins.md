@@ -108,16 +108,15 @@
 
 ## Automation
  
- Click “Configure” your job/project and add these two configurations
+ Click “Configure”  job/project and add these two configurations
  
    1. Configure triggering the job from GitHub webhook:
 
 
    2. Configure “Post-build Actions” to archive all the files - files resulted from a build are called “artifacts”.
 
-   3. Make some change in any file in GitHub repository and push the changes to the master branch.
-
-   4. Check to see if new build has been launched automatically (by webhook) and its results - artifacts, saved on Jenkins server.
+  Make some change in any file in GitHub repository and push the changes to the master branch. Check to see if new build has been launched automatically   
+  (by webhook) and its results - artifacts, saved on Jenkins server.
  
       By default, the artifacts are stored on Jenkins server locally
 
