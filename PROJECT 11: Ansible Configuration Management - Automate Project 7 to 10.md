@@ -189,3 +189,4 @@ In this project, I learnt how to automate routine tasks using Ansible Configurat
 
 https://stackoverflow.com/questions/33762738/specifying-the-os-ansible
 
+https://medium.com/@christyjacob4/using-vscode-remotely-on-an-ec2-instance-7822c4032cff
