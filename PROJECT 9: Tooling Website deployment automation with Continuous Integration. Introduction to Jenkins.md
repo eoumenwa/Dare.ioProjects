@@ -73,69 +73,69 @@
   1. Enable webhooks in GitHub repository settings
 
  
-  On Jenkins web console, click “New Item” and create a “Freestyle project”
+  2. On Jenkins web console, click “New Item” and create a “Freestyle project”
 
-  Provide github repository URL
+  3. Provide github repository URL
 
 
-  Under freestyle project configuration/Git repository, 
-  provide the link to Tooling GitHub repository and credentials (user/password)
-  so Jenkins could access files in the repository.
+  4. Under freestyle project configuration/Git repository, provide the link to Tooling GitHub repository and credentials (user/password)
+     so Jenkins could access files in the repository.
 
-  Save the configuration and run the build manually by clicking “Build Now” button.
+  5. Save the configuration and run the build manually by clicking “Build Now” button.
   
-  Open the build and check in “Console Output” if it has run successfully.
+  6. Open the build and check in “Console Output” if it has run successfully.
 
 
 ## Automation
  
  Click “Configure” your job/project and add these two configurations
  
-    1. Configure triggering the job from GitHub webhook:
+   1. Configure triggering the job from GitHub webhook:
 
 
    2. Configure “Post-build Actions” to archive all the files - files resulted from a build are called “artifacts”.
 
-  Make some change in any file in GitHub repository and push the changes to the master branch.
+   3. Make some change in any file in GitHub repository and push the changes to the master branch.
 
-  Check to see if new build has been launched automatically (by webhook) and its results - artifacts, saved on Jenkins server.
-
+   4. Check to see if new build has been launched automatically (by webhook) and its results - artifacts, saved on Jenkins server.
  
-  By default, the artifacts are stored on Jenkins server locally
+      By default, the artifacts are stored on Jenkins server locally
 
-    ls /var/lib/jenkins/jobs/tooling_github/builds/<build_number>/archive/
+            ls /var/lib/jenkins/jobs/tooling_github/builds/<build_number>/archive/
 
  
  ## Step 3 - Configure Jenkins to copy files to NFS server via SSH
   
-  Now we have our artifacts saved locally on Jenkins server, the next step is to copy them to our NFS server to /mnt/apps directory.
-
-  Jenkins is a highly extendable application and there are 1400+ plugins available. We will need a plugin that is called “Publish Over SSH”.
-
-  Install “Publish Over SSH” plugin.
-  On main dashboard select “Manage Jenkins” and choose “Manage Plugins” menu item.
-
-  On “Available” tab search for “Publish Over SSH” plugin and install it
+  1. Install “Publish Over SSH” plugin.
+     
+     On main dashboard select “Manage Jenkins” and choose “Manage Plugins” menu item.
+      
+     On “Available” tab search for “Publish Over SSH” plugin and install it
 
 
-  Configure the job/project to copy artifacts over to NFS server.
-  On main dashboard select “Manage Jenkins” and choose “Configure System” menu item.
+  2. Configure the job/project to copy artifacts over to NFS server.
+    
+     On main dashboard select “Manage Jenkins” and choose “Configure System” menu item.
 
-  Scroll down to Publish over SSH plugin configuration section and configure it to be able to connect to your NFS server:
+  3. Scroll down to Publish over SSH plugin configuration section and configure it to be able to connect to your NFS server:
 
-  Provide a private key (content of .pem file that you use to connect to NFS server via SSH/Putty)
-  Arbitrary name
-  Hostname - can be private IP address of your NFS server
+  4. Provide a private key (content of .pem file that was used to connect to NFS server via SSH/Putty)
+     
+     Arbitrary name
+     
+     Hostname - can be private IP address of  NFS server
+   
+     Username - ec2-user (since NFS server is based on EC2 with RHEL 8)
+  
+     Remote directory - /mnt/apps since our Web Servers use it as a mointing point to retrieve files from the NFS server
+     
+  5. Test the configuration and make sure the connection returns Success. TCP port 22 on NFS server must be open to receive SSH connections.
 
-  Username - ec2-user (since NFS server is based on EC2 with RHEL 8)
-  Remote directory - /mnt/apps since our Web Servers use it as a mointing point to retrieve files from the NFS server
-  Test the configuration and make sure the connection returns Success. Remember, that TCP port 22 on NFS server must be open to receive SSH connections.
+
+  6. Save the configuration, open  Jenkins job/project configuration page and add another  “Post-build Action”
 
 
-  Save the configuration, open your Jenkins job/project configuration page and add another one “Post-build Action”
-
-
-  Configure it to send all files produced by the build into our previously define remote directory. In our case we want to copy all files and directories -   so we use **.
+  7. Configure it to send all files produced by the build into previously define remote directory using **.
 
  
   
