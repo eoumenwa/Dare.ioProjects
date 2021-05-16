@@ -73,8 +73,16 @@
 4. Enter the default admin password (retrieve it from server) by running
 
         sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+
+5. Enable Jenkins
+
+   Output
+   
+        jenkins.service is not a native service, redirecting to systemd-sysv-install.
         
-5. Install suggested plugins.
+        Executing: /lib/systemd/systemd-sysv-install enable jenkins
+        
+6. Install suggested plugins.
 
   
 
