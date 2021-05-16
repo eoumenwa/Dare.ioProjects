@@ -114,7 +114,7 @@
  
  Click “Configure”  job/project and add these two configurations
  
-   1. Configure triggering the job from GitHub webhook:
+   1. Configure triggering the job from GitHub webhook
 
 
    2. Configure “Post-build Actions” to archive all the files - files resulted from a build are called “artifacts”.
