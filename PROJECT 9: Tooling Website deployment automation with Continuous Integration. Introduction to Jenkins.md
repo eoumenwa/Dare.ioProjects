@@ -49,20 +49,21 @@
 
     Output:
     
-    ● jenkins.service - LSB: Start Jenkins at boot time
+       ● jenkins.service - LSB: Start Jenkins at boot time
     
-     Loaded: loaded (/etc/init.d/jenkins; generated)
+        Loaded: loaded (/etc/init.d/jenkins; generated)
      
-     Active: active (exited) since Fri 2021-04-23 23:07:49 UTC; 2min 49s ago
+        Active: active (exited) since Fri 2021-04-23 23:07:49 UTC; 2min 49s ago
      
-      Docs: man:systemd-sysv-generator(8)
+        Docs: man:systemd-sysv-generator(8)
        
-      Tasks: 0 (limit: 1160)
+        Tasks: 0 (limit: 1160)
       
-     Memory: 0B
+        Memory: 0B
      
-     CGroup: /system.slice/jenkins.service
+        CGroup: /system.slice/jenkins.service
 
+    
     By default Jenkins server uses TCP port 8080 - open it by creating a new Inbound Rule in your EC2 Security Group
   
 
