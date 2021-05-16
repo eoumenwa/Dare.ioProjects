@@ -47,26 +47,29 @@
 
         sudo systemctl status jenkins
 
+    Output:
+    
+    ● jenkins.service - LSB: Start Jenkins at boot time
+     Loaded: loaded (/etc/init.d/jenkins; generated)
+     Active: active (exited) since Fri 2021-04-23 23:07:49 UTC; 2min 49s ago
+       Docs: man:systemd-sysv-generator(8)
+      Tasks: 0 (limit: 1160)
+     Memory: 0B
+     CGroup: /system.slice/jenkins.service
 
     By default Jenkins server uses TCP port 8080 - open it by creating a new Inbound Rule in your EC2 Security Group
   
 
-      Perform initial Jenkins setup.
-      From your browser access http://<Jenkins-Server-Public-IP-Address-or-Public-DNS-Name>:8080
+3. Perform initial Jenkins setup.
+   From the browser access http://<Jenkins-Server-Public-IP-Address-or-Public-DNS-Name>:8080
 
-   You will be prompted to provide a default admin password
+4. Enter the default admin password (retrieve it from server) by running
 
+        sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+        
+5. Install suggested plugins.
 
-   Retrieve it from your server:
-
-   sudo cat /var/lib/jenkins/secrets/initialAdminPassword
-   Then you will be asked which plugings to install - choose suggested plugins.
-
- 
-   Once plugins installation is done - create an admin user and you will get your Jenkins server address.
-
-   The installation is completed!
-
+  
 
 ## Step 2 - Configure Jenkins to retrieve source codes from GitHub using Webhooks
 
@@ -165,7 +168,7 @@
 ## Resolution
 
 Changed ownership of /mnt/apps from root to ec2-user as shown in the lines below
- sudo chown -R ec2-user: /mnt/apps
+  nnsudo chown -R ec2-user: /mnt/apps
 
 
 ## Summary
