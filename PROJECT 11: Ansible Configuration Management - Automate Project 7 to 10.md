@@ -42,17 +42,19 @@ Create a simple Ansible playbook to automate servers configuration
 
 5. Create a new Freestyle project ansible in Jenkins and point it to ‘ansible-config-mgt’ repository.
 
+6. Configure Webhook in GitHub and set webhook to trigger ansible build.
 
-Configure Webhook in GitHub and set webhook to trigger ansible build.
-Configure a Post-build job to save all (**) files, like you did it in Project 9.
-Test your setup by making some change in README.MD file in master branch and make sure that builds starts automatically and Jenkins saves the files (build artifacts) in following folder
-ls /var/lib/jenkins/jobs/ansible/builds/<build_number>/archive/
-Note: Trigger Jenkins project execution only for /main (master) branch.
+7. Configure a Post-build job to save all (**) files.
 
-Now your setup will look like this:
+8. Test your setup by making some change in README.MD file in master branch and make sure that builds starts automatically and Jenkins saves the files (build artifacts) in   
+   following folder
+ 
+            ls /var/lib/jenkins/jobs/ansible/builds/<build_number>/archive/
 
-_images/jenkins_ansible.png
+    New setup will be as shown below:
 
+  ![image](https://user-images.githubusercontent.com/78841364/118416923-e5f3e400-b67f-11eb-9134-758dce32336e.png)
+  
 Tip Every time you stop/start your Jenkins-Ansible server - you have to reconfigure GitHub webhook to a new IP address, in order to avoid it, it makes sense to allocate an Elastic IP to your Jenkins-Ansible server (you have done it before to your LB server in Project 10). Note that Elastic IP is free only when it is being allocated to an EC2 Instance, so do not forget to release Elastic IP once you terminate your EC2 Instance.
 
 Step 2 - Prepare your development environment using Visual Studio Code
@@ -171,7 +173,18 @@ _images/ansible_architecture.png
 Optional step - Repeat once again
 Update your ansible playbook with some new Ansible tasks and go through the full checkout -> change codes -> commit -> PR -> merge -> build -> ansible-playbook cycle again to see how easily you can manage a servers fleet of any size with just one command!
 
-## Summary
+### Challenges
+
+Error 1:
+
+ERROR: Couldn't find any revision to build. Verify the repository and branch configuration for this job. Finished: FAILURE
+
+Solution:
+
+Created a new branch called "master" and went to settings/branches then changed default branch to master from main. This now corresponds to the branch specifier on Jenkins I could have also changed the specifier in Jenkins to */main to match the default branch in GIT.
+
+
+### Summary
 
 In this project, I learnt how to automate routine tasks using Ansible Configuration Management and writing code using declarative language such as YAML.
 
