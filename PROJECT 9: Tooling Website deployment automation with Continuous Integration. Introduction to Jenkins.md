@@ -92,6 +92,10 @@
 
   1. Enable webhooks in GitHub repository settings
 
+     ![image](https://user-images.githubusercontent.com/78841364/118402347-8eca2100-b637-11eb-90bf-2245d8a28912.png)
+
+     
+     Payload URL http://3.143.243.155:8080/github-webhook/
  
   2. On Jenkins web console, click “New Item” and create a “Freestyle project”
 
