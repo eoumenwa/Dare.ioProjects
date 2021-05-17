@@ -95,6 +95,9 @@ Tip Every time you stop/start your Jenkins-Ansible server - you have to reconfig
 
 6. Within the inventory folder, create an inventory file (.yml) for each environment (Development, Staging Testing and Production) dev, staging, uat, and prod respectively.
 
+    
+    ![image](https://user-images.githubusercontent.com/78841364/118504070-34919480-b6f9-11eb-80fe-3032367f3f3f.png)
+
 
 ### Step 4 - Set up an Ansible Inventory
 
@@ -115,18 +118,22 @@ Tip Every time you stop/start your Jenkins-Ansible server - you have to reconfig
 
 Save the inventory structure start configuring the development servers
 
-Note: Ansible uses TCP port 22 by default, which means it needs to ssh into target servers from Jenkins-Ansible host - for this we need to copy your private (.pem) key to the server and also change permissions to the private key chmod 400 key.pem so that EC2 will accept the key. 
+Note: Ansible uses TCP port 22 by default, which means it needs to ssh into target servers from Jenkins-Ansible host - for this we need to copy the private (.pem) key to the server and also change permissions to the private key chmod 400 key.pem so that EC2 will accept the key. 
 
-2. Import your key into ssh-agent:
-
+2. Change permissions to private key
+       
          chmod 400 key.pem
          
+4. Import key into ssh-agent:
+   
+   Run the command below start the agent in background, and set the apropriate environment variables for the current shell instance.
          
          eval `ssh-agent -s`
          
          Agent pid 1608
 
-
+   Use the command below to unlock keys (usually ~/.ssh/id_*) and load them into the agent, making them accessible to ssh or sftp connections.
+   
         ssh-add <path-to-private-key>
 
         oeume@KRISOLIZ-SFFHPDPC MINGW64 ~/Downloads $ ssh-add /c/Users/oeume/Downloads/keypairname.pem
@@ -136,7 +143,66 @@ Note: Ansible uses TCP port 22 by default, which means it needs to ssh into targ
 Note, Load Balancer user is ubuntu and user for RHEL-based servers is ec2-user.
 
 
+### Step 4b - Configure SSH Connections into target Servers
+
+I was unable to use the ssh-copy-id command. I copied pub key to webserver-1 manually and really needed to make use of a simpler command to implement this for the rest of the 
+
+servers. I ended up enabling password authentication on both host and server and created a password for each after which I ran the ssh-copy-id command.
+
+Run 
+                            
+     sudo vi /etc/ssh/sshd_config
+     
+     Set password authentication yes
+     
+Run 
+
+      sudo systemctl restart sshd
+      
+      
+Run
+
+      sudo passwd ubuntu or sudo passwd ec2-user
+      
+      This will set a password
+      
+Run
+
+
+      ssh-copy-id ec2-user@private-IP-add
+      
+      /usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
+      
+      /usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
+      
+      ec2-user@private-IP-add's password: 
+
+      Number of key(s) added: 1
+
+      Now try logging into the machine, with:   "ssh '@private-IP-add'"
+     
+      and check to make sure that only the key(s) you wanted were added.
+
+      ssh ec2-user@private-IP-add
+      
+      Last login: Mon May 17 15:24:21 2021 from 73.152.119.181
+      
+      [ec2-user@ip-172-31-23-13 ~]$ logout
+      
+      Connection to 172.31.23.13 closed.
+    
+Next step is to go back to sshd config file and disable password authentication.
+
+Change path to ansible config file to define inventory location
+
+[defaults]
+
+# some basic default values...
+
+inventory       = /home/ubuntu/ansible/ansible-config-mgt/inventory
+
 ### Step 5 - Create a Common Playbook
+
 
 It is time to start giving Ansible the instructions on what you needs to be performed on all servers listed in inventory/dev.
 
@@ -176,7 +242,14 @@ Run some shell script
 …
 For a better understanding of Ansible playbooks - watch this video from RedHat and read this article.
 
-Step 6 - Update GIT with the latest code
+
+First Playbook Run
+
+![image](https://user-images.githubusercontent.com/78841364/118551260-b8647480-b72b-11eb-84d9-eace08ce18c4.png)
+
+
+### Step 6 - Update GIT with the latest code
+
 Now all of your directories and files live on your machine and you need to push changes made locally to GitHub.
 
 In the real world, you will be working within a team of other DevOps engineers and developers. It is important to learn how to collaborate with help of GIT. In many organisations there is a development rule that do not allow to deploy any code before it has been reviewed by an extra pair of eyes - it is also called “Four eyes principle”.
@@ -217,13 +290,14 @@ Update your ansible playbook with some new Ansible tasks and go through the full
 
 ### Challenges
 
-Error 1:
-
-ERROR: Couldn't find any revision to build. Verify the repository and branch configuration for this job. Finished: FAILURE
+1. ERROR: Couldn't find any revision to build. Verify the repository and branch configuration for this job. Finished: FAILURE
 
 Solution:
 
 Created a new branch called "master" and went to settings/branches then changed default branch to master from main. This now corresponds to the branch specifier on Jenkins I could have also changed the specifier in Jenkins to */main to match the default branch in GIT.
+
+2. 
+
 
 
 ### Summary
@@ -245,3 +319,11 @@ In this project, I learnt how to automate routine tasks using Ansible Configurat
 https://stackoverflow.com/questions/33762738/specifying-the-os-ansible
 
 https://medium.com/@christyjacob4/using-vscode-remotely-on-an-ec2-instance-7822c4032cff
+
+https://phoenixnap.com/kb/ssh-permission-denied-publickey
+
+https://stackoverflow.com/questions/22530886/ssh-copy-id-no-identities-found-error
+
+https://linuxhint.com/copy_ssh_keys/
+
+https://unix.stackexchange.com/questions/356259/ssh-between-two-linux-boxes-permission-denied-public-key
