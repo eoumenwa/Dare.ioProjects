@@ -57,14 +57,31 @@ Create a simple Ansible playbook to automate servers configuration
   
 Tip Every time you stop/start your Jenkins-Ansible server - you have to reconfigure GitHub webhook to a new IP address, in order to avoid it, it makes sense to allocate an Elastic IP to your Jenkins-Ansible server (you have done it before to your LB server in Project 10). Note that Elastic IP is free only when it is being allocated to an EC2 Instance, so do not forget to release Elastic IP once you terminate your EC2 Instance.
 
-Step 2 - Prepare your development environment using Visual Studio Code
-First part of ‘DevOps’ is ‘Dev’, which means you will require to write some codes and you shall have proper tools that will make your coding and debugging comfortable - you need an Integrated development environment (IDE) or Source-code Editor. There is a plethora of different IDEs and Source-code Editors for different languages with their own advantages and drawbacks, you can choose whichever you are comfortable with, but we recommend one free and universal editor that will fully satisfy your needs - Visual Studio Code (VSC), you can get it here.
+### Step 2 - Prepare development environment using Visual Studio Code
 
-After you have successfully installed VSC, configure it to connect to your newly created GitHub repository.
+1. Download and install VSCode
 
-Step 3 - Begin Ansible Development
+2. Install the Remote SSH Extension by searching for the extension “Remote-SSH” in the VSCode marketplace.
+
+3. Open The Configuration file and choose the config file corresponding to the current user (typically the /.ssh path)
+   
+   Enter the following details
+   
+   Host - enter any name of choice to identify the server.
+  
+   HostName is the server’s host or IP
+   
+   User is the Ubuntu username.
+   
+   IdentityFile is the path to the private key.
+
+### Step 3 - Begin Ansible Development
+
 In your ansible-config-mgt GitHub repository, create a new branch that will be used for development of a new feature.
-Tip: Give your branches descriptive and comprehensive names, for example, if you use Jira or Trello as a project management tool - include ticket number (e.g. PRJ-145) in the name of your branch and add a topic and a brief description what this branch is about - a bugfix, hotfix, feature, release (e.g. feature/prj-145-lvm)
+
+Tip: Give your branches descriptive and comprehensive names, for example, if you use Jira or Trello as a project management tool - include ticket number (e.g. PRJ-145) in the 
+
+name of your branch and add a topic and a brief description what this branch is about - a bugfix, hotfix, feature, release (e.g. feature/prj-145-lvm)
 
 Checkout the newly created feature branch to your local machine and start building your code and directory structure
 Create a directory and name it playbooks - it will be used to store all your playbook files.
