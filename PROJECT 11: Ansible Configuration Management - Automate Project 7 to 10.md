@@ -98,26 +98,7 @@ Tip Every time you stop/start your Jenkins-Ansible server - you have to reconfig
 
 ### Step 4 - Set up an Ansible Inventory
 
-An Ansible inventory file defines the hosts and groups of hosts upon which commands, modules, and tasks in a playbook operate. Since our intention is to execute Linux commands on remote hosts, and ensure that it is the intended configuration on a particular server that occurs. It is important to have a way to organize our hosts in such an Inventory.
-
-Save below inventory structure in the inventory/dev file to start configuring your development servers. Ensure to replace the IP addresses according to your own setup.
-
-Note: Ansible uses TCP port 22 by default, which means it needs to ssh into target servers from Jenkins-Ansible host - for this you need to copy your private (.pem) key to your server. Do not forget to change permissions to your private key chmod 400 key.pem, otherwise EC2 will not accept the key. 
-Now you need to import your key into ssh-agent:
-
-eval `ssh-agent -s`
-Agent pid 1608
-
-ssh-add <path-to-private-key>
-
-oeume@KRISOLIZ-SFFHPDPC MINGW64 ~/Downloads
-      
-      $ ssh-add /c/Users/oeume/Downloads/keypairname.pem
-      Identity added: /c/Users/oeume/Downloads/keypairname.pem (/c/Users/oeume/Downloads/keypairname.pem)
-
-Also notice, that your Load Balancer user is ubuntu and user for RHEL-based servers is ec2-user.
-
-Update your inventory/dev.yml file with this snippet of code:
+1. Edit inventory/dev.yml as follows:
 
 [nfs]
 <NFS-Server-Private-IP-Address> ansible_ssh_user='ec2-user'
@@ -127,11 +108,36 @@ Update your inventory/dev.yml file with this snippet of code:
 <Web-Server2-Private-IP-Address> ansible_ssh_user='ec2-user'
 
 [db]
-<Database-Private-IP-Address> ansible_ssh_user='ec2-user' 
+<Database-Private-IP-Address> ansible_ssh_user='ubuntu' 
 
 [lb]
 <Load-Balancer-Private-IP-Address> ansible_ssh_user='ubuntu'
-Step 5 - Create a Common Playbook
+
+Save the inventory structure start configuring the development servers
+
+Note: Ansible uses TCP port 22 by default, which means it needs to ssh into target servers from Jenkins-Ansible host - for this we need to copy your private (.pem) key to the server and also change permissions to the private key chmod 400 key.pem so that EC2 will accept the key. 
+
+2. Import your key into ssh-agent:
+
+         chmod 400 key.pem
+         
+         
+         eval `ssh-agent -s`
+         
+         Agent pid 1608
+
+
+        ssh-add <path-to-private-key>
+
+        oeume@KRISOLIZ-SFFHPDPC MINGW64 ~/Downloads $ ssh-add /c/Users/oeume/Downloads/keypairname.pem
+      
+        Identity added: /c/Users/oeume/Downloads/keypairname.pem (/c/Users/oeume/Downloads/keypairname.pem)
+
+Note, Load Balancer user is ubuntu and user for RHEL-based servers is ec2-user.
+
+
+### Step 5 - Create a Common Playbook
+
 It is time to start giving Ansible the instructions on what you needs to be performed on all servers listed in inventory/dev.
 
 In common.yml playbook you will write configuration for repeatable, re-usable, and multi-machine tasks that is common to systems within the infrastructure.
@@ -207,6 +213,7 @@ _images/ansible_architecture.png
 
 Optional step - Repeat once again
 Update your ansible playbook with some new Ansible tasks and go through the full checkout -> change codes -> commit -> PR -> merge -> build -> ansible-playbook cycle again to see how easily you can manage a servers fleet of any size with just one command!
+
 
 ### Challenges
 
