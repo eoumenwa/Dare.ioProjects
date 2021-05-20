@@ -197,7 +197,7 @@ Change path to ansible config file to define inventory location
 
 [defaults]
 
-# some basic default values...
+####### some basic default values...
 
 inventory       = /home/ubuntu/ansible/ansible-config-mgt/inventory
 
@@ -243,14 +243,16 @@ Run some shell script
 For a better understanding of Ansible playbooks - watch this video from RedHat and read this article.
 
 
-First Playbook Run
+First Playbook Run on webserver-1
 
 ![image](https://user-images.githubusercontent.com/78841364/118551260-b8647480-b72b-11eb-84d9-eace08ce18c4.png)
 
 
 ### Step 6 - Update GIT with the latest code
 
-Now all of your directories and files live on your machine and you need to push changes made locally to GitHub.
+1.  Push changes made locally to GitHub. 
+
+3.  Enter command here
 
 In the real world, you will be working within a team of other DevOps engineers and developers. It is important to learn how to collaborate with help of GIT. In many organisations there is a development rule that do not allow to deploy any code before it has been reviewed by an extra pair of eyes - it is also called “Four eyes principle”.
 
