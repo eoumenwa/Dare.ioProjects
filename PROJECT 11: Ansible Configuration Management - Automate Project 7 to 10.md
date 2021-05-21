@@ -145,9 +145,9 @@ Note, Load Balancer user is ubuntu and user for RHEL-based servers is ec2-user.
 
 ### Step 4b - Configure SSH Connections into target Servers
 
-I was unable to use the ssh-copy-id command. I copied pub key to webserver-1 manually and really needed to make use of a simpler command to implement this for the rest of the 
+1. I was unable to use the ssh-copy-id command. I copied pub key to webserver-1 manually and really needed to make use of a simpler command to implement this for the rest of 
 
-servers. I ended up enabling password authentication on both host and server and created a password for each after which I ran the ssh-copy-id command.
+   the servers. I ended up enabling password authentication on both host and server and created a password for each after which I ran the ssh-copy-id command.
 
 Run 
                             
@@ -191,24 +191,23 @@ Run
       
       Connection to 172.31.23.13 closed.
     
-Next step is to go back to sshd config file and disable password authentication.
+2. Next step is to go back to sshd config file and disable password authentication.
 
-Change path to ansible config file to define inventory location
+3. Change path to ansible config file to define inventory location as shown below
 
-[defaults]
+   [defaults]
 
-####### some basic default values...
+   ####### some basic default values...
 
-inventory       = /home/ubuntu/ansible/ansible-config-mgt/inventory
+   inventory       = /home/ubuntu/ansible/ansible-config-mgt/inventory
+
 
 ### Step 5 - Create a Common Playbook
 
 
-It is time to start giving Ansible the instructions on what you needs to be performed on all servers listed in inventory/dev.
+In common.yml playbook, write configuration for repeatable, re-usable, and multi-machine tasks that is common to systems within the infrastructure as listed in inventory/dev
 
-In common.yml playbook you will write configuration for repeatable, re-usable, and multi-machine tasks that is common to systems within the infrastructure.
-
-Update your playbooks/common.yml file with following code:
+Update playbooks/common.yml file with following code:
 
 ---
 - name: update web, nfs and db servers
