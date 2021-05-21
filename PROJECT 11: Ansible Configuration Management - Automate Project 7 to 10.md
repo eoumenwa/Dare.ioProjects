@@ -209,37 +209,35 @@ In common.yml playbook, write configuration for repeatable, re-usable, and multi
 
 Update playbooks/common.yml file with following code:
 
----
-- name: update web, nfs and db servers
-  hosts: webservers, nfs, db
-  remote_user: ec2-user
-  become: yes
-  become_user: root
-  tasks:
-  - name: ensure wireshark is at the latest version
-    yum:
-      name: wireshark
-      state: latest
+         ---
+         - name: update web, nfs and db servers
+           hosts: webservers, nfs, db
+           remote_user: ec2-user
+           become: yes
+           become_user: root
+           tasks:
+           - name: ensure wireshark is at the latest version
+             yum:
+               name: wireshark
+               state: latest
 
-- name: update LB server
-  hosts: lb
-  remote_user: ubuntu
-  become: yes
-  become_user: root
-  tasks:
-  - name: ensure wireshark is at the latest version
-    apt:
-      name: wireshark
-      state: latest
-Examine the code above and try to make sense out of it. This playbook is divided into two parts, each of them is intended to perform the same task: install wireshark utility (or make sure it is updated to the latest version) on your RHEL 8 and Ubuntu servers. It uses root user to perform this task and respective package manager: yum for RHEL 8 and apt for Ubuntu.
+         - name: update LB server
+           hosts: lb
+           remote_user: ubuntu
+           become: yes
+           become_user: root
+           tasks:
+           - name: ensure wireshark is at the latest version
+             apt:
+               name: wireshark
+               state: latest
 
-Feel free to update this playbook with following tasks:
+The playbook above is divided into two parts, each of them is intended to perform the same task: install wireshark utility (or make sure it is updated to the latest version) 
 
-Create a directory and a file inside it
-Change timezone on all servers
-Run some shell script
-…
-For a better understanding of Ansible playbooks - watch this video from RedHat and read this article.
+on RHEL 8 and Ubuntu servers. It uses root user to perform this task and respective package manager: yum for RHEL 8 and apt for Ubuntu. Other tasks include creating a 
+
+directory and a file inside it, change timezone on all servers and run some shell script
+
 
 
 First Playbook Run on webserver-1
@@ -330,3 +328,7 @@ https://linuxhint.com/copy_ssh_keys/
 https://unix.stackexchange.com/questions/356259/ssh-between-two-linux-boxes-permission-denied-public-key
 
 https://www.google.com/search?q=meaning+of+lineinfile&oq=meaning+of+lineinfile&aqs=chrome..69i57j69i60l2j69i65j69i60j69i65.3975j1j7&sourceid=chrome&ie=UTF-8
+
+https://www.redhat.com/en/topics/automation/what-is-an-ansible-playbook
+
+https://docs.ansible.com/ansible/latest/user_guide/playbooks_intro.html
