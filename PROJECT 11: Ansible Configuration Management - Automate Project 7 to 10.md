@@ -11,6 +11,7 @@ On the diagram below the Virtual Private Network (VPC) is divided into two subne
 
 ### Task
 Install and configure Ansible client to act as a Jump Server/Bastion Host
+
 Create a simple Ansible playbook to automate servers configuration
 
 ### Step 1 - Install and configure Ansible on EC2 Instance
@@ -232,6 +233,7 @@ Update playbooks/common.yml file with following code:
                name: wireshark
                state: latest
 
+
 The playbook above is divided into two parts, each of them is intended to perform the same task: install wireshark utility (or make sure it is updated to the latest version) 
 
 on RHEL 8 and Ubuntu servers. It uses root user to perform this task and respective package manager: yum for RHEL 8 and apt for Ubuntu. Other tasks include creating a 
@@ -249,27 +251,33 @@ First Playbook Run on webserver-1
 
 1.  Push changes made locally to GitHub. 
 
-3.  Enter command here
+2.  Enter command here
 
-In the real world, you will be working within a team of other DevOps engineers and developers. It is important to learn how to collaborate with help of GIT. In many organisations there is a development rule that do not allow to deploy any code before it has been reviewed by an extra pair of eyes - it is also called “Four eyes principle”.
+In the real world, you will be working within a team of other DevOps engineers and developers. It is important to learn how to collaborate with help of GIT. In many 
+
+organisations there is a development rule that do not allow to deploy any code before it has been reviewed by an extra pair of eyes - it is also called “Four eyes principle”.
 
 Now you have a separate branch, you will need to know how to raise a Pull Request (PR), get your branch peer reviewed and merged to the master branch.
 
 Commit your code into GitHub:
 
 use git commands to add, commit and push your branch to GitHub.
+
 git status
 
 git add <selected files>
 
 git commit -m "commit message"
-Create a Pull request (PR)
+
+4. Create a Pull request (PR)
+
 Wear a hat of another developer for a second, and act as a reviewer.
 If the reviewer is happy with your new feature development, merge the code to the master branch.
 Head back on your terminal, checkout from the feature branch into the master, and pull down the latest changes.
 Once your code changes appear in master branch - Jenkins will do its job and save all the files (build artifacts) to /var/lib/jenkins/jobs/ansible/builds/<build_number>/archive/ directory on Jenkins-Ansible server.
 
-Step 7 - Run first Ansible test
+### Step 7 - Run first Ansible test
+
 Now, it is time to execute ansible-playbook command and verify if your playbook actually works:
 
 ansible-playbook -i /var/lib/jenkins/jobs/ansible/builds/<build-number>/archive/inventory/dev.yml /var/lib/jenkins/jobs/ansible/builds/<build-number>/archive/playbooks/common.yml
