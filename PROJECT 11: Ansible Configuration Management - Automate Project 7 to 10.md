@@ -241,10 +241,34 @@ on RHEL 8 and Ubuntu servers. It uses root user to perform this task and respect
 directory and a file inside it, change timezone on all servers and run some shell script
 
 
+Run the command below to confirm all hosts are reachable
+
+      ~/ansible/ansible-config-mgt$ ansible all -m ping -u root
+      
+      
+         172.31.23.215 | SUCCESS => {
+             "ansible_facts": {
+                 "discovered_interpreter_python": "/usr/libexec/platform-python"
+             },
+             "changed": false,
+             "ping": "pong"
+         }
+         172.31.26.39 | SUCCESS => {
+             "ansible_facts": {
+                 "discovered_interpreter_python": "/usr/libexec/platform-python"
+             },
+             "changed": false,
+             "ping": "pong"
+         }
+
+
+       ~/ansible/ansible-config-mgt/playbooks$ ansible-playbook common.yml 
+
 
 First Playbook Run on webserver-1
 
-![image](https://user-images.githubusercontent.com/78841364/118551260-b8647480-b72b-11eb-84d9-eace08ce18c4.png)
+       ![image](https://user-images.githubusercontent.com/78841364/118551260-b8647480-b72b-11eb-84d9-eace08ce18c4.png)
+
 
 
 ### Step 6 - Update GIT with the latest code
@@ -340,3 +364,7 @@ https://www.google.com/search?q=meaning+of+lineinfile&oq=meaning+of+lineinfile&a
 https://www.redhat.com/en/topics/automation/what-is-an-ansible-playbook
 
 https://docs.ansible.com/ansible/latest/user_guide/playbooks_intro.html
+
+https://stackoverflow.com/questions/36724870/ansible-error-the-field-hosts-is-required-but-was-not-set
+
+https://www.tecmint.com/set-time-timezone-and-synchronize-time-using-timedatectl-command/
