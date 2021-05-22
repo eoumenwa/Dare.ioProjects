@@ -267,7 +267,7 @@ Run the command below to confirm all hosts are reachable
 
 First Playbook Run on webserver-1
 
-       ![image](https://user-images.githubusercontent.com/78841364/118551260-b8647480-b72b-11eb-84d9-eace08ce18c4.png)
+   ![image](https://user-images.githubusercontent.com/78841364/118551260-b8647480-b72b-11eb-84d9-eace08ce18c4.png)
 
 
 
