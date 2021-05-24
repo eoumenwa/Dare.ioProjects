@@ -374,6 +374,54 @@ git commit -m "Initial commit"
 
 6. Checkout from the feature branch into the master, and pull down the latest changes.
 
+         ~/ansible/ansible-config-mgt/inventory$ git checkout master
+        
+        Switched to branch 'master'
+        
+        Your branch is up to date with 'origin/master'.
+        
+        ~/ansible/ansible-config-mgt$ git pull
+        
+        remote: Enumerating objects: 1, done.
+        
+        remote: Counting objects: 100% (1/1), done.
+        
+        remote: Total 1 (delta 0), reused 0 (delta 0), pack-reused 0
+        
+        Unpacking objects: 100% (1/1), 638 bytes | 638.00 KiB/s, done.
+         
+         From https://github.com/eoumenwa/ansible-config-mgt
+         
+         12f10e7..785094f  master     -> origin/master
+      
+         Updating 12f10e7..785094f
+        
+        Fast-forward
+          
+          README.md             |  7 ++++---
+         
+         inventory/dev.yml     | 13 +++++++++++++
+         
+         inventory/prod.yml    |  0
+         
+         inventory/staging.yml |  0
+         
+         inventory/uat.yml     |  0
+         
+         playbooks/common.yml  | 58 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+         
+         6 files changed, 75 insertions(+), 3 deletions(-)
+          
+          create mode 100644 inventory/dev.yml
+         
+         create mode 100644 inventory/prod.yml
+         
+         create mode 100644 inventory/staging.yml
+         
+         create mode 100644 inventory/uat.yml
+         
+         create mode 100644 playbooks/common.yml
+
 
 7. Confirm that Jenkins saved all the files (build artifacts) to /var/lib/jenkins/jobs/ansible/builds/<build_number>/archive/ directory on Jenkins-Ansible server.
 
