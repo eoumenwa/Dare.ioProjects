@@ -283,16 +283,83 @@ organisations there is a development rule that do not allow to deploy any code b
 
 Now you have a separate branch, you will need to know how to raise a Pull Request (PR), get your branch peer reviewed and merged to the master branch.
 
-Commit your code into GitHub:
+3. Commit your code into GitHub:
 
-use git commands to add, commit and push your branch to GitHub.
+   use git commands to add, commit and push your branch to GitHub.
 
-git status
+         ~/ansible/ansible-config-mgt$ git add .
 
-git add <selected files>
+         ~/ansible/ansible-config-mgt$ git status
+         
+         On branch feature01-prj11-layout
+         
+         Your branch is up to date with 'origin/feature01-prj11-layout'.
 
-git commit -m "commit message"
+         Changes to be committed:
+        
+         (use "git restore --staged <file>..." to unstage)
+               
+                  new file:   inventory/dev.yml
+                  
+                  new file:   inventory/prod.yml
+                
+                  new file:   inventory/staging.yml
+                
+                  new file:   inventory/uat.yml
+                
+                  new file:   playbooks/common.yml
 
+
+         :~/ansible/ansible-config-mgt$ git push
+        
+        To https://github.com/eoumenwa/ansible-config-mgt.git
+          
+          ! [rejected]        feature01-prj11-layout -> feature01-prj11-layout (fetch first)
+         
+         error: failed to push some refs to 'https://github.com/eoumenwa/ansible-config-mgt.git'
+        
+         hint: Updates were rejected because the remote contains work that you do
+        
+         hint: not have locally. This is usually caused by another repository pushing
+         
+         hint: to the same ref. You may want to first integrate the remote changes
+        
+         hint: (e.g., 'git pull ...') before pushing again.
+         
+         hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+
+git commit -m "Initial commit"
+
+         ~/ansible/ansible-config-mgt$ git commit -m "Initial commit"
+         
+         [feature01-prj11-layout 4cfee5d] Initial commit
+                    
+         Committer: Ubuntu <ubuntu@ip-172-31-36-216.us-east-2.compute.internal>
+
+~/ansible/ansible-config-mgt$ git pull
+
+         Merge made by the 'recursive' strategy.
+
+         README.md | 7 ++++---
+          1 file changed, 4 insertions(+), 3 deletions(-)
+
+~/ansible/ansible-config-mgt$ git push
+         
+         Enumerating objects: 11, done.
+         
+         Counting objects: 100% (11/11), done.
+         
+         Compressing objects: 100% (7/7), done.
+         
+         Writing objects: 100% (9/9), 1.30 KiB | 443.00 KiB/s, done.
+         
+         Total 9 (delta 1), reused 0 (delta 0)
+         
+         remote: Resolving deltas: 100% (1/1), done.
+         
+         To https://github.com/eoumenwa/ansible-config-mgt.git
+            4b046bb..69ca5fd  feature01-prj11-layout -> feature01-prj11-layout
+            
 4. Create a Pull request (PR)
 
 Wear a hat of another developer for a second, and act as a reviewer.
