@@ -444,20 +444,6 @@ Execute ansible-playbook command and verify that the playbook actually works:
          ansible-playbook -i /var/lib/jenkins/jobs/ansible_automation/builds/7/archive/inventory/dev.yml  
          /var/lib/jenkins/jobs/ansible_automation/builds/7/archive/playbooks/common.yml
 
-Note: Previous command we ran without sudo, this is because we had added an ssh key to ssh-agent for our regular user. If you try to run this command with sudo you will have to explicitly pass the ssh key with --private-key <path-to-private-key> parameter.
-
-You can go to each of the servers and check if wireshark has been installed by running which wireshark or wireshark --version
-
-
-
-Your updated with Ansible architecture now looks like this:
-
-_images/ansible_architecture.png
-
-Optional step - Repeat once again
-Update your ansible playbook with some new Ansible tasks and go through the full checkout -> change codes -> commit -> PR -> merge -> build -> ansible-playbook cycle again to see how easily you can manage a servers fleet of any size with just one command!
-
-
 ### Challenges
 
 1. ERROR: Couldn't find any revision to build. Verify the repository and branch configuration for this job. Finished: FAILURE
@@ -481,10 +467,11 @@ In this project, I learnt how to automate routine tasks using Ansible Configurat
 
 
 
+### Links to Implementation Video
 
+https://drive.google.com/file/d/1nWr2Xx-Lfyy9hX8sIf6gMlxwC44vHeIQ/view?usp=sharing
 
-
-
+https://drive.google.com/file/d/1Eck6_bmIsNjtHTwn_mScCld9Cvrgmj7Z/view?usp=sharing
 
 
 
