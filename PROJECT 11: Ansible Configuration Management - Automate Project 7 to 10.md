@@ -36,9 +36,12 @@ Create a simple Ansible playbook to automate servers configuration
    ![image](https://user-images.githubusercontent.com/78841364/118403463-6f81c280-b63c-11eb-8267-809dbbb12168.png)
    
    - Install Jenkins
+   
    - Perform initial Jenkins setup
-   - From the browser access http://<Jenkins-Server-Public-IP-Address-or-Public-DNS-Name>:8080
-   - Retrieve password from server using sudo cat /var/lib/jenkins/secrets/initialAdminPassword.
+  
+  - From the browser access http://<Jenkins-Server-Public-IP-Address-or-Public-DNS-Name>:8080
+  
+  - Retrieve password from server using sudo cat /var/lib/jenkins/secrets/initialAdminPassword.
       
 
 5. Create a new Freestyle project ansible in Jenkins and point it to ‘ansible-config-mgt’ repository.
@@ -362,10 +365,29 @@ git commit -m "Initial commit"
             
 4. Create a Pull request (PR)
 
-Wear a hat of another developer for a second, and act as a reviewer.
-If the reviewer is happy with your new feature development, merge the code to the master branch.
-Head back on your terminal, checkout from the feature branch into the master, and pull down the latest changes.
-Once your code changes appear in master branch - Jenkins will do its job and save all the files (build artifacts) to /var/lib/jenkins/jobs/ansible/builds/<build_number>/archive/ directory on Jenkins-Ansible server.
+   Create  a pull request and merge to the master branch.
+   
+5. Confirm that Jenkins received the push notification from GitHub
+   
+   ![image](https://user-images.githubusercontent.com/78841364/119287168-ece89c80-bc13-11eb-8f5d-b80b386249a5.png)
+
+
+6. Checkout from the feature branch into the master, and pull down the latest changes.
+
+
+7. Confirm that Jenkins saved all the files (build artifacts) to /var/lib/jenkins/jobs/ansible/builds/<build_number>/archive/ directory on Jenkins-Ansible server.
+
+        ~/ansible/ansible-config-mgt/inventory$ sudo ls -l /var/lib/jenkins/jobs/ansible_automation/builds/7/archive/
+      
+         total 16
+     
+         -rw-r--r-- 1 jenkins jenkins 1072 May 16 17:35 LICENSE
+     
+         -rw-r--r-- 1 jenkins jenkins  628 May 24 02:10 README.md
+    
+         drwxr-xr-x 2 jenkins jenkins 4096 May 24 02:10 inventory
+      
+         drwxr-xr-x 2 jenkins jenkins 4096 May 24 02:10 playbooks
 
 ### Step 7 - Run first Ansible test
 
