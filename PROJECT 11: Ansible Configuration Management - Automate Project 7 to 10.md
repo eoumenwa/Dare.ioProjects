@@ -280,15 +280,9 @@ First Playbook Run on webserver-1
 
 2.  Enter command here
 
-In the real world, you will be working within a team of other DevOps engineers and developers. It is important to learn how to collaborate with help of GIT. In many 
+3. Commit code into GitHub:
 
-organisations there is a development rule that do not allow to deploy any code before it has been reviewed by an extra pair of eyes - it is also called “Four eyes principle”.
-
-Now you have a separate branch, you will need to know how to raise a Pull Request (PR), get your branch peer reviewed and merged to the master branch.
-
-3. Commit your code into GitHub:
-
-   use git commands to add, commit and push your branch to GitHub.
+   use git commands to add, commit and push the branch to GitHub.
 
          ~/ansible/ansible-config-mgt$ git add .
 
@@ -374,13 +368,19 @@ git commit -m "Initial commit"
 
 6. Checkout from the feature branch into the master, and pull down the latest changes.
 
-         ~/ansible/ansible-config-mgt/inventory$ git checkout master
+     ~/ansible/ansible-config-mgt/inventory$ git checkout master
         
         Switched to branch 'master'
         
         Your branch is up to date with 'origin/master'.
         
-        ~/ansible/ansible-config-mgt$ git pull
+     ~/ansible/ansible-config-mgt/inventory$ git pull
+     
+         fatal: Unable to read current working directory: No such file or directory
+    
+    ~/ansible/ansible-config-mgt/inventory$ cd ..
+        
+    ~/ansible/ansible-config-mgt$ git pull
         
         remote: Enumerating objects: 1, done.
         
@@ -439,14 +439,16 @@ git commit -m "Initial commit"
 
 ### Step 7 - Run first Ansible test
 
-Now, it is time to execute ansible-playbook command and verify if your playbook actually works:
+Execute ansible-playbook command and verify that the playbook actually works:
 
-ansible-playbook -i /var/lib/jenkins/jobs/ansible/builds/<build-number>/archive/inventory/dev.yml /var/lib/jenkins/jobs/ansible/builds/<build-number>/archive/playbooks/common.yml
+         ansible-playbook -i /var/lib/jenkins/jobs/ansible_automation/builds/7/archive/inventory/dev.yml  
+         /var/lib/jenkins/jobs/ansible_automation/builds/7/archive/playbooks/common.yml
+
 Note: Previous command we ran without sudo, this is because we had added an ssh key to ssh-agent for our regular user. If you try to run this command with sudo you will have to explicitly pass the ssh key with --private-key <path-to-private-key> parameter.
 
 You can go to each of the servers and check if wireshark has been installed by running which wireshark or wireshark --version
 
-_images/wireshark.png
+
 
 Your updated with Ansible architecture now looks like this:
 
@@ -460,11 +462,16 @@ Update your ansible playbook with some new Ansible tasks and go through the full
 
 1. ERROR: Couldn't find any revision to build. Verify the repository and branch configuration for this job. Finished: FAILURE
 
-Solution:
+   Solution:
 
-Created a new branch called "master" and went to settings/branches then changed default branch to master from main. This now corresponds to the branch specifier on Jenkins I could have also changed the specifier in Jenkins to */main to match the default branch in GIT.
+   Created a new branch called "master" and went to settings/branches then changed default branch to master from main. This now corresponds to the branch specifier on Jenkins    
+   I could have also changed the specifier in Jenkins to */main to match the default branch in GIT.
 
-2. 
+2. I was unable to use the saved Jenkins artifacts to run ansible test. The play as always halting for no reason since I could run the block of tasks successfully on   
+ 
+   individual hosts. I however setenforce to zero and tried again before I could successfully run the laybook on all servers
+   
+3. Issues with SSH into the required servers. I had to enable password authentication on all servers to copy ssh ids (see step 4b)
 
 
 
@@ -505,3 +512,5 @@ https://docs.ansible.com/ansible/latest/user_guide/playbooks_intro.html
 https://stackoverflow.com/questions/36724870/ansible-error-the-field-hosts-is-required-but-was-not-set
 
 https://www.tecmint.com/set-time-timezone-and-synchronize-time-using-timedatectl-command/
+
+https://github.com/ansible/ansible/issues/30411
