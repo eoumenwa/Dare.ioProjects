@@ -24,9 +24,9 @@ Since every new change in the codes creates a separate directory which is not ve
 
 3. Go to Jenkins web console -> Manage Jenkins -> Manage Plugins -> on Available tab search for Copy Artifact and install this plugin without restarting Jenkins
 
-4. Create a new Freestyle project (you have done it in Project 9) and name it save_artifacts.
+4. Create a new Freestyle project and name it save_artifacts.
 
-   This project will be triggered by completion of your existing ansible project. Configure it accordingly:
+   This project will be triggered by completion of existing ansible project. Configure it accordingly:
 
    Note: You can configure number of builds to keep in order to save space on the server, for example, you might want to keep only last 2 or 5 build results. You can also        make this change to your ansible job.
 
