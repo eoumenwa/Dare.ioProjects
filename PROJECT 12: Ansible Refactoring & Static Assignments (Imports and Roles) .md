@@ -27,20 +27,26 @@ Since every new change in the codes creates a separate directory which is not ve
 4. Create a new Freestyle project and name it save_artifacts.
 
    This project will be triggered by completion of existing ansible project. Configure it accordingly:
-
-   Note: You can configure number of builds to keep in order to save space on the server, for example, you might want to keep only last 2 or 5 build results. You can also        make this change to your ansible job.
+   
+   a. Under General Tab, check "Discard old builds" and enter the max # of builds to keep
+   
+   b. Under Build Triggers, check "Build after other projects are built", enter the projects to watch (ansible_automation) and select "Trigger only if build is stable"
 
    The main idea of save_artifacts project is to save artifacts into /home/ubuntu/ansible-config-artifact directory. 
 
-   To achieve this, create a Build step and choose Copy artifacts from other project, specify ansible as a source project and /home/ubuntu/ansible-config-artifact as a target 
+   c. To achieve this, create a Build step and choose Copy artifacts from other project, specify ansible_automation as a source project and /home/ubuntu/ansible-config-
+     
+      artifact as a target directory.
    
-   directory.
    
-   
-5. Test your set up by making some change in README.MD file inside ansible-config-mgt repository (right inside master branch).
+5. Test the set up by making some change in README.MD file inside ansible-config-mgt repository (right inside master branch).
     
    If both Jenkins jobs have completed one after another - you shall see your files inside /home/ubuntu/ansible-config-artifact directory and it will be updated with every       
    commit to the master branch.
+
+![image](https://user-images.githubusercontent.com/78841364/120471399-a9f49a80-c372-11eb-86da-9622dc135c1e.png)
+
+![image](https://user-images.githubusercontent.com/78841364/120471459-bbd63d80-c372-11eb-9a97-0766900b79f4.png)
 
 
 
