@@ -277,7 +277,15 @@ Your Ansible architecture now looks like this:
 
 _images/project12_architecture.png
 
-In Project 13, you will see the difference between Static and Dynamic assignments.
 
-Congratulations!
-You have learned how to deploy and configure UAT Web Servers using Ansible imports and roles!
+
+### Summary
+
+In this project, I learnt how to deploy and configure UAT Web Servers using Ansible imports and roles!
+
+
+### References
+
+http://man.hubwiz.com/docset/Ansible.docset/Contents/Resources/Documents/docs.ansible.com/ansible/playbooks_checkmode.html#check-mode-dry-run
+
+
