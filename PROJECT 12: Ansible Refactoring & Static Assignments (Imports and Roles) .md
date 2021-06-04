@@ -1,18 +1,24 @@
 ## Ansible Refactoring & Static Assignments (Imports and Roles)
 
-In this project we will continue working with ansible-config-mgt repository and make some improvements of the existing code by refactoring it, creating assignments, and learning how to use the imports functionality. Imports allow to effectively re-use previously created playbooks in a new playbook - it allows tasks to be organized and reused when needed.
+In this project we will continue working with ansible-config-mgt repository and make some improvements of the existing code by refactoring it, creating assignments, and 
 
-Side Self Study: For better understanding or Ansible artifacts re-use - read this article.
+learning how to use the imports functionality. Imports allow to effectively re-use previously created playbooks in a new playbook - it allows tasks to be organized and reused 
+
+when needed.
 
 
 ### Code Refactoring
 
-Refactoring is a general term in computer programming. It means making changes to the source code without changing expected behaviour of the software. The main idea of refactoring is to enhance code readability, increase maintainability and extensibility, reduce complexity, add proper comments without affecting the logic.
+Refactoring is a general term in computer programming. It means making changes to the source code without changing expected behaviour of the software. The main idea of 
+
+refactoring is to enhance code readability, increase maintainability and extensibility, reduce complexity, add proper comments without affecting the logic.
 
 
 ### Step 1 - Jenkins job enhancement
 
-Since every new change in the codes creates a separate directory which is not very convenient and consumes space on Jenkins servers with each subsequent change. This will be enhanced by introducing a new Jenkins project/job requiring Copy Artifact plugin.
+Since every new change in the codes creates a separate directory which is not very convenient and consumes space on Jenkins servers with each subsequent change. This will be 
+
+enhanced by introducing a new Jenkins project/job requiring Copy Artifact plugin.
 
 1. Go to Jenkins-Ansible server and create a new directory called ansible-config-artifact for storing all artifacts after each build.
 
@@ -61,7 +67,7 @@ Since every new change in the codes creates a separate directory which is not ve
 2. Within playbooks folder, create a new file and name it site.yml - This file will now be considered as an entry point into the entire infrastructure configuration. Other 
 
    playbooks will be included here as a reference. In other words, site.yml will become a parent to all other playbooks that will be developed. Including common.yml that was    
-   created previousl.
+   created previously.
 
 3. Create a new folder in root of the repository and name it static-assignments. The static-assignments folder is where all other children playbooks will be stored.
 
@@ -119,12 +125,13 @@ Since every new change in the codes creates a separate directory which is not ve
       
 8. update site.yml with - import_playbook: ../static-assignments/common-del.yml instead of common.yml and run it against dev servers:
 
-        sudo ansible-playbook -i /home/ubuntu/ansible-config-mgt/inventory/dev.yml /home/ubuntu/ansible-config-mgt/playbooks/site.yaml
-
+        ansible-playbook -i /home/ubuntu/ansible-config-mgt/inventory/dev.yml /home/ubuntu/ansible-config-mgt/playbooks/site.yml
+        
+ 
 9. Make sure that wireshark is deleted on all the servers by running wireshark --version
 
-Now you have learned how to use import_playbooks module and you have a ready solution to install/delete packages on multiple servers with just one command.
 
+       
 ## Step 3 - Configure UAT Webservers with a role ‘Webserver’
 
 We have our nice and clean dev environment, so let us put it aside and configure 2 new Web Servers as uat. We could write tasks to configure Web Servers in the same playbook, 
@@ -132,17 +139,28 @@ We have our nice and clean dev environment, so let us put it aside and configure
 but it would be too messy, instead, we will use a dedicated role to make our configuration reusable.
 
 Launch 2 fresh EC2 instances using RHEL 8 image, we will use them as our uat servers, so give them names accordingly - Web1-UAT and Web2-UAT.
-Tip: Do not forget to stop EC2 instances that you are not using at the moment to avoid paying extra. For now, you only need 2 new RHEL 8 servers as Web Servers and 1 existing Jenkins-Ansible server up and running.
+
+Tip: Do not forget to stop EC2 instances that you are not using at the moment to avoid paying extra. For now, you only need 2 new RHEL 8 servers as Web Servers and 1 existing 
+
+Jenkins-Ansible server up and running.
 
 To create a role, you must create a directory called roles/, relative to the playbook file or in /etc/ansible/ directory.
+
 There are two ways how you can create this folder structure:
 
 Use an Ansible utility called ansible-galaxy inside ansible-config-mgt/roles directory (you need to create roles directory upfront)
+
 mkdir roles
+
 cd roles
-ansible-galaxy init webserver
+
+        ansible-galaxy init webserver
+
 Create the directory/files structure manually
-Note: You can choose either way, but since you store all your codes in GitHub, it is recommended to create folders and files there rather than locally on Jenkins-Ansible server.
+
+Note: You can choose either way, but since you store all your codes in GitHub, it is recommended to create folders and files there rather than locally on Jenkins-Ansible 
+
+server.
 
 The entire folder structure should look like below, but if you create it manually - you can skip creating tests, files, and vars or remove them if you used ansible-galaxy
 
@@ -277,7 +295,22 @@ Your Ansible architecture now looks like this:
 
 _images/project12_architecture.png
 
+### Challenges
 
+1. I tried to run common-del.yml on the development servers but it kept failing with the errors below (step 8)
+
+        :~$ sudo ansible-playbook -i /home/ubuntu/ansible/ansible-config-mgt/inventory/dev.yml /home/ubuntu/ansible/ansible-config-      
+        mgt/playbooks/site.yml
+
+        PLAY [all] ********************************************************************************************************************
+
+        TASK [Gathering Facts] ********************************************************************************************************
+        fatal: [172.31.xx.xx]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: ec2-user@172.31.23.215: Permission denied (publickey,gssapi-
+        keyex,gssapi-with-mic,password).", "unreachable": true}
+        fatal: [172.31.xx.xx]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: ec2-user@172.31.26.39: Permission denied (publickey,gssapi-
+        keyex,gssapi-with-mic).", "unreachable": true}
+        
+    I finally ran the command without "sudo" and it worked
 
 ### Summary
 
