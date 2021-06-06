@@ -349,6 +349,8 @@ _images/project12_architecture.png
 
 
    I realized that the path to the roles was wrong in my ansible configuration file
+   
+3. I ran the playbook site.yml using the dry run mode (--check) and the result showed that there may be an issue with the get block of the playbook
 
 ### Summary
 
