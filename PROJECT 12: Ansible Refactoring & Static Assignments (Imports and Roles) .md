@@ -351,18 +351,22 @@ _images/project12_architecture.png
    I realized that the path to the roles was wrong in my ansible configuration file
    
 3. I ran the playbook site.yml using the dry run mode (--check) and the result showed that there may be an issue with the get block of the playbook
+       
+       ~/ansible/ansible-config-mgt/playbooks$ ansible-playbook -i /home/ubuntu/ansible/ansible-config-mgt/inventory/uat.yml /home/ubuntu/ansible/ansible-config-mgt/playbooks/site.yml --check
+       TASK [webserver : clone a repo] ***********************************************************************************************
+        fatal: [17x.xx.18.19]: FAILED! => {"changed": false, "msg": "Failed to find required executable git in paths: /sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin"}
+        fatal: [17x.xx.24.11]: FAILED! => {"changed": false, "msg": "Failed to find required executable git in paths: /sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin"}
+
+        PLAY RECAP ********************************************************************************************************************
+        172.31.18.19               : ok=5    changed=2    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+        172.31.24.11               : ok=5    changed=2    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0 
+
 
 ### Summary
 
 In this project, I learnt how to deploy and configure UAT Web Servers using Ansible imports and roles!
 
-TASK [webserver : clone a repo] ***********************************************************************************************
-fatal: [17x.xx.18.19]: FAILED! => {"changed": false, "msg": "Failed to find required executable git in paths: /sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin"}
-fatal: [17x.xx.24.11]: FAILED! => {"changed": false, "msg": "Failed to find required executable git in paths: /sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin"}
-
-PLAY RECAP ********************************************************************************************************************
-172.31.18.19               : ok=5    changed=2    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
-172.31.24.11               : ok=5    changed=2    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0  
+ 
 
 
 
