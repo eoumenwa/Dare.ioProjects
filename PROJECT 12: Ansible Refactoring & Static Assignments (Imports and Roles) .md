@@ -356,6 +356,16 @@ _images/project12_architecture.png
 
 In this project, I learnt how to deploy and configure UAT Web Servers using Ansible imports and roles!
 
+TASK [webserver : clone a repo] ***********************************************************************************************
+fatal: [17x.xx.18.19]: FAILED! => {"changed": false, "msg": "Failed to find required executable git in paths: /sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin"}
+fatal: [17x.xx.24.11]: FAILED! => {"changed": false, "msg": "Failed to find required executable git in paths: /sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin"}
+
+PLAY RECAP ********************************************************************************************************************
+172.31.18.19               : ok=5    changed=2    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+172.31.24.11               : ok=5    changed=2    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0  
+
+
+
 
 ### References
 
