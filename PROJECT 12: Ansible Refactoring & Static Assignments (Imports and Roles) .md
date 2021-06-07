@@ -312,9 +312,10 @@ or
 
 http://<Web1-UAT-Server-Public-IP-or-Public-DNS-Name>/index.php
 
-Your Ansible architecture now looks like this:
+### Final output
 
-_images/project12_architecture.png
+![image](https://user-images.githubusercontent.com/78841364/120950118-14f7f580-c714-11eb-9098-74876499c8c6.png)
+
 
 ### Challenges
 
@@ -376,4 +377,5 @@ In this project, I learnt how to deploy and configure UAT Web Servers using Ansi
 
 http://man.hubwiz.com/docset/Ansible.docset/Contents/Resources/Documents/docs.ansible.com/ansible/playbooks_checkmode.html#check-mode-dry-run
 
+https://koukia.ca/how-to-remove-local-untracked-files-from-the-current-git-branch-571c6ce9b6b1
 
