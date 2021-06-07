@@ -348,12 +348,13 @@ _images/project12_architecture.png
               ^ here
 
 
-   I realized that the path to the roles was wrong in my ansible configuration file
+   I realized that the path to the roles was wrong in my ansible configuration file. Also when defining hosts in uat.yml I captured hosts as uat webservers instead of uat-      webservers
    
 3. I ran the playbook site.yml using the dry run mode (--check) and the result showed that there may be an issue with the get block of the playbook
        
        ~/ansible/ansible-config-mgt/playbooks$ ansible-playbook -i /home/ubuntu/ansible/ansible-config-mgt/inventory/uat.yml /home/ubuntu/ansible/ansible-config-mgt/playbooks/site.yml --check
-       TASK [webserver : clone a repo] ***********************************************************************************************
+       
+        TASK [webserver : clone a repo] ***********************************************************************************************
         fatal: [17x.xx.18.19]: FAILED! => {"changed": false, "msg": "Failed to find required executable git in paths: /sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin"}
         fatal: [17x.xx.24.11]: FAILED! => {"changed": false, "msg": "Failed to find required executable git in paths: /sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin"}
 
