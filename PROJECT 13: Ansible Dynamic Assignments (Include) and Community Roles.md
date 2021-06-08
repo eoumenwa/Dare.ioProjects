@@ -24,23 +24,23 @@ Your GitHub shall have following structure by now.
 
 Note: Depending on what method you used in the previous project you may have or not have roles folder in your GitHub repository - if you used ansible-galaxy, then roles directory was only created on your Jenkins-Ansible server locally. It is recommended to have all the codes managed and tracked in GitHub, so you might want to recreate this structure manually in this case - it is up to you.
 
-├── dynamic-assignments
-│   └── env-vars.yml
+    ├── dynamic-assignments
+    │   └── env-vars.yml
 
-├── inventory
-│   └── dev
-    └── stage
-    └── uat
-    └── prod
+    ├── inventory
+    │   └── dev
+        └── stage
+        └── uat
+        └── prod
 
-└── playbooks
-    └── site.yml
+    └── playbooks
+        └── site.yml
 
-└── roles (optional folder)
-    └──...(optional subfolders & files)
+    └── roles (optional folder)
+        └──...(optional subfolders & files)
 
-└── static-assignments
-    └── common.yml
+    └── static-assignments
+        └── common.yml
 
 Since we will be using the same Ansible to configure multiple environments, and each of these environments will have certain unique attributes, such as servername, ip-address etc., we will need a way to set values to variables per specific environment.
 
@@ -48,29 +48,23 @@ For this reason, we will now create a folder to keep each environment’s variab
 
 Your layout should now look like this.
 
-├── dynamic-assignments
-
-│   └── env-vars.yml
-
-├── env-vars
-
-└── dev.yml
-    └── stage.yml
-    └── uat.yml
-    └── prod.yml
-
-├── inventory
-    └── dev
-    └── stage
-    └── uat
-    └── prod
-
-├── playbooks
-    └── site.yml
-
-└── static-assignments
-    └── common.yml
-    └── webservers.yml
+    ├── dynamic-assignments
+    │   └── env-vars.yml
+    ├── env-vars
+    └── dev.yml
+        └── stage.yml
+        └── uat.yml
+        └── prod.yml
+    ├── inventory
+        └── dev
+        └── stage
+        └── uat
+        └── prod
+    ├── playbooks
+        └── site.yml
+    └── static-assignments
+        └── common.yml
+        └── webservers.yml
 
 Now paste the instruction below into the env-vars.yml file.
 
@@ -82,16 +76,20 @@ Now paste the instruction below into the env-vars.yml file.
     - "{{ playbook_dir }}/../env_vars/default.yml"
   tags:
     - always
+
 Notice 3 things to notice here:
 
 We used include_vars syntax instead of include, this is because Ansible developers decided to separate different features of the module. From Ansible version 2.8, the include module is deprecated and variants of include_* must be used. These are:
+
 include_role
 include_tasks
 include_vars
+
 In the same version, variants of import were also introduces, such as:
 
 import_role
 import_tasks
+
 We made use of a special variables {{ playbook_dir }} and {{ inventory_file }}. {{ playbook_dir }} will help Ansible to determine the location of the running playbook, and from there navigate to other path on the filesystem. {{ inventory_file }} on the other hand will dynamically resolve to the name of the inventory file being used, then append .yml so that it picks up the required file within the env-vars folder.
 We are including the variables using a loop. with_first_found implies that, looping through the list of files, the first one found is used. This is good so that we can always set default values in case an environment specific env file does not exist.
 Update site.yml with dynamic assignments
