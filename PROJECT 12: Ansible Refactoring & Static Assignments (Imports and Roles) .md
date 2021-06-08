@@ -301,8 +301,8 @@ After removing unnecessary directories and files, the roles structure should loo
    files to Jenkins-Ansible server into /home/ubuntu/ansible-config-mgt/ directory.
 
 2. Run the playbook against uat inventory
-
-        sudo ansible-playbook -i /home/ubuntu/ansible-config-mgt/inventory/uat.yml /home/ubuntu/ansible-config-mgt/playbooks/site.yaml
+        
+        ansible-playbook -i /home/ubuntu/ansible-config-artifact/inventory/uat.yml /home/ubuntu/ansible-config-artifact/playbooks/site.yml
 
 You should be able to see both of your UAT Web servers configured and you can try to reach them from your browser:
 
