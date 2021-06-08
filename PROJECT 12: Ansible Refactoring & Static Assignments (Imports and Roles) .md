@@ -286,7 +286,7 @@ After removing unnecessary directories and files, the roles structure should loo
              - webserver
 
 
-   The entry point to ansible configuration is the site.yml file therefore we will refer to the uat-webservers.yml role inside site.yml as shown below
+ 2. The entry point to ansible configuration is the site.yml file therefore we will refer to the uat-webservers.yml role inside site.yml as shown below
 
         ---
         - hosts: all
@@ -351,7 +351,7 @@ http://<Web1-UAT-Server-Public-IP-or-Public-DNS-Name>/index.php
 
    I realized that the path to the roles was wrong in my ansible configuration file. Also when defining hosts in uat.yml I captured hosts as uat webservers instead of uat-      webservers
    
-3. I ran the playbook site.yml using the dry run mode (--check) and the result showed that there may be an issue with the get block of the playbook
+3. I ran the playbook site.yml using the dry run mode (--check) and the result showed that there may be an issue with the git block of the playbook
        
        ~/ansible/ansible-config-mgt/playbooks$ ansible-playbook -i /home/ubuntu/ansible/ansible-config-mgt/inventory/uat.yml /home/ubuntu/ansible/ansible-config-mgt/playbooks/site.yml --check
        
@@ -363,14 +363,13 @@ http://<Web1-UAT-Server-Public-IP-or-Public-DNS-Name>/index.php
         172.31.18.19               : ok=5    changed=2    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
         172.31.24.11               : ok=5    changed=2    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0 
 
+   Git was properly installed so I went ahead to run the playbook in real time mode and it was successful.
 
 ### Summary
 
 In this project, I learnt how to deploy and configure UAT Web Servers using Ansible imports and roles!
 
  
-
-
 
 
 ### References
