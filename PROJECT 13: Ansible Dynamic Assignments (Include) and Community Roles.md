@@ -176,5 +176,17 @@ The same must work with apache LB, so you can switch it by setting respective en
 
 To test this, you can update inventory for each environment and run Ansible against each environment.
 
+### Summary
+
+In this project, I learnt how to deploy and configure UAT Web Servers using Ansible imports and roles!
+
+### References
+
+https://github.community/t/add-a-folder/2304/2
+
+
+
+https://koukia.ca/how-to-remove-local-untracked-files-from-the-current-git-branch-571c6ce9b6b1
+
 Congratulations!
 You have learned and practiced how to use Ansible configuration management tool to prepare UAT environment for Tooling web solution.
