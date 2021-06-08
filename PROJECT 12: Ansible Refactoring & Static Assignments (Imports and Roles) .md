@@ -317,6 +317,11 @@ http://<Web1-UAT-Server-Public-IP-or-Public-DNS-Name>/index.php
 ![image](https://user-images.githubusercontent.com/78841364/120950118-14f7f580-c714-11eb-9098-74876499c8c6.png)
 
 
+New setup is as shown below
+
+![image](https://user-images.githubusercontent.com/78841364/121176152-e409e480-c829-11eb-80b8-13cf751142c9.png)
+
+
 ### Challenges
 
 1. I tried to run common-del.yml on the development servers but it kept failing with the errors below (step 8)
