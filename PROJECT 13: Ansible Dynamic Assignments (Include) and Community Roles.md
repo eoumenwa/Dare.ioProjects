@@ -12,70 +12,52 @@ On the other hand, when include module is used, all statements are processed onl
 
 Take note that in most cases it is recommended to use static assignments for playbooks, because it is more reliable. With dynamic ones, it is hard to debug playbook problems due to its dynamic nature. However, you can use dynamic assignments for environment specific variables as we will be introducing in this project.
 
-Instructions On How To Submit Your Work For Review And Feedback
-To submit your work for review and feedback - follow this instruction.
 
-Introducing Dynamic Assignment Into Our structure
-In your https://github.com/<your-name>/ansible-config-mgt GitHub repository start a new branch and call it dynamic-assignments.
+### Introducing Dynamic Assignment Into Our structure
 
-Create a new folder, name it dynamic-assignments. Then inside this folder, create a new file and name it env-vars.yml. We will instruct site.yml to include this playbook later. For now, let us keep building up the structure.
+1. In  https://github.com/oeumenwa/ansible-config-mgt GitHub repository start a new branch and call it dynamic-assignments.
 
-Your GitHub shall have following structure by now.
+2. Create a new folder, name it dynamic-assignments. Then inside this folder, create a new file and name it env-vars.yml. We will instruct site.yml to include this playbook    
+   later. For now, we will keep building up the structure.
 
-Note: Depending on what method you used in the previous project you may have or not have roles folder in your GitHub repository - if you used ansible-galaxy, then roles directory was only created on your Jenkins-Ansible server locally. It is recommended to have all the codes managed and tracked in GitHub, so you might want to recreate this structure manually in this case - it is up to you.
+3. Create a folder to keep each environment’s variables file. Create a new folder env-vars, then for each environment, create new YAML nfiles which we will use to set   
 
-    ├── dynamic-assignments
-    │   └── env-vars.yml
+    variables.
 
-    ├── inventory
-    │   └── dev
-        └── stage
-        └── uat
-        └── prod
+    The layout should now look like this.
 
-    └── playbooks
-        └── site.yml
+        ├── dynamic-assignments
+        │   └── env-vars.yml
+        ├── env-vars
+        └── dev.yml
+            └── stage.yml
+            └── uat.yml
+            └── prod.yml
+        ├── inventory
+            └── dev
+            └── stage
+            └── uat
+            └── prod
+        ├── playbooks
+            └── site.yml
+        └── static-assignments
+            └── common.yml
+            └── webservers.yml
+        
+ ![image](https://user-images.githubusercontent.com/78841364/121199143-b11f1b00-c840-11eb-8786-953226d973d9.png)
 
-    └── roles (optional folder)
-        └──...(optional subfolders & files)
 
-    └── static-assignments
-        └── common.yml
+4. Paste the instruction below into the env-vars.yml file.
 
-Since we will be using the same Ansible to configure multiple environments, and each of these environments will have certain unique attributes, such as servername, ip-address etc., we will need a way to set values to variables per specific environment.
+        ---
+        - name: collate variables from env specific file, if it exists
+          include_vars: "{{ item }}"
+          with_first_found:
+            - "{{ playbook_dir }}/../env_vars/{{ "{{ inventory_file }}.yml"
+            - "{{ playbook_dir }}/../env_vars/default.yml"
+          tags:
+            - always
 
-For this reason, we will now create a folder to keep each environment’s variables file. Therefore, create a new folder env-vars, then for each environment, create new YAML files which we will use to set variables.
-
-Your layout should now look like this.
-
-    ├── dynamic-assignments
-    │   └── env-vars.yml
-    ├── env-vars
-    └── dev.yml
-        └── stage.yml
-        └── uat.yml
-        └── prod.yml
-    ├── inventory
-        └── dev
-        └── stage
-        └── uat
-        └── prod
-    ├── playbooks
-        └── site.yml
-    └── static-assignments
-        └── common.yml
-        └── webservers.yml
-
-Now paste the instruction below into the env-vars.yml file.
-
----
-- name: collate variables from env specific file, if it exists
-  include_vars: "{{ item }}"
-  with_first_found:
-    - "{{ playbook_dir }}/../env_vars/{{ "{{ inventory_file }}.yml"
-    - "{{ playbook_dir }}/../env_vars/default.yml"
-  tags:
-    - always
 
 Notice 3 things to notice here:
 
@@ -183,8 +165,6 @@ In this project, I learnt how to deploy and configure UAT Web Servers using Ansi
 ### References
 
 https://github.community/t/add-a-folder/2304/2
-
-
 
 https://koukia.ca/how-to-remove-local-untracked-files-from-the-current-git-branch-571c6ce9b6b1
 
