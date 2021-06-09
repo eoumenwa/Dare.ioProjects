@@ -130,7 +130,7 @@ git commit -m "Commit new role files into GitHub"
 git push --set-upstream origin roles-feature
 Now, if you are satisfied with your codes, you can create a Pull Request and merge it to main branch on GitHub.
 
-## Load Balancer roles
+   ## Load Balancer roles
 
 We want to be able to choose which Load Balancer to use, Nginx or Apache, so we need to have two roles respectively:
 
