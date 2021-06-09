@@ -59,72 +59,85 @@ Take note that in most cases it is recommended to use static assignments for pla
             - always
 
 
-Notice 3 things to notice here:
+### Note
 
 We used include_vars syntax instead of include, this is because Ansible developers decided to separate different features of the module. From Ansible version 2.8, the include module is deprecated and variants of include_* must be used. These are:
 
-include_role
-include_tasks
-include_vars
+      include_role
+      include_tasks
+      include_vars
 
 In the same version, variants of import were also introduces, such as:
 
-import_role
-import_tasks
+      import_role
+      import_tasks
 
-We made use of a special variables {{ playbook_dir }} and {{ inventory_file }}. {{ playbook_dir }} will help Ansible to determine the location of the running playbook, and from there navigate to other path on the filesystem. {{ inventory_file }} on the other hand will dynamically resolve to the name of the inventory file being used, then append .yml so that it picks up the required file within the env-vars folder.
-We are including the variables using a loop. with_first_found implies that, looping through the list of files, the first one found is used. This is good so that we can always set default values in case an environment specific env file does not exist.
-Update site.yml with dynamic assignments
-Update site.yml file to make use of the dynamic assignment. (At this point, we cannot test it yet. We are just setting the stage for what is yet to come. So hang on to your hats)
+We made use of a special variables {{ playbook_dir }} and {{ inventory_file }}. 
 
-site.yml should now look like this.
+{{ playbook_dir }} will help Ansible to determine the location of the running playbook, and from there navigate to other path on the filesystem. 
 
----
-- name: Include dynamic variables 
-  hosts: all
-  tasks:
-    - import_playbook: ../static-assignments/common.yml 
-    - include_playbook: ../dynamic-assignments/env-vars.yml
-  tags:
-    - always
+{{ inventory_file }} will dynamically resolve to the name of the inventory file being used, then append .yml so that it picks up the required file within the env-vars folder.
 
-- name: Webserver assignment
-  hosts: webservers
-    - import_playbook: ../static-assignments/webservers.yml
-Community Roles
-Now it is time to create a role for MySQL database - it should install the MySQL package, create a database and configure users. But why should we re-invent the wheel? There are tons of roles that have already been developed by other open source engineers out there. These roles are actually production ready, and dynamic to accomodate most of Linux flavours. With Ansible Galaxy again, we can simply download a ready to use ansible role, and keep going.
+The variables are included using a loop. with_first_found implies that, looping through the list of files, the first one found is used. This is good so that we can always set default values in case an environment specific env file does not exist.
 
-Download Mysql Ansible Role
-You can browse available community roles here
 
-We will be using a MySQL role developed by geerlingguy.
+5. Update site.yml with dynamic assignments
 
-Hint: To preserve your your GitHub in actual state after you install a new role - make a commit and push to master your ‘ansible-config-mgt’ directory. Of course you must have git installed and configured on Jenkins-Ansible server and, for more convenient work with codes, you can configure Visual Studio Code to work with this directory. In this case, you will no longer need webhook and Jenkins jobs to update your codes on Jenkins-Ansible server, so you can disable it - we will be using Jenkins later for a better purpose.
+   Update site.yml file to make use of the dynamic assignment.Ssite.yml should be as shown below;
 
-On Jenkins-Ansible server make sure that git is installed with git --version, then go to ‘ansible-config-mgt’ directory and run
+         ---
+         - name: Include dynamic variables 
+           hosts: all
+           tasks:
+             - import_playbook: ../static-assignments/common.yml 
+             - include_playbook: ../dynamic-assignments/env-vars.yml
+           tags:
+             - always
 
-git init
-git pull https://github.com/<your-name>/ansible-config-mgt.git
-git remote add origin https://github.com/<your-name>/ansible-config-mgt.git
-git branch roles-feature
-git switch roles-feature
-Inside roles directory create your new MySQL role with ansible-galaxy install geerlingguy.mysql and rename the folder to mysql
+         - name: Webserver assignment
+           hosts: webservers
+             - import_playbook: ../static-assignments/webservers.yml
 
-mv geerlingguy.mysql/ mysql
-Read README.md file, and edit roles configuration to use correct credentials for MySQL required for the tooling website.
+### Community Roles
 
-Now it is time to upload the changes into your GitHub:
+1. Inside roles directory create new MySQL role with ansible-galaxy install geerlingguy.mysql. This should download a ready to use ansible role    for MySQL database and install MySQL package, create a database and configure users.
+
+         ubuntu@jenkins-ansible:~/ansible/ansible-config-mgt/roles$ ansible-galaxy install geerlingguy.mysql
+         
+         - downloading role 'mysql', owned by geerlingguy
+         - downloading role from https://github.com/geerlingguy/ansible-role-mysql/archive/3.3.1.tar.gz
+         - extracting geerlingguy.mysql to /home/ubuntu/ansible/ansible-config-mgt/roles/geerlingguy.mysql
+         - geerlingguy.mysql (3.3.1) was installed successfully
+
+2. Rename geerlingguy.mysql folder to mysql.
+               
+           ubuntu@jenkins-ansible:~/ansible/ansible-config-mgt/roles$ mv geerlingguy.mysql/ mysql
+
+
+3. Read README.md file, and edit roles configuration to use correct credentials for MySQL required for the tooling website.
+   
+   Edit the file below
+   
+         /home/ubuntu/ansible/ansible-config-mgt/roles/mysql/defaults/main.yml
+        
+
+
+4. Upload the changes into GitHub:
+
 
 git add .
 git commit -m "Commit new role files into GitHub"
 git push --set-upstream origin roles-feature
 Now, if you are satisfied with your codes, you can create a Pull Request and merge it to main branch on GitHub.
 
-Load Balancer roles
+## Load Balancer roles
+
 We want to be able to choose which Load Balancer to use, Nginx or Apache, so we need to have two roles respectively:
 
 Nginx
+
 Apache
+
 With your experience on Ansible so far you can:
 
 Decide if you want to develop your own roles, or find available ones from the community
