@@ -172,15 +172,41 @@ Now, if you are satisfied with the codes, create a Pull Request and merge it to 
 
 ### Load Balancer roles
 
-We want to be able to choose which Load Balancer to use, Nginx or Apache, so we need to have two roles respectively:
+We want to be able to choose which Load Balancer to use, Nginx or Apache, so we need to have two roles respectively using available ones from the community
 
-Nginx
+1. Install geerlinguy Nginx role and rename as appropriate
 
-Apache
+      ubuntu@jenkins-ansible:~/ansible/ansible-config-mgt/roles$ ansible-galaxy install geerlingguy.nginx
+      
+      - downloading role 'nginx', owned by geerlingguy
+      - downloading role from https://github.com/geerlingguy/ansible-role-nginx/archive/3.0.0.tar.gz
+      - extracting geerlingguy.nginx to /home/ubuntu/ansible/ansible-config-mgt/roles/geerlingguy.nginx
+      - geerlingguy.nginx (3.0.0) was installed successfully
+     
+      ubuntu@jenkins-ansible:~/ansible/ansible-config-mgt/roles$ mv geerlingguy.nginx/ nginx
+      
+      ubuntu@jenkins-ansible:~/ansible/ansible-config-mgt/roles$
+
+2. Install geerlinguy Apache role and rename as appropriate
+
+         ubuntu@jenkins-ansible:~/ansible/ansible-config-mgt/roles$ ansible-galaxy install geerlingguy.apache
+         
+         - downloading role 'apache', owned by geerlingguy
+         - downloading role from https://github.com/geerlingguy/ansible-role-apache/archive/3.1.4.tar.gz
+         - extracting geerlingguy.apache to /home/ubuntu/ansible/ansible-config-mgt/roles/geerlingguy.apache
+         - geerlingguy.apache (3.1.4) was installed successfully
+       
+         ubuntu@jenkins-ansible:~/ansible/ansible-config-mgt/roles$ mv geerlingguy.apache/ apache
+         ubuntu@jenkins-ansible:~/ansible/ansible-config-mgt/roles$ 
+
+
+
+
+![image](https://user-images.githubusercontent.com/78841364/121516830-a6899080-c9bc-11eb-82b0-971bc65bd352.png)
 
 With your experience on Ansible so far you can:
 
-Decide if you want to develop your own roles, or find available ones from the community
+
 Update both static-assignment and site.yml files to refer the roles
 Important Hints:
 
@@ -191,16 +217,17 @@ Declare another variable in both roles load_balancer_is_required and set its val
 Update both assignment and site.yml files respectively
 loadbalancers.yml file
 
-- hosts: lb
-  roles:
-    - { role: nginx, when: enable_nginx_lb and load_balancer_is_required }
-    - { role: apache, when: enable_apache_lb and load_balancer_is_required }
-site.yml file
+      - hosts: lb
+        roles:
+          - { role: nginx, when: enable_nginx_lb and load_balancer_is_required }
+          - { role: apache, when: enable_apache_lb and load_balancer_is_required }
+      site.yml file
 
      - name: Loadbalancers assignment
        hosts: lb
          - import_playbook: ../static-assignments/loadbalancers.yml
         when: load_balancer_is_required 
+
 Now you can make use of env-vars\uat.yml file to define which loadbalancer to use in UAT environment by setting respective environmental variable to true.
 
 You will activate load balancer, and enable nginx by setting these in the respective environment’s env-vars file.
@@ -223,3 +250,7 @@ https://github.community/t/add-a-folder/2304/2
 https://koukia.ca/how-to-remove-local-untracked-files-from-the-current-git-branch-571c6ce9b6b1
 
 https://professional-pbl.darey.io/en/latest/project13.html#community-roles
+
+https://galaxy.ansible.com/geerlingguy/nginx
+
+https://galaxy.ansible.com/geerlingguy/apache
