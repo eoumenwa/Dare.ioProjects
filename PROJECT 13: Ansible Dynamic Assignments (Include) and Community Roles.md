@@ -124,13 +124,53 @@ The variables are included using a loop. with_first_found implies that, looping 
 
 4. Upload the changes into GitHub:
 
+         ubuntu@jenkins-ansible:~/ansible/ansible-config-mgt$ git status
+         On branch dynamic-assignments
+         Your branch is up to date with 'origin/dynamic-assignments'.
 
-git add .
-git commit -m "Commit new role files into GitHub"
-git push --set-upstream origin roles-feature
-Now, if you are satisfied with your codes, you can create a Pull Request and merge it to main branch on GitHub.
+         Changes not staged for commit:
+           (use "git add <file>..." to update what will be committed)
+           (use "git restore <file>..." to discard changes in working directory)
+                 modified:   dynamic-assignments/env-vars.yml
+                 modified:   playbooks/site.yml
 
-   ## Load Balancer roles
+         Untracked files:
+           (use "git add <file>..." to include in what will be committed)
+                 roles/mysql/
+
+         no changes added to commit (use "git add" and/or "git commit -a")
+         
+         ubuntu@jenkins-ansible:~/ansible/ansible-config-mgt$ git add .
+         
+         ubuntu@jenkins-ansible:~/ansible/ansible-config-mgt$ git commit -m "update mysql setup roles files"
+         
+         [dynamic-assignments 1468e61] update mysql setup roles files
+          35 files changed, 1221 insertions(+), 5 deletions(-)
+          create mode 100644 roles/mysql/.ansible-lint
+          .
+          .
+          .
+          create mode 100644 roles/mysql/templates/user-my.cnf.j2
+          create mode 100644 roles/mysql/vars/Archlinux.yml
+          create mode 100644 roles/mysql/vars/Debian-10.yml
+          create mode 100644 roles/mysql/vars/Debian.yml
+          create mode 100644 roles/mysql/vars/RedHat-7.yml
+          create mode 100644 roles/mysql/vars/RedHat-8.yml
+        
+         ubuntu@jenkins-ansible:~/ansible/ansible-config-mgt$ git push
+
+         Enumerating objects: 57, done.
+         Counting objects: 100% (57/57), done.
+         Compressing objects: 100% (44/44), done.
+         Writing objects: 100% (51/51), 17.16 KiB | 605.00 KiB/s, done.
+         Total 51 (delta 3), reused 0 (delta 0)
+         remote: Resolving deltas: 100% (3/3), completed with 1 local object.
+         To https://github.com/eoumenwa/ansible-config-mgt.git
+            92c5f74..1468e61  dynamic-assignments -> dynamic-assignments
+
+Now, if you are satisfied with the codes, create a Pull Request and merge it to main branch on GitHub.
+
+### Load Balancer roles
 
 We want to be able to choose which Load Balancer to use, Nginx or Apache, so we need to have two roles respectively:
 
@@ -171,9 +211,10 @@ The same must work with apache LB, so you can switch it by setting respective en
 
 To test this, you can update inventory for each environment and run Ansible against each environment.
 
+
 ### Summary
 
-In this project, I learnt how to deploy and configure UAT Web Servers using Ansible imports and roles!
+In this project, I was able to learn and practice how to use Ansible configuration management tool to prepare UAT environment for Tooling web solution.
 
 ### References
 
@@ -182,6 +223,3 @@ https://github.community/t/add-a-folder/2304/2
 https://koukia.ca/how-to-remove-local-untracked-files-from-the-current-git-branch-571c6ce9b6b1
 
 https://professional-pbl.darey.io/en/latest/project13.html#community-roles
-
-Congratulations!
-You have learned and practiced how to use Ansible configuration management tool to prepare UAT environment for Tooling web solution.
