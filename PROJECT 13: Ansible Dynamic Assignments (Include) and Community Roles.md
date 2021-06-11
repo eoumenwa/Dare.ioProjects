@@ -204,17 +204,21 @@ We want to be able to choose which Load Balancer to use, Nginx or Apache, so we 
 
 ![image](https://user-images.githubusercontent.com/78841364/121516830-a6899080-c9bc-11eb-82b0-971bc65bd352.png)
 
-With your experience on Ansible so far you can:
+3. Declare a variable in defaults/main.yml file inside the Nginx and Apache roles. Name each variables enable_nginx_lb and enable_apache_lb respectively.
+   
+   Note: Since we cannot use both Nginx and Apache load balancer, we need to add a condition to enable either one using variables.
+
+4. Set both values in 3 above to false as in enable_nginx_lb: false and enable_apache_lb: false.
+
+5. Declare another variable in both roles load_balancer_is_required and set its value to false as well
+
+   ![image](https://user-images.githubusercontent.com/78841364/121675506-7ce66d00-ca81-11eb-9c95-4c36349f928c.png)
+
+   ![image](https://user-images.githubusercontent.com/78841364/121675741-cc2c9d80-ca81-11eb-8a05-9f9b1f40651d.png)
 
 
-Update both static-assignment and site.yml files to refer the roles
-Important Hints:
+.6. Update both static-assignment and site.yml files as shown below
 
-Since you cannot use both Nginx and Apache load balancer, you need to add a condition to enable either one - this is where you can make use of variables.
-Declare a variable in defaults/main.yml file inside the Nginx and Apache roles. Name each variables enable_nginx_lb and enable_apache_lb respectively.
-Set both values to false like this enable_nginx_lb: false and enable_apache_lb: false.
-Declare another variable in both roles load_balancer_is_required and set its value to false as well
-Update both assignment and site.yml files respectively
 loadbalancers.yml file
 
       - hosts: lb
@@ -228,16 +232,22 @@ loadbalancers.yml file
          - import_playbook: ../static-assignments/loadbalancers.yml
         when: load_balancer_is_required 
 
-Now you can make use of env-vars\uat.yml file to define which loadbalancer to use in UAT environment by setting respective environmental variable to true.
+7. Use env-vars\uat.yml file to define which loadbalancer to use in UAT environment by setting respective environmental variable to true.
 
-You will activate load balancer, and enable nginx by setting these in the respective environment’s env-vars file.
+8. Activate load balancer, and enable nginx by setting these in the respective environment’s env-vars file.
 
-enable_nginx_lb: true
-load_balancer_is_required: true
-The same must work with apache LB, so you can switch it by setting respective environmental variable to true and other to false.
+         enable_nginx_lb: true
+         load_balancer_is_required: true
+9. USe the same setting for apache LB, so you we can switch it by setting respective environmental variable to true and other to false.
 
-To test this, you can update inventory for each environment and run Ansible against each environment.
+10. Update inventory for each environment  
+     
+         edit /home/ubuntu/ansible/ansible-config-mgt/inventory/uat.yml 
+         
+    Add loadbalancers block [lb] and provide same IP addresses used for UAT-webservers
 
+11. Run Ansible against each environment.
+    
 
 ### Summary
 
