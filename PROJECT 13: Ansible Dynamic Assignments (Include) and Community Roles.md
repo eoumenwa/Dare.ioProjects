@@ -246,7 +246,14 @@ loadbalancers.yml file
          
     Add loadbalancers block [lb] and provide same IP addresses used for UAT-webservers
 
-11. Run Ansible against each environment.
+11. Update git
+
+         ubuntu@jenkins-ansible:~/ansible/ansible-config-mgt$ git status
+         ubuntu@jenkins-ansible:~/ansible/ansible-config-mgt$ git add .
+         ubuntu@jenkins-ansible:~/ansible/ansible-config-mgt$ git commit -m "configured load balancer roles"
+         ubuntu@jenkins-ansible:~/ansible/ansible-config-mgt$ git push
+
+12. Run Ansible against each environment.
     
 
 ### Summary
