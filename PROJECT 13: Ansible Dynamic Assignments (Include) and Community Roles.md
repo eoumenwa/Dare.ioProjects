@@ -276,3 +276,5 @@ https://professional-pbl.darey.io/en/latest/project13.html#community-roles
 https://galaxy.ansible.com/geerlingguy/nginx
 
 https://galaxy.ansible.com/geerlingguy/apache
+
+https://severalnines.com/database-blog/introduction-mysql-deployment-using-ansible-role
