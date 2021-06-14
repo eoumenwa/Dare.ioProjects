@@ -120,7 +120,7 @@ enhanced by introducing a new Jenkins project/job requiring Copy Artifact plugin
 
 6. Run ansible-playbook command against the dev environment
 
-7. create another playbook under static-assignments and name it common-del.yml. In this playbook, configure deletion of wireshark utility.
+7. Create another playbook under static-assignments and name it common-del.yml. In this playbook, configure deletion of wireshark utility.
 
         ---
         - name: update web, nfs and db servers
@@ -227,15 +227,15 @@ After removing unnecessary directories and files, the roles structure should loo
 
 5. Go into tasks directory and within the main.yml file, start writing configuration tasks to do the following:
 
-  Install and configure Apache (httpd service)
+   Install and configure Apache (httpd service)
 
-  Clone Tooling website from GitHub https://github.com/<your-name>/tooling.git.
+   Clone Tooling website from GitHub https://github.com/<your-name>/tooling.git.
 
-  Ensure the tooling website code is deployed to /var/www/html on each of 2 UAT Web servers.
+   Ensure the tooling website code is deployed to /var/www/html on each of 2 UAT Web servers.
 
-  Make sure httpd service is started
+   Make sure httpd service is started
 
-  Copy the content below to main.yml
+   Copy the content below to main.yml
 
         ---
         - name: install apache
