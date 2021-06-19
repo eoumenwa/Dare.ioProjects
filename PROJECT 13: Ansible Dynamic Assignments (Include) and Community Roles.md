@@ -253,7 +253,23 @@ loadbalancers.yml file
          ubuntu@jenkins-ansible:~/ansible/ansible-config-mgt$ git commit -m "configured load balancer roles"
          ubuntu@jenkins-ansible:~/ansible/ansible-config-mgt$ git push
 
-12. Run Ansible against each environment
+12. Create ansible.cfg on root directory ans paste the configuration below
+
+            [defaults]
+            inventory = /home/ubuntu/ansible/ansible-config-mgt/inventory
+            roles_path = /home/ubuntu/ansible/ansible-config-mgt/roles
+            timeout = 160
+            callback_whitelist = profile_tasks
+            log_path=~/ansible.log
+            host_key_checking = False
+            gathering = smart
+            ansible_python_interpreter=/usr/bin/python3
+
+13. Export ansible.cfg file as below
+            
+            ubuntu@jenkins-ansible:~/ansible/ansible-config-mgt$ export ANSIBLE_CONFIG=/home/ubuntu/ansible/ansible-config-mgt/ansible.cfg
+
+. Run Ansible against each environment
 
     ansible-playbook -i /home/ubuntu/ansible/ansible-config-mgt/inventory/uat.yml /home/ubuntu/ansible/ansible-config-mgt/playbooks/site.yml --check
     
