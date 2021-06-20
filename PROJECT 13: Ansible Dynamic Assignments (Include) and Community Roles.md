@@ -267,7 +267,7 @@ loadbalancers.yml file
 
 13. Export ansible.cfg file as below
             
-            ubuntu@jenkins-ansible:~/ansible/ansible-config-mgt$ export ANSIBLE_CONFIG=/home/ubuntu/ansible/ansible-config-mgt/ansible.cfg
+           ubuntu@jenkins-ansible:~/ansible/ansible-config-mgt$ export ANSIBLE_CONFIG=/home/ubuntu/ansible/ansible-config-mgt/ansible.cfg
 
 . Run Ansible against each environment
 
