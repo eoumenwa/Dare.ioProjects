@@ -232,13 +232,14 @@ loadbalancers.yml file
          - import_playbook: ../static-assignments/loadbalancers.yml
         when: load_balancer_is_required 
 
-7. Use env-vars\uat.yml file to define which loadbalancer to use in UAT environment by setting respective environmental variable to true.
+7. Use env-vars/uat.yml file to define which loadbalancer to use in UAT environment by setting respective environmental variable to true.
 
 8. Activate load balancer, and enable nginx by setting these in the respective environment’s env-vars file.
 
          enable_nginx_lb: true
          load_balancer_is_required: true
-9. USe the same setting for apache LB, so you we can switch it by setting respective environmental variable to true and other to false.
+
+9. Use the same setting for apache LB, so we can switch it by setting respective environmental variable to true and other to false.
 
 10. Update inventory for each environment  
      
