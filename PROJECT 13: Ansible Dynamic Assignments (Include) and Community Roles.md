@@ -274,7 +274,7 @@ loadbalancers.yml file
 
     ansible-playbook -i /home/ubuntu/ansible/ansible-config-mgt/inventory/uat.yml /home/ubuntu/ansible/ansible-config-mgt/playbooks/site.yml --check
     
-    ![image](https://user-images.githubusercontent.com/78841364/121728626-87bdf380-cabb-11eb-9fd0-e995dfc30a7a.png)
+   ![image](https://user-images.githubusercontent.com/78841364/121728626-87bdf380-cabb-11eb-9fd0-e995dfc30a7a.png)
 
 
 
