@@ -370,11 +370,10 @@ New setup is as shown below
 
    Git was properly installed so I went ahead to run the playbook in real time mode and it was successful.
 
+
 ### Summary
 
 In this project, I learnt how to deploy and configure UAT Web Servers using Ansible imports and roles!
-
- 
 
 
 ### References
