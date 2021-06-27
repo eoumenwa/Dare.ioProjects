@@ -201,8 +201,8 @@ We want to be able to choose which Load Balancer to use, Nginx or Apache, so we 
 
 
 
-
 ![image](https://user-images.githubusercontent.com/78841364/121516830-a6899080-c9bc-11eb-82b0-971bc65bd352.png)
+
 
 3. Declare a variable in defaults/main.yml file inside the Nginx and Apache roles. Name each variables enable_nginx_lb and enable_apache_lb respectively.
    
@@ -217,14 +217,18 @@ We want to be able to choose which Load Balancer to use, Nginx or Apache, so we 
    ![image](https://user-images.githubusercontent.com/78841364/121675741-cc2c9d80-ca81-11eb-8a05-9f9b1f40651d.png)
 
 
-.6. Update both static-assignment and site.yml files as shown below
+6. Update both static-assignment and site.yml files as shown below
 
-loadbalancers.yml file
+   loadbalancers.yml file
 
+      ---
       - hosts: lb
+        become: yes
         roles:
           - { role: nginx, when: enable_nginx_lb and load_balancer_is_required }
           - { role: apache, when: enable_apache_lb and load_balancer_is_required }
+      
+      
       site.yml file
 
      - name: Loadbalancers assignment
@@ -245,8 +249,7 @@ loadbalancers.yml file
      
          edit /home/ubuntu/ansible/ansible-config-mgt/inventory/uat.yml 
          
-    Add loadbalancers block [lb] and provide same IP addresses used for UAT-webservers
-
+  
 11. Update git
 
          ubuntu@jenkins-ansible:~/ansible/ansible-config-mgt$ git status
@@ -254,7 +257,7 @@ loadbalancers.yml file
          ubuntu@jenkins-ansible:~/ansible/ansible-config-mgt$ git commit -m "configured load balancer roles"
          ubuntu@jenkins-ansible:~/ansible/ansible-config-mgt$ git push
 
-12. Create ansible.cfg on root directory ans paste the configuration below
+12. Create ansible.cfg in root directory using the configuration below
 
             [defaults]
             inventory = /home/ubuntu/ansible/ansible-config-mgt/inventory
@@ -270,13 +273,20 @@ loadbalancers.yml file
             
            ubuntu@jenkins-ansible:~/ansible/ansible-config-mgt$ export ANSIBLE_CONFIG=/home/ubuntu/ansible/ansible-config-mgt/ansible.cfg
 
-. Run Ansible against each environment
+14. Run Ansible against each environment
 
-    ansible-playbook -i /home/ubuntu/ansible/ansible-config-mgt/inventory/uat.yml /home/ubuntu/ansible/ansible-config-mgt/playbooks/site.yml --check
+    ansible-playbook -i /home/ubuntu/ansible/ansible-config-mgt/inventory/uat.yml /home/ubuntu/ansible/ansible-config-mgt/playbooks/site.yml
     
    ![image](https://user-images.githubusercontent.com/78841364/121728626-87bdf380-cabb-11eb-9fd0-e995dfc30a7a.png)
 
 
+### Challenges
+
+1. Playbook had some errors as shown in step 14. This was resolved by applying steps 12 and 13 (creating and exporting ansible.cfg file)
+
+2. Ran the playbook with the following errors
+
+  ![image](https://user-images.githubusercontent.com/78841364/123524376-cc3eb700-d697-11eb-9b1f-ab1f1d55b048.png)
 
 ### Summary
 
