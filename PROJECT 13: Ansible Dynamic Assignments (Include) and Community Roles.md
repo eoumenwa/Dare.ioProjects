@@ -288,6 +288,10 @@ We want to be able to choose which Load Balancer to use, Nginx or Apache, so we 
 
   ![image](https://user-images.githubusercontent.com/78841364/123524376-cc3eb700-d697-11eb-9b1f-ab1f1d55b048.png)
 
+  ![image](https://user-images.githubusercontent.com/78841364/123571257-d647df00-d797-11eb-8cfc-e819c5dfee6b.png)
+
+  After several attempts at troubleshooting, I realized that I had to stop manually stop apache or nginx from running in order to successfully install nginx or apache
+
 ### Summary
 
 In this project, I was able to learn and practice how to use Ansible configuration management tool to prepare UAT environment for Tooling web solution.
