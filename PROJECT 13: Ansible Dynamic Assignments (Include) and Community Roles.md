@@ -296,6 +296,10 @@ We want to be able to choose which Load Balancer to use, Nginx or Apache, so we 
 
 In this project, I was able to learn and practice how to use Ansible configuration management tool to prepare UAT environment for Tooling web solution.
 
+### Link to implementation demo
+
+https://drive.google.com/drive/folders/1jwYaF6VFUHYjpA7LRSpm4r3OEeGk1WLB?usp=sharing
+
 ### References
 
 https://github.community/t/add-a-folder/2304/2
