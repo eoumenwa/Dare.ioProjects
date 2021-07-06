@@ -117,7 +117,7 @@ This project consists of two parts:
  4. Start the Nginx LB instance 
    
  
-4. Assign an Elastic IP to your Nginx LB server and associate the domain name with this Elastic IP
+4. Assign an Elastic IP to the Nginx LB server and associate the domain name with this Elastic IP
    
     * Create an A record on AWS Route 53 pointing to the LB elastic IP (We use a static IP address to prevent changes in IP after an EC2 instance is       
       rebooted. 
@@ -126,7 +126,7 @@ This project consists of two parts:
    
     * Create another A record for www referencing Nginx LB Elastic IP
    
-      We have that LB, Route 53 and Domain are noe connected
+      We have that LB, Route 53 and Domain are now connected
    
       ![image](https://user-images.githubusercontent.com/78841364/116737905-c8582680-a9bf-11eb-9234-f560b54ca308.png)
 
