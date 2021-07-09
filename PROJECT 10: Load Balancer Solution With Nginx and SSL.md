@@ -81,7 +81,7 @@ This project consists of two parts:
 ## Part 2 - Register a new domain name and configure secured connection using SSL/TLS certificates
 
    In the following steps, we shall make necessary configurations to make connections to our Tooling Web Solution secured!
-   In order to get a valid SSL certificate - we need to register a new domain name, using any Domain name registrar - a company that manages reservation of domain names. The    most popular ones are: Godaddy.com, Domain.com, Bluehost.com. we shall howevevr be using reenom.com in this project
+   In order to get a valid SSL certificate - we need to register a new domain name, using any Domain name registrar - a company that manages reservation of domain names. The    most popular ones are: Godaddy.com, Domain.com, Bluehost.com. we shall however be using freenom.com in this project
 
 1. Register the new domain name with freenom.com
 
