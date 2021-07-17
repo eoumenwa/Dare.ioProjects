@@ -26,4 +26,5 @@ Measure and Validate: This is where live users are interacting with the applicat
 ### References
 
 https://www.cloudflare.com/en-gb/learning/dns/dns-records/dns-cname-record/
+
 https://aws.amazon.com/blogs/compute/deploying-an-nginx-based-http-https-load-balancer-with-amazon-lightsail/
