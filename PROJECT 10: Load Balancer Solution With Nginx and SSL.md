@@ -73,8 +73,6 @@ This project consists of two parts:
 
    sudo systemctl status nginx
    
-   
-
    Side Self Study: Read more about HTTP load balancing methods and features supported by Nginx on this page
    
 
