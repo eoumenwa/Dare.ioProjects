@@ -1,6 +1,7 @@
 # Tooling Website deployment automation with Continuous Integration. Introduction to Jenkins
 
-  In this project we are going to utilize Jenkins CI capabilities to make sure that every change made to the source code in GitHub will be automatically be   updated to the Tooling Website.
+  In this project we are going to utilize Jenkins CI capabilities to make sure that every change made to the source code in GitHub will be automatically be   updated to the    
+  Tooling Website.
 
   Continuous integration:
   The automated building and testing of an application on every new commit.
@@ -68,7 +69,7 @@
   
 
 3. Perform initial Jenkins setup.
-   From the browser access http://<Jenkins-Server-Public-IP-Address-or-Public-DNS-Name>:8080
+   From the browser access "http://<Jenkins-Server-Public-IP-Address-or-Public-DNS-Name>:8080"
 
 4. Enter the default admin password (retrieve it from server) by running
 
