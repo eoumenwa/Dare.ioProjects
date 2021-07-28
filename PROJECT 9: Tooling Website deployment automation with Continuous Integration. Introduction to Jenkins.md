@@ -69,7 +69,7 @@
   
 
 3. Perform initial Jenkins setup.
-   From the browser access "http://<Jenkins-Server-Public-IP-Address-or-Public-DNS-Name>:8080"
+   From the browser access http://Jenkins-Server-Public-IP-Address-or-Public-DNS-Name:8080
 
 4. Enter the default admin password (retrieve it from server) by running
 
