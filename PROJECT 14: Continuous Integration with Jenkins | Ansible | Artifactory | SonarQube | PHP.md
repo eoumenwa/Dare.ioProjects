@@ -26,6 +26,12 @@ Measure and Validate: This is where live users are interacting with the applicat
 ![image](https://user-images.githubusercontent.com/78841364/130381287-3198e762-809e-4793-b8fc-09ae9420f207.png)
 Artifactory status
 
+![image](https://user-images.githubusercontent.com/78841364/130384400-87c4bc07-68e5-41c4-8d14-bf1aae602149.png)
+Artifactory Landing
+
+![image](https://user-images.githubusercontent.com/78841364/130585651-53c3e88b-f60a-4002-9415-4993aee4b4e1.png)
+jenkins-artifactory config
+
 ### References
 
 https://www.cloudflare.com/en-gb/learning/dns/dns-records/dns-cname-record/
@@ -35,3 +41,5 @@ https://aws.amazon.com/blogs/compute/deploying-an-nginx-based-http-https-load-ba
 https://www.howtoforge.com/tutorial/ubuntu-jfrog/
 
 https://websiteforstudents.com/how-to-install-jfrog-artifactory-on-ubuntu-18-04-16-04/
+
+https://cloudcone.com/docs/article/the-linux-wget-command/
