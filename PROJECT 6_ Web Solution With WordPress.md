@@ -1,8 +1,13 @@
+## Web Solution With WordPress
 
-Web Solution With WordPress
-Step 1 — Prepare a Web Server
+### Step 1 — Prepare a Web Server
+
 1.	Launch an EC2 instance that will serve as “Web Server”. Create 3 volumes in  the same AZ as your Web Server EC2, each of 1 GiB.
+
 2.	Attach all three volumes one by one to your Web Server EC2 instance 
+
+![image](https://user-images.githubusercontent.com/78841364/135814287-d980c7b4-920a-42a4-8869-50c620e7141e.png)
+
 
 3.	Open up the Linux terminal to begin configuration
 4.	Use lsblk command to inspect what block devices are attached to the server. Notice names of your newly created devices. All devices in Linux reside in /dev/ directory. Inspect it with ls /dev/ and make sure you see all 3 newly created block devices there - their names will likely be xvdf, xvdh, xvdg.
