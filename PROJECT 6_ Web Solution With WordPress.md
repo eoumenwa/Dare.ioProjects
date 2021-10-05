@@ -18,16 +18,29 @@
 ![image](https://user-images.githubusercontent.com/78841364/135814453-e4708bbf-4ba8-4970-b21d-d0ba973798ed.png)
 
 5.	Use df -h command to see all mounts and free space on your server
+
+![image](https://user-images.githubusercontent.com/78841364/135969799-6339ef65-ecbe-4b46-b705-4cad6073e36b.png)
+
  
 6.	Use gdisk utility to create a single partition on each of the 3 disks
 
 
 a.	sudo gdisk /dev/xvdf
  
+ ![image](https://user-images.githubusercontent.com/78841364/135969859-bf50935e-2471-4a7f-9693-0d9c59374400.png)
+
+![image](https://user-images.githubusercontent.com/78841364/135969876-16b4f14e-a956-460c-a542-5952f2e211f7.png)
+
  
 b.	sudo gdisk /dev/xvdg
  
+ ![image](https://user-images.githubusercontent.com/78841364/135969906-c04bc8cb-f7e9-45b6-8de5-b70d8ebe4327.png)
+
 c.	sudo gdisk /dev/xvdh 
+
+![image](https://user-images.githubusercontent.com/78841364/135969930-af41ffab-222c-4f8a-8469-c092f1d89881.png)
+
+
 7. 	Use lsblk utility to view the newly configured partition on each of the 3 disks.
  
 8.	Install lvm2 package using sudo yum install lvm2.  
