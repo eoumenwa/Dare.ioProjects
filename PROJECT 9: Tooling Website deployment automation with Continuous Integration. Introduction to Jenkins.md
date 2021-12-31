@@ -189,9 +189,9 @@
 ## Resolution
 
 Changed ownership of /mnt/apps from root to ec2-user as shown in the lines below
-  nnsudo chown -R ec2-user: /mnt/apps
+  sudo chown -R ec2-user: /mnt/apps
 
 
 ## Summary
 
-In this project, I learnt how to implement a Continous Integration solution using Jenkins CI which involved pushing commits directly from github automatically using a web-hook and also copying build artifacts over SSH from jenkins to the NFS-Server which also makes our webservers (being mnounted) to get updates to /var/www/html for website updates
+In this project, I learnt how to implement a Continous Integration solution using Jenkins CI which involved pushing commits directly from github automatically using a web-hook and also copying build artifacts over SSH from jenkins to the NFS-Server which also makes our webservers (being mounted) to get updates to /var/www/html for website updates
