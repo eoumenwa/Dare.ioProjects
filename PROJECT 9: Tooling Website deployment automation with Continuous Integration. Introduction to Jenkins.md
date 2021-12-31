@@ -1,6 +1,6 @@
 # Tooling Website deployment automation with Continuous Integration. Introduction to Jenkins
 
-  In this project we are going to utilize Jenkins CI capabilities to make sure that every change made to the source code in GitHub will be automatically be   updated to the    
+  In this project we are going to utilize Jenkins CI capabilities to make sure that every change made to the source code in GitHub will automatically be updated to the    
   Tooling Website.
 
   Continuous integration:
